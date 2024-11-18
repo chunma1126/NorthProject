@@ -7,6 +7,7 @@ public:
 	void Update();
 public:
 	const float& GetDT() const { return m_dT; }
+	const float& GetTime() const { return m_time; }
 private:
 	// Delta time
 	LARGE_INTEGER m_llPrevCnt = {};
@@ -18,5 +19,7 @@ private:
 	UINT		  m_fps = 0;
 	UINT		  m_framecnt = 0;
 	float		  m_frametime = 0.f;
+
+	float m_time = 0;
 };
 

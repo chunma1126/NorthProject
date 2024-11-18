@@ -1,13 +1,10 @@
 #include "pch.h"
-#include "TitleScene.h"
-#include "Object.h"
-#include "Player.h"
-#include "InputManager.h"
-#include "SceneManager.h"
+#include "OJYScene.h"
 #include "Enemy.h"
+#include "Player.h"
 #include "CollisionManager.h"
-#include "ResourceManager.h"
-void TitleScene::Init()
+
+void OJYScene::Init()
 {
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
@@ -25,11 +22,4 @@ void TitleScene::Init()
 	//sound
 	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");
-}
-
-void TitleScene::Update()
-{
-	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
 }

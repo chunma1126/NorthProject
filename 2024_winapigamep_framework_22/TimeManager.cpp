@@ -45,4 +45,5 @@ void TimeManager::Update()
 		::SetWindowText(GET_SINGLE(Core)->GetHwnd()
 						, buf);
 	}
+	m_time += m_dT;
 }
