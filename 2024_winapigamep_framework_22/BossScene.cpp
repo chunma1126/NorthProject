@@ -1,19 +1,18 @@
 #include "pch.h"
 #include "BossScene.h"
 #include "ResourceManager.h"
-#include "Projectile.h"
+#include "BulletManager.h"
+#include "Player.h"
+
 
 void BossScene::Init()
 {
-	Object* pObj = new Projectile;
-	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
-	pObj->SetSize({ 100.f,100.f });
-	pObj->SetName(L"Projectile");
-	AddObject(pObj, LAYER::PROJECTILE);
+    Player* p = new Player;
+    p->SetSize({100.f,100.f});
+    p->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
+    AddObject(p,LAYER::PLAYER);
 
-
-
-
+    GET_SINGLE(BulletManager)->CircleShotGoToTarget(this,13,200,p);
 
 }
 
