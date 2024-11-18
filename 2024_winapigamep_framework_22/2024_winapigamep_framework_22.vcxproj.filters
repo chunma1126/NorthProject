@@ -133,6 +133,9 @@
     <ClInclude Include="BossScene.h">
       <Filter>Engine\04. Scene\Jung</Filter>
     </ClInclude>
+    <ClInclude Include="OJYScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -219,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="BossScene.cpp">
       <Filter>Engine\04. Scene\Jung</Filter>
+    </ClCompile>
+    <ClCompile Include="OJYScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
