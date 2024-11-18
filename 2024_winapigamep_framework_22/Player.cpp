@@ -19,7 +19,7 @@ Player::Player()
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	m_pWomb = GET_SINGLE(ResourceManager)->TextureLoad(L"Womb", L"Texture\\womb.bmp");
+	//m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Hitbox.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
