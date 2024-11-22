@@ -19,7 +19,7 @@ Player::Player()
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	//m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Hitbox.bmp");
+	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Hitbox.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
@@ -64,8 +64,6 @@ void Player::Render(HDC _hdc)
 	Vec2 vSize = GetSize();
 	//RECT_RENDER(_hdc, vPos.x, vPos.y
 	//	, vSize.x, vSize.y);
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
 	//::BitBlt(_hdc
 	//	, (int)(vPos.x - vSize.x / 2)
 	//	, (int)(vPos.y - vSize.y / 2)
@@ -73,13 +71,24 @@ void Player::Render(HDC _hdc)
 	//	m_pTex->GetTexDC()
 	//	,0,0,SRCCOPY
 	//);
-	/*::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_pTex->GetTexDC()
-		, 0, 0,width, height, RGB(255,0,255));*/
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	m_pTex->GetTexDC()
+	//	, 0, 0,width, height, RGB(255,0,255));
 	ComponentRender(_hdc);
+	if (isSlow)
+	{
+		int width = m_pHitbox->GetWidth();
+		int height = m_pHitbox->GetHeight();
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			m_pHitbox->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));
+	}
 	//::StretchBlt();
 	//::AlphaBlend();
 	//::PlgBlt();

@@ -20,6 +20,6 @@ private:
 	float lastShotTime = 0;
 	bool isSlow = false;
 	Texture* m_pTex;
-	Texture* m_pWomb;
+	Texture* m_pHitbox;
 };
 
