@@ -4,6 +4,7 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "BossScene.h"
+#include "TrashScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -13,9 +14,10 @@ void SceneManager::Init()
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 
 	RegisterScene(L"BossScene", std::make_shared<BossScene>());
+	RegisterScene(L"TrashScene", std::make_shared<TrashScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"BossScene");
+	LoadScene(L"TrashScene");
 }
 
 void SceneManager::Update()
