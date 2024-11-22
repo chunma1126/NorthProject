@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "BulletManager.h"
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -78,7 +79,7 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
-
+	GET_SINGLE(BulletManager)->Update();
 }
 
 void Core::MainRender()
@@ -87,7 +88,7 @@ void Core::MainRender()
 	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
 	// 2. Render
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
-	// 3. display	
+	// 3. display
 	::BitBlt(m_hDC, 0,0, SCREEN_WIDTH,SCREEN_HEIGHT,
 			m_hBackDC,0,0, SRCCOPY);
 

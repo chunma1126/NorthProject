@@ -19,6 +19,7 @@ Player::Player()
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	m_pWomb = GET_SINGLE(ResourceManager)->TextureLoad(L"Womb", L"Texture\\womb.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
@@ -33,15 +34,28 @@ Player::~Player()
 }
 void Player::Update()
 {
-	Vec2 vPos = GetPos();
-	//if(GET_KEY(KEY_TYPE::LEFT))
+	if (GET_KEY(KEY_TYPE::RIGHT))
+		TryShoot();
+	if (GET_KEYDOWN(KEY_TYPE::LEFT))
+		CreateUltmite();
+	isSlow = GET_KEY(KEY_TYPE::UP);
+
+	Vec2 dir = Vec2();
+	if (GET_KEY(KEY_TYPE::W))
+		dir.y -= 1;
+	if (GET_KEY(KEY_TYPE::S))
+		dir.y += 1;
 	if (GET_KEY(KEY_TYPE::A))
-		vPos.x -= 100.f * fDT;
+		dir.x -= 1;
 	if (GET_KEY(KEY_TYPE::D))
-		vPos.x += 100.f * fDT;
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();
-	SetPos(vPos);
+		dir.x += 1;
+
+	float speed = isSlow ? runningSpeed : defaultSpeed;
+	dir.Normalize();
+	dir = dir * (fDT * speed);
+
+	Vec2 vPos = GetPos();
+	SetPos(vPos + dir);
 }
 
 void Player::Render(HDC _hdc)
@@ -71,6 +85,22 @@ void Player::Render(HDC _hdc)
 	//::PlgBlt();
 }
 
+bool Player::TryShoot()
+{
+	float delay = 0.1f;
+	float currentTime = GET_SINGLE(TimeManager)->GetTime();
+	bool canShot = lastShotTime + delay < currentTime;
+	//system("cls");
+	cout << "\n " << currentTime;
+	if (canShot)
+	{
+		cout << "shoot";
+		CreateProjectile();
+		lastShotTime = currentTime;
+	}
+	return canShot;
+}
+
 void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
@@ -90,4 +120,8 @@ void Player::CreateProjectile()
 	//Vec2 c = a / b;
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
+}
+
+void Player::CreateUltmite()
+{
 }
