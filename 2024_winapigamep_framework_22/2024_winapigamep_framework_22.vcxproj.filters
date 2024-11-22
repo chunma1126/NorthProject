@@ -133,8 +133,11 @@
     <ClInclude Include="BossScene.h">
       <Filter>Engine\04. Scene\Jung</Filter>
     </ClInclude>
-    <ClInclude Include="OJYScene.h">
-      <Filter>Engine\04. Scene</Filter>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowProjectile.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,8 +226,11 @@
     <ClCompile Include="BossScene.cpp">
       <Filter>Engine\04. Scene\Jung</Filter>
     </ClCompile>
-    <ClCompile Include="OJYScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowProjectile.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

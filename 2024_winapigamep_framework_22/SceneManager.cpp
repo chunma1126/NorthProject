@@ -17,7 +17,7 @@ void SceneManager::Init()
 	RegisterScene(L"OJYScene", std::make_shared<OJYScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"OJYScene");
+	LoadScene(L"BossScene");
 }
 
 void SceneManager::Update()
