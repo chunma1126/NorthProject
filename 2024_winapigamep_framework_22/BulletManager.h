@@ -22,8 +22,10 @@ public:
 	void ApplySpinShot();
 
 	void ShapeShot(ShotInfo _shotInfo, int _m, int _a, float _phi);
-	
 
+
+	void HeartShot(ShotInfo _shotInfo);
+	void HeartDataInit();
 
 private:
 	//spinshot
@@ -38,6 +40,12 @@ private:
 	 float m_endTimer;
 
 	 Object* m_target;
+
+	 //HeartShot
+private:
+	 float _speeds[34];
+	 float _direction[34];
+
 
 };
 
