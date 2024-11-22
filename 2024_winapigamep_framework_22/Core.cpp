@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "BulletManager.h"
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -78,7 +79,7 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
-
+	GET_SINGLE(BulletManager)->Update();
 }
 
 void Core::MainRender()

@@ -11,6 +11,8 @@ void FollowProjectile::Update()
 	{
 		m_isFollowing = true;
 
+		cout << m_isFollowing << endl;
+
 		Vec2 vPos = GetPos();
 		Vec2 targetPos = m_target->GetPos();
 
@@ -24,8 +26,8 @@ void FollowProjectile::Update()
 
 		m_targetDir.Normalize();
 
-		vPos.x += m_targetDir.x * m_speed * fDT;
-		vPos.y += m_targetDir.y * m_speed * fDT;
+		vPos.x += m_targetDir.x * m_speed * 1.5f * fDT;
+		vPos.y += m_targetDir.y * m_speed * 1.5f * fDT;
 
 		SetPos(vPos);
 	}
@@ -41,5 +43,7 @@ void FollowProjectile::Update()
 			GET_SINGLE(EventManager)->DeleteObject(this);
 		}
 	}
+
+	cout << m_isFollowing << endl;
 
 }

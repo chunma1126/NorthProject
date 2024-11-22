@@ -12,8 +12,15 @@ void BossScene::Init()
     p->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
     AddObject(p,LAYER::PLAYER);
 
-    GET_SINGLE(BulletManager)->CircleShotGoToTarget(this,13,200,p);
+    ShotInfo shotInfo = {this ,20,400.f};
+    ShotInfo shotInfo_1 = { this ,0.005,400.f };
+    float angle = 0;
 
+    GET_SINGLE(BulletManager)->SpinShot(shotInfo_1, angle , 10000.f, 12);
+    //GET_SINGLE(BulletManager)->SpinShotGoToTarget(shotInfo_1, angle, 10000.f, 3.5f, p);
+
+    //GET_SINGLE(BulletManager)->CircleShotGoToTarget(shotInfo,p);
+    //GET_SINGLE(BulletManager)->CircleShot(shotInfo);
 }
 
 
