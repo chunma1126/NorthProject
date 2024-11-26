@@ -197,6 +197,8 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TrashMob1.h" />
+    <ClInclude Include="TrashMob2.h" />
+    <ClInclude Include="TrashMob3.h" />
     <ClInclude Include="TrashScene.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
@@ -229,6 +231,8 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TrashMob1.cpp" />
+    <ClCompile Include="TrashMob2.cpp" />
+    <ClCompile Include="TrashMob3.cpp" />
     <ClCompile Include="TrashScene.cpp" />
   </ItemGroup>
   <ItemGroup>
