@@ -1,29 +1,35 @@
 #include "pch.h"
-#include "TrashMob1.h"
+#include "TrashMob2.h"
 #include "Collider.h"
 #include "EventManager.h"
 #include "TimeManager.h"
 
-TrashMob1::TrashMob1()
+TrashMob2::TrashMob2()
 	: m_hp(5)
 {
 	this->AddComponent<Collider>();
+	if (right) {
+		for (int i = 0; i < 17; ++i) {
+			Vec2 down = Vec2();
+			down.y += 10*fDT;
+			down.x -= 10*fDT;
+			Vec2 curPos = GetPos();
+			SetPos(curPos + down);
+		}
+	}
 }
 
-TrashMob1::~TrashMob1()
+TrashMob2::~TrashMob2()
 {
 }
 
-void TrashMob1::Update()
+void TrashMob2::Update()
 {	 
 	//Vec2 dir = ifPlayerPos - GetPos();
-	Vec2 down = { 0.f,10*fDT };
-	Vec2 curPos = GetPos();
-	SetPos(curPos + down);
-
+	
 }	 
 	 
-void TrashMob1::Render(HDC _hdc)
+void TrashMob2::Render(HDC _hdc)
 {
 	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
 	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
@@ -36,7 +42,7 @@ void TrashMob1::Render(HDC _hdc)
 	//DeleteObject(brush);
 }
 
-void TrashMob1::EnterCollision(Collider* _other)
+void TrashMob2::EnterCollision(Collider* _other)
 {
 	std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
@@ -49,12 +55,12 @@ void TrashMob1::EnterCollision(Collider* _other)
 	}
 }
 
-void TrashMob1::StayCollision(Collider* _other)
+void TrashMob2::StayCollision(Collider* _other)
 {
 	//std::cout << "Stay" << std::endl;
 }
 
-void TrashMob1::ExitCollision(Collider* _other)
+void TrashMob2::ExitCollision(Collider* _other)
 {
 	std::cout << "Exit" << std::endl;
 }
