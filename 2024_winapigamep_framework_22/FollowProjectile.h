@@ -15,4 +15,4 @@ private:
 	float m_followChangeTime;
 	float m_changeTimer;
 };
-
+	

@@ -10,6 +10,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Enemy.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -18,14 +19,16 @@ Player::Player()
 	//path += L"Texture\\planem.bmp";
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Hitbox.bmp");
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
+
+	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player_ship.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\jiwoo.bmp");
+	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
-		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
-
+	GetComponent<Animator>()->CreateAnimation(L"Player_shipFront", m_pTex, Vec2(0.f, 150.f),
+		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.5f);
+	GetComponent<Animator>()->PlayAnimation(L"Player_shipFront", true);
 }
 Player::~Player()
 {
@@ -50,12 +53,13 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::D))
 		dir.x += 1;
 
-	float speed = isSlow ? runningSpeed : defaultSpeed;
+	float speed = isSlow ? defaultSpeed : runningSpeed;
 	dir.Normalize();
 	dir = dir * (fDT * speed);
 
 	Vec2 vPos = GetPos();
 	SetPos(vPos + dir);
+	//Clamp();
 }
 
 void Player::Render(HDC _hdc)
@@ -77,6 +81,7 @@ void Player::Render(HDC _hdc)
 	//	, width, height,
 	//	m_pTex->GetTexDC()
 	//	, 0, 0,width, height, RGB(255,0,255));
+	RECT_RENDER(_hdc, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, boundary.x, boundary.y);
 	ComponentRender(_hdc);
 	if (isSlow)
 	{
@@ -94,43 +99,63 @@ void Player::Render(HDC _hdc)
 	//::PlgBlt();
 }
 
+void Player::EnterCollision(Collider* _other)
+{
+	if (_other->GetOwner()->GetTag() == TagEnum::EnemyProjectile)
+	{
+		cout << "d";
+		Object* owner = _other->GetOwner();
+		Enemy* enemy = owner->GetComponent<Enemy>();
+		//if (enemy != nullptr)
+		//	enemy.Kill();
+	}
+}
+
+void Player::Clamp()
+{
+	int x = GetPos().x;
+	int y = GetPos().y;
+	cout << x << " " << y << SCREEN_WIDTH << "_" << SCREEN_HEIGHT << "\n";
+}
+
 bool Player::TryShoot()
 {
-	float delay = 0.1f;
+	float delay = 60 / rpm;
 	float currentTime = GET_SINGLE(TimeManager)->GetTime();
 	bool canShot = lastShotTime + delay < currentTime;
-	//system("cls");
-	cout << "\n " << currentTime;
 	if (canShot)
 	{
-		cout << "shoot";
+		GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerShoot");
 		CreateProjectile();
 		lastShotTime = currentTime;
 	}
 	return canShot;
 }
 
+bool Player::TryUltimite()
+{
+	bool result = false;
+	if (result)
+	{
+		CreateUltmite();
+	}
+	return result;
+}
+
 void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
+	pProj->SetSpeed(1000);
 	Vec2 vPos = GetPos();
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({30.f,30.f});
-	// �� -> ����: PI / 180
-	//pProj->SetAngle(PI / 4 * 7.f); // 1
-	//static float angle = 0.f;
-	//pProj->SetAngle(angle * PI / 180); // 2
-	//angle += 10.f;
 	pProj->SetDir({0.f, -1.f});
 	pProj->SetName(L"PlayerBullet");
-	//Vec2 a = { 10.f, 10.f };
-	//Vec2 b = { 0.f, 0.f };
-	//Vec2 c = a / b;
-
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
 }
 
 void Player::CreateUltmite()
 {
+	cout << "created ultimite\n";
 }

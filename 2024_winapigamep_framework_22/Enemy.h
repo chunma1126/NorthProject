@@ -1,7 +1,9 @@
 #pragma once
 #include "Object.h"
+#include "Health.h"
 class Enemy :
-    public Object
+    public Object,
+	public Health
 {
 public:
 	Enemy();

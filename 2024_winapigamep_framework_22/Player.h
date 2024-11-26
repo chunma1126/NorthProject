@@ -9,12 +9,16 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+	void EnterCollision(Collider* _other) override;
 private:
-	const float defaultSpeed = 300;
-	const float runningSpeed = 200;
-	const float rpm = 100;
+	const float defaultSpeed = 200;
+	const float runningSpeed = 350;
+	const float rpm = 600;
+	const Vec2 boundary = Vec2(500, 500);
 private:
+	void Clamp();
 	bool TryShoot();
+	bool TryUltimite();
 	void CreateProjectile();
 	void CreateUltmite();
 	float lastShotTime = 0;

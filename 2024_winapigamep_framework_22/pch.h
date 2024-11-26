@@ -48,3 +48,9 @@ using std::wstring;
 #include<iostream>
 using std::cout;
 using std::endl;
+
+enum class TagEnum {
+	//add here
+	None,
+	EnemyProjectile
+};

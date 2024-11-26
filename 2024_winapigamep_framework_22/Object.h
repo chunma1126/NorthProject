@@ -24,10 +24,12 @@ public:
 	void SetDead() { m_IsDie = true; }
 	void SetName(wstring _name) { m_name = _name; }
 	const wstring& GetName() const { return m_name; }
-
+	void SetTag(TagEnum _tag) { tag = _tag; }
+	const TagEnum& GetTag() { return tag; }
 private:
 	bool m_IsDie;
 	wstring m_name;
+	TagEnum tag = TagEnum::None;
 public:
 	template<typename T>
 	void AddComponent()

@@ -88,7 +88,7 @@ void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool 
 	m_mapSounds.insert({ _key, ptSound });
 }
 
-void ResourceManager::Play(const wstring& _key)
+void ResourceManager::PlayAudio(const wstring& _key)
 {
 	tSoundInfo* ptSound = FindSound(_key);
 	if (!ptSound)
