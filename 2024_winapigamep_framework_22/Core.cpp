@@ -28,7 +28,12 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
+
+	GET_SINGLE(BulletManager)->Init();//³ªÁß¿¡ ½ÇÇà ¼ø¼­ ¹Ù²ãÁà¾ßµÊ.
+
 	GET_SINGLE(SceneManager)->Init();
+
+	//made by jyd
 
 	//m_obj.SetPos(Vec2(SCREEN_WIDTH / 2
 	//				,SCREEN_HEIGHT/ 2));
@@ -79,6 +84,8 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
+
+	//made by jyd
 	GET_SINGLE(BulletManager)->Update();
 }
 

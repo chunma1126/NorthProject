@@ -11,8 +11,6 @@ void FollowProjectile::Update()
 	{
 		m_isFollowing = true;
 
-		cout << m_isFollowing << endl;
-
 		Vec2 vPos = GetPos();
 		Vec2 targetPos = m_target->GetPos();
 
@@ -22,7 +20,6 @@ void FollowProjectile::Update()
 	if (m_isFollowing)
 	{
 		Vec2 vPos = GetPos();
-
 
 		m_targetDir.Normalize();
 
@@ -44,6 +41,5 @@ void FollowProjectile::Update()
 		}
 	}
 
-	cout << m_isFollowing << endl;
 
 }
