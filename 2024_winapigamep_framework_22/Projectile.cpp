@@ -30,6 +30,7 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 
 Projectile::~Projectile()
 {
+	
 }
 
 void Projectile::Update()

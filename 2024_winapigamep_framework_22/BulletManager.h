@@ -2,10 +2,11 @@
 #include "Scene.h"
 #include "Object.h"
 
-class FollowProjectile;
+class Projectile;
 
 struct ShotInfo
 {
+	Vec2 pos;
 	Scene* scene;
 	float interval;
 	float bulletSpeed;
@@ -18,21 +19,28 @@ class BulletManager
 public:
 	void Init();
 	void Update();
+	void BasicShot(ShotInfo& _shotInfo , Vec2 _dir);
 	void CircleShot(ShotInfo& _shotInfo);
-	void CircleShotGoToTarget(ShotInfo& _shotInfo,Object* target,float changeTime);
+	void CircleShotGoToTarget(ShotInfo& _shotInfo,Object* _target,float _changeTime);
+	void ShapeShot(ShotInfo& _shotInfo, Vec2 _dir ,int _vertex, float _size,float _rotationSpeed);
 
-	void SpinShot(ShotInfo& _shotInfo, float& spinAngle, float turnSpeed,float endTime);
+
+#pragma region Spinshot
+	void SpinShot(ShotInfo& _shotInfo, float& _spinAngle, float _turnSpeed, float _endTime);
 	void ApplySpinShot();
+#pragma endregion
 
-	void ShapeShot(ShotInfo& _shotInfo, Vec2 dir ,int vertex, float size,float rotationSpeed);
-
+#pragma region HeartShot
 	void HeartShot(ShotInfo& _shotInfo);
-	void HeartShotGoToTarget(ShotInfo& _shotInfo , Object* target,float changeTime);
+	void HeartShotGoToTarget(ShotInfo& _shotInfo, Object* _target, float _changeTime);
 	void HeartDataInit(float _rotation);
+#pragma endregion
 
-	void RoseShot(ShotInfo& _shotInfo, int petals, float size);
-	void RoseSpinShot(ShotInfo& _shotInfo, Object* _target,int petals, float size, float time);
+#pragma region RoseShot
+	void RoseShot(ShotInfo& _shotInfo, Vec2 _dir,int _petals, float _size);
+	void RoseSpinShot(ShotInfo& _shotInfo, Object* _target,int _petals, float _size, float _endTime,float _rotationSpeed);
 	void ApplyRoseSpinShot();
+#pragma endregion
 
 private:
 	 Object* m_target;
@@ -49,8 +57,6 @@ private:
 	float m_spinEndTimer;
 	#pragma endregion
 
-
-
 	 //HeartShot
 	 float m_heartRotation;
 private:
@@ -60,14 +66,20 @@ private:
 	 //rose spinShot
 private : 
 	ShotInfo m_roseShotInfo;
-	bool m_isRoseShot;
-	float m_roseTimer;
-	float m_roseShotTimer;
-	float m_roseEndTime;
-	int m_rosePetals;
-	float m_roseSize;
-	vector<FollowProjectile*> m_roseVec;
+	vector<Projectile*> m_roseVec;
+	Vec2 m_roseDir;
 
+	bool m_isRoseShot;
+	bool m_roseShotEnd;
+
+	int m_rosePetals;
+	int m_roseCount;
+
+	float m_roseEndTime;
+	float m_roseEndTimer;
+	float m_roseRotationSpeed;
+	float m_roseShotTimer;
+	float m_roseSize;
 
 };
 

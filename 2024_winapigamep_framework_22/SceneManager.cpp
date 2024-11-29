@@ -10,7 +10,7 @@ void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
-	// ¾À µî·Ï
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 
@@ -18,8 +18,8 @@ void SceneManager::Init()
 	RegisterScene(L"OJYScene", std::make_shared<OJYScene>());
 	RegisterScene(L"TrashScene", std::make_shared<TrashScene>());
 
-	// ¾À ·Îµå
-	LoadScene(L"OJYScene");
+	// ï¿½ï¿½ ï¿½Îµï¿½
+	LoadScene(L"BossScene");
 }
 
 void SceneManager::Update()
@@ -46,7 +46,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 
 void SceneManager::LoadScene(const wstring& _sceneName)
 {
-	// ¾ÀÀÌ ÀÖÀ¸¸é
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (m_pCurrentScene != nullptr)
 	{
 		m_pCurrentScene->Release();
