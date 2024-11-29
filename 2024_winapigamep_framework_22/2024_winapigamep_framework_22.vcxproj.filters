@@ -145,6 +145,10 @@
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="Health.h" />
+    <ClInclude Include="TrashMob2.h" />
+    <ClInclude Include="TrashMob3.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -244,5 +248,9 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="TrashMob2.cpp" />
+    <ClCompile Include="TrashMob3.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
 </Project>

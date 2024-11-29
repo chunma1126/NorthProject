@@ -19,7 +19,7 @@ void SceneManager::Init()
 	RegisterScene(L"TrashScene", std::make_shared<TrashScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TrashScene");
+	LoadScene(L"BossScene");
 }
 
 void SceneManager::Update()
