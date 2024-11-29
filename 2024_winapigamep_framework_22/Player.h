@@ -21,6 +21,7 @@ private:
 	bool TryUltimite();
 	void CreateProjectile();
 	void CreateUltmite();
+	Vec2 pivotPoint = Vec2(0, 0);
 	float lastShotTime = 0;
 	bool isSlow = false;
 	Texture* m_pTex;

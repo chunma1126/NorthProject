@@ -144,7 +144,9 @@
     <ClInclude Include="OJYScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Health.h" />
+    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="TrashMob2.h" />
+    <ClInclude Include="TrashMob3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -243,6 +245,8 @@
     <ClCompile Include="OJYScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Health.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="TrashMob2.cpp" />
+    <ClCompile Include="TrashMob3.cpp" />
   </ItemGroup>
 </Project>

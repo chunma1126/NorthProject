@@ -2,10 +2,14 @@
 #include "Enemy.h"
 #include "Collider.h"
 #include "EventManager.h"
+#include "HealthComponent.h"
 Enemy::Enemy()
-	: m_hp(5)
 {
+	this->SetTag(TagEnum::Enemy);
 	this->AddComponent<Collider>();
+	this->AddComponent<HealthComponent>();
+	m_health = this->GetComponent<HealthComponent>();
+	m_health->SetHP(10);
 }
 
 Enemy::~Enemy()
@@ -29,15 +33,17 @@ void Enemy::Render(HDC _hdc)
 	//DeleteObject(brush);
 }
 
+
 void Enemy::EnterCollision(Collider* _other)
 {
-	std::cout << "Enter" << std::endl;
+	//std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"PlayerBullet")
+	//wstring str = pOtherObj->GetName();
+	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
-		m_hp -= 1;
-		if(m_hp <=0)
+		const float damagedTaken = 1;
+		m_health->TakeDamage(damagedTaken);
+		if(m_health->IsDead())
 			GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }
@@ -49,5 +55,6 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	std::cout << "Exit" << std::endl;
+	//std::cout << "Exit" << std::endl;
 }
+
