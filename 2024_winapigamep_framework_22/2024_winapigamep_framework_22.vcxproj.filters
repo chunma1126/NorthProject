@@ -149,6 +149,7 @@
     <ClInclude Include="TrashMob3.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Background.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -252,5 +253,6 @@
     <ClCompile Include="TrashMob3.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
 </Project>
