@@ -16,7 +16,7 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
-private:
+protected:
 	Texture* m_texture = nullptr;
 	HealthComponent* m_health = nullptr;
 };
