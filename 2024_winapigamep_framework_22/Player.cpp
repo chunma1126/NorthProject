@@ -11,23 +11,32 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Enemy.h"
+#include "HealthComponent.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\8-bit-power-down-2.wav", false);
+
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
+	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\planemTakeDamageAnim.bmp");
+	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
+
+	this->SetTag(TagEnum::Player);
+	this->AddComponent<HealthComponent>();
+	m_health = this->GetComponent<HealthComponent>();
+	m_health->SetHP(4);
+
+	this->AddComponent<Collider>();
+	Vec2 offsetSize = Vec2(1.f, -5.f);
+	pivotPoint = offsetSize;
+	this->GetComponent<Collider>()->SetOffSetPos(offsetSize);
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\planem.bmp";
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
-	this->SetTag(TagEnum::Player);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player_ship.bmp");
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
-	this->AddComponent<Collider>();
-	Vec2 offsetSize = Vec2(1.f, -5.f);
-	this->GetComponent<Collider>()->SetOffSetPos(offsetSize);
-	pivotPoint = offsetSize;
 	//AddComponent<Animator>();
 	//GetComponent<Animator>()->CreateAnimation(L"Player_shipFront", m_pTex, Vec2(0.f, 150.f),
 	//	Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.5f);
@@ -40,6 +49,8 @@ Player::~Player()
 }
 void Player::Update()
 {
+	m_immortalTime += GET_SINGLE(TimeManager)->GetDT();
+
 	if (GET_KEY(KEY_TYPE::RIGHT))
 		TryShoot();
 	if (GET_KEYDOWN(KEY_TYPE::LEFT))
@@ -81,14 +92,27 @@ void Player::Render(HDC _hdc)
 
 	//boundary
 	//RECT_RENDER(_hdc, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, boundary.x, boundary.y);
+
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_pTex->GetTexDC()
-		, 0, 0,width, height, RGB(255,0,255));
+	bool isImmortal = IsImmortal();
+	if (isImmortal)
+	{
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			m_pTexOnHurt->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));
+	}
+	else {
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			m_pTex->GetTexDC()
+			, 0, 0,width, height, RGB(255,0,255));
+	}
 	ComponentRender(_hdc);
 	if (isSlow)
 	{
@@ -108,15 +132,33 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	//cout << "d";
+	if (IsImmortal()) return;
 	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetTag() == TagEnum::EnemyProjectile)
+	TagEnum pOtherObjTag = pOtherObj->GetTag();
+	switch (pOtherObjTag)
 	{
-		Object* owner = _other->GetOwner();
-		Enemy* enemy = owner->GetComponent<Enemy>();
+	case TagEnum::EnemyProjectile:
+	case TagEnum::Enemy:
+		m_health->TakeDamage(1);
+		OnTakeDamage();
+		break;
 	}
 }
 
+void Player::StayCollision(Collider* _other)
+{
+	if (IsImmortal()) return;
+	Object* pOtherObj = _other->GetOwner();
+	TagEnum pOtherObjTag = pOtherObj->GetTag();
+	switch (pOtherObjTag)
+	{
+	case TagEnum::EnemyProjectile:
+	case TagEnum::Enemy:
+		m_health->TakeDamage(1);
+		OnTakeDamage();
+		break;
+	}
+}
 
 void Player::Clamp()
 {
@@ -166,4 +208,22 @@ void Player::CreateProjectile()
 void Player::CreateUltmite()
 {
 	cout << "created ultimite\n";
+}
+
+void Player::Dead()
+{
+	cout << "PLAYER dead\n";
+}
+
+void Player::OnTakeDamage()
+{
+	SetPos(spawnPosition);
+	m_immortalTime = 0;
+	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
+	if (m_health->GetHP() <= 0)
+	{
+		Dead();
+		return;
+	}
+
 }
