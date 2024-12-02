@@ -5,6 +5,8 @@
 #include "InputManager.h"
 #include "UI.h"
 #include "Button.h"
+#include "PlayButton.h"
+#include "ExitButton.h"
 
 void UIManager::Init()
 {
@@ -44,14 +46,14 @@ void UIManager::Init()
 		UI* Title = new UI;
 
 		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\Title.bmp"));
-		Title->SetPos({425 , 200 });
+		Title->SetPos({400 , 200 });
 		Title->SetSize({ 800,200 });
 
 		AddChild(L"Title", Title);
 	}
 
 	{
-		Button* playButton = new Button;
+		PlayButton* playButton = new PlayButton;
 		playButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButton", L"Texture\\PlayButton.bmp"));
 		playButton->SetPos({ 400 , 600 });
 		playButton->SetSize({ 400,200 });
@@ -60,6 +62,18 @@ void UIManager::Init()
 		playButton->SetPressTexture(press);
 
 		AddChild(L"PlayButton", playButton);
+	}
+
+	{
+		ExitButton* exitButton = new ExitButton;
+		exitButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButton", L"Texture\\QuitButton.bmp"));
+		exitButton->SetPos({ 400 , 800 });
+		exitButton->SetSize({ 400,200 });
+
+		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButtonPress", L"Texture\\QuitButtonPress.bmp"));
+		exitButton->SetPressTexture(press);
+
+		AddChild(L"ExitButton", exitButton);
 	}
 	
 }

@@ -27,7 +27,6 @@ void Background::Render(HDC _hdc)
 {
     Vec2 pos = GetPos();
 
-
     int width = SCREEN_WIDTH;  
     int height = SCREEN_HEIGHT;
 
