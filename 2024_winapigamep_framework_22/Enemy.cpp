@@ -9,7 +9,7 @@ Enemy::Enemy()
 	this->AddComponent<Collider>();
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
-	m_health->SetHP(10);
+	m_health->SetHP(4);
 }
 
 Enemy::~Enemy()
@@ -36,9 +36,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	//std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
-	//wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
 		const float damagedTaken = 1;
@@ -50,11 +48,9 @@ void Enemy::EnterCollision(Collider* _other)
 
 void Enemy::StayCollision(Collider* _other)
 {
-	//std::cout << "Stay" << std::endl;
 }
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	//std::cout << "Exit" << std::endl;
 }
 
