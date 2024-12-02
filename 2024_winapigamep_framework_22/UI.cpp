@@ -20,7 +20,8 @@ void UI::Init()
 
 void UI::Update()
 {
-	if (m_active == false)return;
+	if (m_active == false)
+		return;
 	
 }
 
@@ -35,8 +36,8 @@ void UI::Render(HDC _hdc)
 	int height = m_pTexture->GetHeight();
 	
 	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2) - vSize.x / 4
-		, (int)(vPos.y - height / 2) - vSize.y / 4
+		, (int)(vPos.x - width / 2) - vSize.x / 5
+		, (int)(vPos.y - height / 2) - vSize.y / 5
 		, width + vSize.x /2, height + vSize.y/2 ,
 		m_pTexture->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));

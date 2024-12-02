@@ -183,6 +183,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="FollowProjectile.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameScene.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="OJYScene.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Resource.h" />
@@ -228,6 +230,7 @@
     <ClCompile Include="EnemySpawnEventManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="FollowProjectile.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OJYScene.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

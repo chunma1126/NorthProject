@@ -16,6 +16,8 @@ void TitleScene::Init()
 
 	GET_SINGLE(UIManager)->SetActiveChild(L"Title",true);
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayButton", true);
+    GET_SINGLE(UIManager)->SetActiveChild(L"ExitButton", true);
+
 }
 
 void TitleScene::Update()

@@ -14,6 +14,8 @@ public:
 		m_pressTexture = _tex; 
 	}
 	void ChangeTex(Texture* _tex);
+	virtual void ClickEvent() abstract;
+
 
 private :
 	RECT m_rect;

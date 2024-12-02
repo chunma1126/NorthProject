@@ -19,20 +19,27 @@ bool Button::MouseInRect()
 
 void Button::Update()
 {
+	UI::Update();
+
 	KEY_STATE state = GET_SINGLE(InputManager)->GetKey(KEY_TYPE::LBUTTON);
-	if (state == KEY_STATE::DOWN)
+
+	if (MouseInRect())
 	{
-		if (MouseInRect())
+		if (state == KEY_STATE::DOWN)
 		{
 			ChangeTex(m_pressTexture);
 		}
+		else if (state == KEY_STATE::UP)
+		{
+			ChangeTex(m_originTexture);
+			ClickEvent();
+		}
 	}
-	else if (state == KEY_STATE::UP)
+	else
 	{
 		ChangeTex(m_originTexture);
 	}
 
-	
 }
 
 void Button::ChangeTex(Texture* _tex)
