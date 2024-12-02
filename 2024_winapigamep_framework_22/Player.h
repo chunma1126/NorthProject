@@ -39,5 +39,6 @@ private:
 	Texture* m_pTex;
 	Texture* m_pTexOnHurt;
 	Texture* m_pHitbox;
+	Texture* m_pFire;
 };
 

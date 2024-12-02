@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "Background.h"
-
+#include "UIManager.h"
 void BossScene::Init()
 {
     Background* b = new Background;
@@ -17,11 +17,16 @@ void BossScene::Init()
     m_player->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
     AddObject(m_player,LAYER::PLAYER);
     
-   /* Vec2 vec{1,1};
+
+    GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart1" , true);
+    GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
+    GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
+
+    Vec2 vec{1,1};
     ShotInfo shotInfo = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2},this,20,200.f };
     ShotInfo shotInfo_1 = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2}, this ,0.005f,700.f };
 
-    GET_SINGLE(BulletManager)->HeartDataInit(270.f);
+   /* GET_SINGLE(BulletManager)->HeartDataInit(270.f);
     GET_SINGLE(BulletManager)->HeartShot(shotInfo);
 
     GET_SINGLE(BulletManager)->HeartShot(shotInfo);

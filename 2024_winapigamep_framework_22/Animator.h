@@ -27,10 +27,16 @@ public:
 	const bool& GetRepeat() const { return m_IsRepeat; }
 	const int& GetRepeatcnt() const { return m_repeatcnt; }
 	void SetRepeatcnt() { --m_repeatcnt; }
+	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
+	void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
+	const Vec2& GetPos() const { return m_vPos; }
+	const Vec2& GetSize() const { return m_vSize; }
 private:
 	map<wstring, Animation*> m_mapAnimations;
 	Animation* m_pCurrentAnimation;
 	bool	m_IsRepeat;
 	int		m_repeatcnt;
+	Vec2 m_vSize;
+	Vec2 m_vPos;
 };
 
