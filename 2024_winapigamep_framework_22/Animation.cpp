@@ -41,25 +41,36 @@ void Animation::Update()
 	}
 }
 
-void Animation::Render(HDC _hdc)
+void Animation::Render(HDC _hdc, Vec2 _pos, Vec2 _size)
 {
 	Object* pObj = m_pAnimator->GetOwner();
 	Vec2 vPos = pObj->GetPos();
 
 	// 오프셋 적용
 	vPos = vPos + m_vecAnimFrame[m_CurFrame].vOffset;
-	TransparentBlt(_hdc
-		, (int)(vPos.x - m_vecAnimFrame[m_CurFrame].vSlice.x / 2.f)
-		, (int)(vPos.y - m_vecAnimFrame[m_CurFrame].vSlice.y / 2.f)
-		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
-		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.y)
-		, m_pTex->GetTexDC()
-		, (int)(m_vecAnimFrame[m_CurFrame].vLT.x)
-		, (int)(m_vecAnimFrame[m_CurFrame].vLT.y)
-		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
-		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.y)
-		, RGB(255, 0, 255));
+
+	// 스케일링된 크기 계산
+	Vec2 scaledSize = Vec2(
+		m_vecAnimFrame[m_CurFrame].vSlice.x * _size.x,
+		m_vecAnimFrame[m_CurFrame].vSlice.y * _size.y
+	);
+
+	TransparentBlt(_hdc,
+		// 렌더링 위치 계산 (입력된 _pos 기준)
+		(int)(_pos.x + (vPos.x - scaledSize.x / 2.f)),
+		(int)(_pos.y + (vPos.y - scaledSize.y / 2.f)),
+		// 스케일링된 크기 적용
+		(int)(scaledSize.x),
+		(int)(scaledSize.y),
+		// 텍스처 좌표
+		m_pTex->GetTexDC(),
+		(int)(m_vecAnimFrame[m_CurFrame].vLT.x),
+		(int)(m_vecAnimFrame[m_CurFrame].vLT.y),
+		(int)(m_vecAnimFrame[m_CurFrame].vSlice.x),
+		(int)(m_vecAnimFrame[m_CurFrame].vSlice.y),
+		RGB(255, 0, 255));
 }
+
 
 void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, int _framecount, float _fDuration, bool _isRotate)
 {

@@ -18,29 +18,28 @@ Player::Player()
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\8-bit-power-down-2.wav", false);
 
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\planemTakeDamageAnim.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 
+
+	SetSize({400,400});
 	this->SetTag(TagEnum::Player);
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
 	m_health->SetHP(4);
 
 	this->AddComponent<Collider>();
-	Vec2 offsetSize = Vec2(1.f, -5.f);
-	pivotPoint = offsetSize;
-	this->GetComponent<Collider>()->SetOffSetPos(offsetSize);
-	//m_pTex = new Texture;
-	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
-	//path += L"Texture\\planem.bmp";
-	//m_pTex->Load(path);
-	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player_ship.bmp");
-	//AddComponent<Animator>();
-	//GetComponent<Animator>()->CreateAnimation(L"Player_shipFront", m_pTex, Vec2(0.f, 150.f),
-	//	Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.5f);
-	//GetComponent<Animator>()->PlayAnimation(L"Player_shipFront", true);
+	this->GetComponent<Collider>()->SetOffSetPos({ 25.f, 35.f });
+	this->GetComponent<Collider>()->SetSize({75,75});
+
+	m_pFire = GET_SINGLE(ResourceManager)->TextureLoad(L"Fire", L"Texture\\Fire.bmp");
+	AddComponent<Animator>();
+	GetComponent<Animator>()->SetPos({25,85});
+	GetComponent<Animator>()->SetSize({4,4});
+	GetComponent<Animator>()->CreateAnimation(L"Fire", m_pFire, { 0,0 }, { 16,16 }, { 16,0 }, 2 , 0.1f , false);
+	GetComponent<Animator>()->PlayAnimation(L"Fire",true);
+	
 }
 Player::~Player()
 {
@@ -93,7 +92,7 @@ void Player::Render(HDC _hdc)
 	//boundary
 	//RECT_RENDER(_hdc, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, boundary.x, boundary.y);
 
-	int width = m_pTex->GetWidth();
+	int width = m_pTex->GetWidth(); 
 	int height = m_pTex->GetHeight();
 	bool isImmortal = IsImmortal();
 	if (isImmortal)
@@ -101,7 +100,7 @@ void Player::Render(HDC _hdc)
 		::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2)
 			, (int)(vPos.y - height / 2)
-			, width, height,
+			, width + vSize.x / 2, height + vSize.y,
 			m_pTexOnHurt->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
@@ -109,7 +108,7 @@ void Player::Render(HDC _hdc)
 		::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2)
 			, (int)(vPos.y - height / 2)
-			, width, height,
+			, width + vSize.x / 2, height + vSize.y/2,
 			m_pTex->GetTexDC()
 			, 0, 0,width, height, RGB(255,0,255));
 	}
@@ -121,7 +120,7 @@ void Player::Render(HDC _hdc)
 		::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2) + pivotPoint.x
 			, (int)(vPos.y - height / 2) + pivotPoint.y
-			, width, height,
+			, width + vSize.x / 2, height + vSize.y / 2,
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}

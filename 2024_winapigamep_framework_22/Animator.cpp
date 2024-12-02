@@ -27,7 +27,7 @@ void Animator::LateUpdate()
 void Animator::Render(HDC _hdc)
 {
 	if (nullptr != m_pCurrentAnimation)
-		m_pCurrentAnimation->Render(_hdc);
+		m_pCurrentAnimation->Render(_hdc,m_vPos , m_vSize);
 }
 
 void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _framecount, float _fDuration, bool _isRotate)
