@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "EventManager.h"
 #include "BulletManager.h"
+#include "EnemySpawnEventManager.h"
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -84,7 +85,7 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
-
+	GET_SINGLE(EnemySpawnEventManager)->Update();
 	//made by jyd
 	GET_SINGLE(BulletManager)->Update();
 }
