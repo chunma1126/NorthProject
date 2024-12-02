@@ -150,6 +150,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -254,5 +255,6 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
 </Project>

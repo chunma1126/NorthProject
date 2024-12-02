@@ -7,6 +7,7 @@ public:
 	virtual ~UI();
 
 public:
+	virtual void Init();
 	virtual void Update();
 	virtual void Render(HDC _dc);
 
@@ -19,10 +20,10 @@ public:
 	virtual void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
 	virtual void SetTexture(Texture* _tex) { m_pTexture = _tex; }
 	virtual void SetActive(bool  _active) { m_active = _active; }
-private:
+protected:
 	Vec2 m_vPos;
 	Vec2 m_vSize;
 	Texture* m_pTexture;
-	bool m_active = true;
+	bool m_active = false;
 };
 

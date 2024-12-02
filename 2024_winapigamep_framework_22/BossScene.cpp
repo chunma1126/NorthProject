@@ -11,8 +11,7 @@ void BossScene::Init()
 {
     Background* b = new Background;
     AddObject(b , LAYER::BACKGROUND);
-
-
+    
     m_player = new Player;
     m_player->SetSize({100.f,100.f});
     m_player->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
