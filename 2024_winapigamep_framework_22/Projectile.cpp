@@ -10,6 +10,7 @@ Projectile::Projectile()
 //	: m_dir(-1.f)
 	: m_angle(0.f)
 	, m_vDir(0.f, 1.f)
+	, m_speed(0)
 {
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
@@ -22,6 +23,7 @@ Projectile::Projectile()
 Projectile::Projectile(const wstring& _key, const wstring& _path)
 	: m_angle(0.f)
 	, m_vDir(0.f, 1.f)
+	, m_speed(0)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(_key, _path);
 	this->AddComponent<Collider>();
@@ -73,21 +75,15 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum otherTag = pOtherObj->GetTag();
 	TagEnum myTag = this->GetTag();
+				GET_SINGLE(EventManager)->DeleteObject(this);
 	switch (myTag)
 	{
 		case TagEnum::EnemyProjectile:
 			if (otherTag == TagEnum::Player)
-				GET_SINGLE(EventManager)->DeleteObject(this);
 			break;
 		case TagEnum::PlayerProjectile:
 			if (otherTag == TagEnum::Enemy)
-			{
-				//const auto enemy =_other->GetOwner()->GetComponent<Enemy>();
-				//cout << (enemy != nullptr);
-				//if (enemy != nullptr)
-				//	enemy->TakeDamage(1);
 				GET_SINGLE(EventManager)->DeleteObject(this);
-			}
 			break;
 	}
 }
