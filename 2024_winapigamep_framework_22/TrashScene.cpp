@@ -6,7 +6,7 @@
 #include "TrashMob3.h"
 
 void TrashScene::Init()
-{
+{/*
 	Object* tr1[10];
 	for (int i = 0; i < 10; i++) {
 		tr1[i] = new TrashMob1;
@@ -34,7 +34,7 @@ void TrashScene::Init()
 	tr2[1]->SetPos(enemyPos2);
 	tr2[1]->SetSize({ 100.f,100.f });
 	tr2[1]->SetName(L"TrashMob2");
-	AddObject(tr2[1], LAYER::ENEMY);
+	AddObject(tr2[1], LAYER::ENEMY);*/
 
 
 	/*tr[1]->SetPos(enemyPos1);

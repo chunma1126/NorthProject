@@ -20,7 +20,7 @@ void UIManager::Init()
 		
 		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart" , L"Texture\\PlayerHeart.bmp"));
 		playerHeart->SetPos({50 , 50});
-		playerHeart->SetSize({50,50});
+		playerHeart->SetSize({75,75});
 		AddChild(L"PlayerHeart1", playerHeart);
 	}
 
@@ -29,7 +29,7 @@ void UIManager::Init()
 
 		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\PlayerHeart.bmp"));
 		playerHeart->SetPos({ 100 , 50 });
-		playerHeart->SetSize({ 50,50 });
+		playerHeart->SetSize({ 75,75 });
 		AddChild(L"PlayerHeart2", playerHeart);
 	}
 
@@ -38,7 +38,7 @@ void UIManager::Init()
 
 		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\PlayerHeart.bmp"));
 		playerHeart->SetPos({ 150 , 50 });
-		playerHeart->SetSize({ 50,50 });
+		playerHeart->SetSize({ 75,75 });
 		AddChild(L"PlayerHeart3", playerHeart);
 	}
 

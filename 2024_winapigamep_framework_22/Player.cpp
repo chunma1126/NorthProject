@@ -16,7 +16,7 @@ Player::Player()
 	: m_pTex(nullptr)
 {
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\8-bit-power-down-2.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\PlayerDead.wav", false);
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\planemTakeDamageAnim.bmp");
@@ -97,11 +97,18 @@ void Player::Render(HDC _hdc)
 	bool isImmortal = IsImmortal();
 	if (isImmortal)
 	{
-		::TransparentBlt(_hdc
+	/*	::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2)
 			, (int)(vPos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y,
 			m_pTexOnHurt->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));*/
+
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width + vSize.x / 2, height + vSize.y / 2,
+			m_pTex->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 	else {

@@ -7,6 +7,9 @@
 #include "TimeManager.h"
 #include "Background.h"
 #include "UIManager.h"
+#include "CollisionManager.h";
+#include "AllEnemies.h"
+
 void BossScene::Init()
 {
     Background* b = new Background;
@@ -16,9 +19,8 @@ void BossScene::Init()
     m_player->SetSize({100.f,100.f});
     m_player->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
     AddObject(m_player,LAYER::PLAYER);
-    
 
-    GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart1" , true);
+    GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart1" ,true);
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
 
@@ -49,6 +51,15 @@ void BossScene::Init()
     GET_SINGLE(BulletManager)->BasicShot(shotInfo, {0,1});
     GET_SINGLE(BulletManager)->ShapeShot(shotInfo, {0,1} , 3 , 40 , 10);*/
 
+    GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+    GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
+    GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+    
+    Enemy* t = new Enemy(L"Enemy_1", L"Texture\\Enemy_1.bmp");
+
+    t->SetPos({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+    t->SetTag(TagEnum::Enemy);
+    AddObject(t , LAYER::ENEMY);
 
 }
 

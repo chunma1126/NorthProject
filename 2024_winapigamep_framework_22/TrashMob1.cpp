@@ -9,9 +9,8 @@
 
 
 TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
+	: Enemy(_key, _path)
 {
-	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Enemy_1" , L"Texture\\Enemy_1");
-
 
 	AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,0 }, { 15,16 }, { 1,0 }, 5, 1);
