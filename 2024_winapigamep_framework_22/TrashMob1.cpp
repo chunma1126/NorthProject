@@ -17,7 +17,7 @@ TrashMob1::~TrashMob1()
 void TrashMob1::Update()
 {	 
 	//Vec2 dir = ifPlayerPos - GetPos();
-	Vec2 down = { 0.f,10*fDT };
+	Vec2 down = { 0.f,40*fDT };
 	Vec2 curPos = GetPos();
 	SetPos(curPos + down);
 
