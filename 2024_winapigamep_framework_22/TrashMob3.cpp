@@ -17,7 +17,10 @@ TrashMob3::~TrashMob3()
 
 void TrashMob3::Update()
 {	 
-	//Vec2 dir = ifPlayerPos - GetPos();
+	Vec2 dir = ifPlayerPos - GetPos();
+	Vec2 curPos = GetPos();
+	Vec2 movement = dir * m_speed;
+	SetPos(curPos + movement);
 	
 }	 
 	 

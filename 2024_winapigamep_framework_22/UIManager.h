@@ -11,11 +11,12 @@ public:
 
 public :
 	void AddChild(wstring _key,UI* _newUI);
+	void SetActiveChild(wstring _key , bool _active);
+	UI* GetChild(wstring _key);
 
 
 private :
-	map<wstring, UI*> uiLists;
-
+	std::map<wstring, UI*> uiLists;
 
 };
 

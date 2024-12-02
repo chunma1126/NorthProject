@@ -144,14 +144,13 @@
     <ClInclude Include="OJYScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Health.h" />
     <ClInclude Include="TrashMob2.h" />
     <ClInclude Include="TrashMob3.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
-    <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="AllEnemies.h" />
-    <ClInclude Include="DelayedCall.h" />
-    <ClInclude Include="EnemySpawnEventManager.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -250,12 +249,12 @@
     <ClCompile Include="OJYScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Health.cpp" />
     <ClCompile Include="TrashMob2.cpp" />
     <ClCompile Include="TrashMob3.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="HealthComponent.cpp" />
-    <ClCompile Include="DelayedCall.cpp" />
-    <ClCompile Include="EnemySpawnEventManager.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
 </Project>

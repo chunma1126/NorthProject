@@ -5,14 +5,19 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "Background.h"
+
 void BossScene::Init()
 {
+    Background* b = new Background;
+    AddObject(b , LAYER::BACKGROUND);
+    
     m_player = new Player;
     m_player->SetSize({100.f,100.f});
     m_player->SetPos({SCREEN_WIDTH/2 , SCREEN_HEIGHT/2});
     AddObject(m_player,LAYER::PLAYER);
     
-    Vec2 vec{1,1};
+   /* Vec2 vec{1,1};
     ShotInfo shotInfo = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2},this,20,200.f };
     ShotInfo shotInfo_1 = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2}, this ,0.005f,700.f };
 
@@ -37,7 +42,7 @@ void BossScene::Init()
     GET_SINGLE(BulletManager)->RoseSpinShot(shotInfo_1, m_player, 5,400.f ,5.f,20.f);
 
     GET_SINGLE(BulletManager)->BasicShot(shotInfo, {0,1});
-    GET_SINGLE(BulletManager)->ShapeShot(shotInfo, {0,1} , 3 , 40 , 10);
+    GET_SINGLE(BulletManager)->ShapeShot(shotInfo, {0,1} , 3 , 40 , 10);*/
 
 
 }
