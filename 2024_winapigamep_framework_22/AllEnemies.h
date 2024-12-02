@@ -1,5 +1,6 @@
 #pragma once
-#include "pch.h"
+#include "Enemy.h"
+#include "EnemyCircleOut.h"
 #include "DelayedCall.h"
 //#include "TrashMob1.h"
 //#include "TrashMob2.h"
