@@ -4,6 +4,7 @@
 #include "EventManager.h"
 #include "HealthComponent.h"
 #include "ResourceManager.h"
+#include "Texture.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -38,6 +39,15 @@ void Enemy::Render(HDC _hdc)
 	//Vec2 vSize = GetSize();
 	//RECT_RENDER(_hdc, vPos.x, vPos.y
 	//	, vSize.x, vSize.y);
+	Vec2 vPos = GetPos();
+	int width = m_texture->GetWidth();
+	int height = m_texture->GetHeight();
+	::TransparentBlt(_hdc
+		, (int)(vPos.x - width / 2)
+		, (int)(vPos.y - height / 2)
+		, width, height,
+		m_texture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 	ComponentRender(_hdc);
 	//SelectObject(_hdc, oldbrush); 
 	//DeleteObject(brush);
