@@ -3,6 +3,9 @@
 struct tEnemySpawnStruct {
 public:
 	Vec2 position;
+	EnemyType enemyType = EnemyType::Normal;
+	const wstring key;
+	const wstring path;
 };
 class DelayedCall
 {
