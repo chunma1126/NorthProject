@@ -38,6 +38,9 @@
     <Filter Include="Engine\04. Scene\Jung">
       <UniqueIdentifier>{b3262a1c-68e5-466c-9d0b-934bd7f967a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Scene\won">
+      <UniqueIdentifier>{93656378-4425-400b-a541-c4d0ba4d670f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -139,18 +142,20 @@
     <ClInclude Include="FollowProjectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="TrashMob1.h" />
-    <ClInclude Include="TrashScene.h" />
-    <ClInclude Include="OJYScene.h">
-      <Filter>Engine\04. Scene</Filter>
+    <ClInclude Include="OJYScene.h" />
+    <ClInclude Include="TrashMob1.h">
+      <Filter>Engine\04. Scene\won</Filter>
     </ClInclude>
-    <ClInclude Include="Health.h" />
-    <ClInclude Include="TrashMob2.h" />
-    <ClInclude Include="TrashMob3.h" />
-    <ClInclude Include="UI.h" />
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="TrashScene.h">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashMob2.h">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashMob3.h">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClInclude>
+    <ClInclude Include="wonBoss.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -244,17 +249,19 @@
     <ClCompile Include="FollowProjectile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="TrashMob1.cpp" />
-    <ClCompile Include="TrashScene.cpp" />
-    <ClCompile Include="OJYScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
+    <ClCompile Include="OJYScene.cpp" />
+    <ClCompile Include="TrashMob1.cpp">
+      <Filter>Engine\04. Scene\won</Filter>
     </ClCompile>
-    <ClCompile Include="Health.cpp" />
-    <ClCompile Include="TrashMob2.cpp" />
-    <ClCompile Include="TrashMob3.cpp" />
-    <ClCompile Include="UI.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="TrashScene.cpp">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashMob2.cpp">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashMob3.cpp">
+      <Filter>Engine\04. Scene\won</Filter>
+    </ClCompile>
+    <ClCompile Include="wonBoss.cpp" />
   </ItemGroup>
 </Project>
