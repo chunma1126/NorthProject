@@ -55,10 +55,11 @@ void BossScene::Init()
     GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
     GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
     
-    Enemy* t = new Enemy(L"Enemy_1", L"Texture\\Enemy_1.bmp");
-
+    Enemy* t = new TrashMob1(L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp");
+    t->SetSize({100,100});
     t->SetPos({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
     t->SetTag(TagEnum::Enemy);
+
     AddObject(t , LAYER::ENEMY);
 
 }

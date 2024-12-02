@@ -5,6 +5,7 @@
 #include "HealthComponent.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Animator.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -21,6 +22,11 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 	m_health = this->GetComponent<HealthComponent>();
 	m_health->SetHP(4);
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(_key, _path);
+
+	/*AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,0 }, { 16,16 }, { 16,0 }, 5, 0.1f);
+	GetComponent<Animator>()->PlayAnimation(L"Enemy_1", true);
+	GetComponent<Animator>()->SetSize({ 10,10 });*/
 }
 
 Enemy::~Enemy()
@@ -33,26 +39,13 @@ void Enemy::Update()
 
 void Enemy::Render(HDC _hdc)
 {	
-	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
-	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
-	//Vec2 vPos = GetPos();
-	//Vec2 vSize = GetSize();
-	//RECT_RENDER(_hdc, vPos.x, vPos.y
-	//	, vSize.x, vSize.y);
-	Vec2 vPos = GetPos();
+	/*Vec2 vPos = GetPos();
 	int width = m_texture->GetWidth();
-	int height = m_texture->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	int height = m_texture->GetHeight();*/
+	
 	ComponentRender(_hdc);
-	//SelectObject(_hdc, oldbrush); 
-	//DeleteObject(brush);
-}
 
+}
 
 void Enemy::EnterCollision(Collider* _other)
 {

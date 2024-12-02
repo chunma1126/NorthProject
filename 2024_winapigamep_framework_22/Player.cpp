@@ -22,7 +22,6 @@ Player::Player()
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 
-
 	SetSize({ 400,400 });
 	this->SetTag(TagEnum::Player);
 	this->AddComponent<HealthComponent>();
@@ -79,22 +78,11 @@ void Player::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	//RECT_RENDER(_hdc, vPos.x, vPos.y
-	//	, vSize.x, vSize.y);
-	//::BitBlt(_hdc
-	//	, (int)(vPos.x - vSize.x / 2)
-	//	, (int)(vPos.y - vSize.y / 2)
-	//	, width, height,
-	//	m_pTex->GetTexDC()
-	//	,0,0,SRCCOPY
-	//);
-
-	//boundary
-	//RECT_RENDER(_hdc, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, boundary.x, boundary.y);
 
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	bool isImmortal = IsImmortal();
+
 	if (isImmortal)
 	{
 	/*	::TransparentBlt(_hdc
@@ -119,7 +107,6 @@ void Player::Render(HDC _hdc)
 			m_pTex->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
-	ComponentRender(_hdc);
 	if (isSlow)
 	{
 		int width = m_pHitbox->GetWidth();
@@ -131,6 +118,8 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
+
+	ComponentRender(_hdc);
 	//::StretchBlt();
 	//::AlphaBlend();
 	//::PlgBlt();

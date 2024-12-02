@@ -7,7 +7,7 @@ public:
 	TrashMob1(const wstring& _key, const wstring& _path);
 	~TrashMob1();
 public:
-	void Update() override;
+	
 
 private:
 
