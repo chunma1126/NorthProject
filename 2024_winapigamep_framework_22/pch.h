@@ -49,10 +49,3 @@ using std::wstring;
 using std::cout;
 using std::endl;
 
-enum class TagEnum {
-	None,
-	EnemyProjectile,
-	PlayerProjectile,
-	Enemy,
-	Player
-};

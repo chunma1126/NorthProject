@@ -36,3 +36,11 @@ enum class BUTTON_STATE
 	DEFAULT,
 	CLICK,
 };
+
+enum class TagEnum {
+	None,
+	EnemyProjectile,
+	PlayerProjectile,
+	Enemy,
+	Player
+};
