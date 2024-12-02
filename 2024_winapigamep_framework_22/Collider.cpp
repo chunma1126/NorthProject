@@ -35,8 +35,6 @@ void Collider::Render(HDC _hdc)
 void Collider::EnterCollision(Collider* _other)
 {
 	m_showDebug = true;
-	//
-	// "Enter" << endl;
 	GetOwner()->EnterCollision(_other);
 }
 
@@ -48,6 +46,5 @@ void Collider::StayCollision(Collider* _other)
 void Collider::ExitCollision(Collider* _other)
 {
 	m_showDebug = false;
-	//cout << "Exit" << endl;
 	GetOwner()->ExitCollision(_other);
 }

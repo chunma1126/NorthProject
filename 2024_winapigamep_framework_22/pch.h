@@ -50,7 +50,9 @@ using std::cout;
 using std::endl;
 
 enum class TagEnum {
-	//add here
 	None,
-	EnemyProjectile
+	EnemyProjectile,
+	PlayerProjectile,
+	Enemy,
+	Player
 };

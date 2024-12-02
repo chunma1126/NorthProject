@@ -1,9 +1,8 @@
 #pragma once
 #include "Object.h"
-#include "Health.h"
+class HealthComponent;
 class Enemy :
-    public Object,
-	public Health
+    public Object
 {
 public:
 	Enemy();
@@ -16,6 +15,6 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 private:
-	int m_hp;
+	HealthComponent* m_health = nullptr;
 };
 
