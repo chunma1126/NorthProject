@@ -29,6 +29,7 @@ private:
 	void CreateProjectile();
 	void CreateUltmite();
 	void Dead();
+	void OnHit(Collider* _other);
 	void OnTakeDamage();
 private:
 	float m_immortalTime = 4.f;

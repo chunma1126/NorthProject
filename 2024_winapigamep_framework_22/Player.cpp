@@ -132,32 +132,12 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	if (IsImmortal()) return;
-	Object* pOtherObj = _other->GetOwner();
-	TagEnum pOtherObjTag = pOtherObj->GetTag();
-	switch (pOtherObjTag)
-	{
-	case TagEnum::EnemyProjectile:
-	case TagEnum::Enemy:
-		m_health->TakeDamage(1);
-		OnTakeDamage();
-		break;
-	}
+	OnHit(_other);
 }
 
 void Player::StayCollision(Collider* _other)
 {
-	if (IsImmortal()) return;
-	Object* pOtherObj = _other->GetOwner();
-	TagEnum pOtherObjTag = pOtherObj->GetTag();
-	switch (pOtherObjTag)
-	{
-	case TagEnum::EnemyProjectile:
-	case TagEnum::Enemy:
-		m_health->TakeDamage(1);
-		OnTakeDamage();
-		break;
-	}
+	OnHit(_other);
 }
 
 void Player::Clamp()
@@ -212,7 +192,23 @@ void Player::CreateUltmite()
 
 void Player::Dead()
 {
-	cout << "PLAYER dead\n";
+	cout << "PLAYER dead, game over\n";
+}
+
+void Player::OnHit(Collider* _other)
+{
+	if (IsImmortal()) return;
+	Object* pOtherObj = _other->GetOwner();
+	TagEnum pOtherObjTag = pOtherObj->GetTag();
+	switch (pOtherObjTag)
+	{
+	case TagEnum::EnemyProjectile:
+	case TagEnum::Enemy:
+		m_health->TakeDamage(1);
+		OnTakeDamage();
+		break;
+	}
+
 }
 
 void Player::OnTakeDamage()
