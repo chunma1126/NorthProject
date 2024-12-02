@@ -1,17 +1,8 @@
 #pragma once
 #include "Scene.h"
-#include "Object.h"
 
+class Object;
 class Projectile;
-
-struct ShotInfo
-{
-	Vec2 pos;
-	Scene* scene;
-	float interval;
-	float bulletSpeed;
-};
-
 
 class BulletManager
 {
@@ -19,53 +10,65 @@ class BulletManager
 public:
 	void Init();
 	void Update();
-	void BasicShot(ShotInfo& _shotInfo , Vec2 _dir);
-	void CircleShot(ShotInfo& _shotInfo);
-	void CircleShotGoToTarget(ShotInfo& _shotInfo,Object* _target,float _changeTime);
-	void ShapeShot(ShotInfo& _shotInfo, Vec2 _dir ,int _vertex, float _size,float _rotationSpeed);
-
+	void BasicShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir);
+	void CircleShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed);
+	void CircleShotGoToTarget(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, float _changeTime);
+	void ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir, int _vertex, float _size, float _rotationSpeed);
 
 #pragma region Spinshot
-	void SpinShot(ShotInfo& _shotInfo, float& _spinAngle, float _turnSpeed, float _endTime);
+	void SpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, float& _spinAngle, float _turnSpeed, float _endTime);
 	void ApplySpinShot();
 #pragma endregion
 
 #pragma region HeartShot
-	void HeartShot(ShotInfo& _shotInfo);
-	void HeartShotGoToTarget(ShotInfo& _shotInfo, Object* _target, float _changeTime);
+	void HeartShot(Vec2 _pos, Scene* _scene, float _bulletSpeed);
+	void HeartShotGoToTarget(Vec2 _pos, Scene* _scene, float _bulletSpeed, Object* _target, float _changeTime);
 	void HeartDataInit(float _rotation);
 #pragma endregion
 
 #pragma region RoseShot
-	void RoseShot(ShotInfo& _shotInfo, Vec2 _dir,int _petals, float _size);
-	void RoseSpinShot(ShotInfo& _shotInfo, Object* _target,int _petals, float _size, float _endTime,float _rotationSpeed);
+	void RoseShot(Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir, int _petals, float _size);
+	void RoseSpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, int _petals, float _size, float _endTime, float _rotationSpeed);
 	void ApplyRoseSpinShot();
 #pragma endregion
 
 private:
-	 Object* m_target;
+	Object* m_target;
 
-	#pragma region spinshot
-	ShotInfo m_spinShotInfo;
+#pragma region spinshot
+	Vec2 m_spinShotPos;
+	Scene* m_spinShotScene;
+	float m_spinShotInterval;
+	float m_spinShotBulletSpeed;
 
 	bool m_isSpinShot;
 
 	float m_spinTurnSpeed;
-	float m_spinAngle;
-	float m_spinShotTimer;
 	float m_spinEndTime;
+	float m_spinAngle;
+
+	float m_spinShotTimer;
 	float m_spinEndTimer;
-	#pragma endregion
+#pragma endregion
 
-	 //HeartShot
-	 float m_heartRotation;
+	// HeartShot
+	Vec2 m_heartShotPos;
+	Scene* m_heartShotScene;
+	float m_heartShotInterval;
+	float m_heartShotBulletSpeed;
+
+	float m_heartRotation;
 private:
-	 float m_speeds[34];
-	 float m_direction[34];
+	float m_speeds[34];
+	float m_direction[34];
 
-	 //rose spinShot
-private : 
-	ShotInfo m_roseShotInfo;
+	// rose spinShot
+private:
+	Vec2 m_roseShotPos;
+	Scene* m_roseShotScene;
+	float m_roseShotInterval;
+	float m_roseShotBulletSpeed;
+
 	vector<Projectile*> m_roseVec;
 	Vec2 m_roseDir;
 
@@ -80,6 +83,4 @@ private :
 	float m_roseRotationSpeed;
 	float m_roseShotTimer;
 	float m_roseSize;
-
 };
-
