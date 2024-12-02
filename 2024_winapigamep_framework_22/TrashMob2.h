@@ -15,6 +15,9 @@ public:
 private:
 	int m_hp;
 public:
-	bool right = true;
+	bool m_right = true;
+	void SetRight2Left() {
+		m_right = false;
+	}
 };
 

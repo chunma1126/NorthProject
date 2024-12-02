@@ -8,15 +8,20 @@ TrashMob2::TrashMob2()
 	: m_hp(5)
 {
 	this->AddComponent<Collider>();
-	if (right) {
-		for (int i = 0; i < 17; ++i) {
-			Vec2 down = Vec2();
-			down.y += 10*fDT;
-			down.x -= 10*fDT;
+	/*if (m_right) {
+		for (int i = 0; i < 150; ++i) {
+			Vec2 down = { -40 * fDT,40 * fDT };
 			Vec2 curPos = GetPos();
 			SetPos(curPos + down);
 		}
 	}
+	else {
+		for (int i = 0; i < 150; ++i) {
+			Vec2 down = { 40 * fDT,40 * fDT };
+			Vec2 curPos = GetPos();
+			SetPos(curPos + down);
+		}
+	}*/
 }
 
 TrashMob2::~TrashMob2()
@@ -25,7 +30,16 @@ TrashMob2::~TrashMob2()
 
 void TrashMob2::Update()
 {	 
-	//Vec2 dir = ifPlayerPos - GetPos();
+	if (m_right) {
+			Vec2 down = { -40 * fDT,40 * fDT };
+			Vec2 curPos = GetPos();
+			SetPos(curPos + down);
+	}
+	else {
+			Vec2 down = { 40 * fDT,40 * fDT };
+			Vec2 curPos = GetPos();
+			SetPos(curPos + down);
+	}
 	
 }	 
 	 

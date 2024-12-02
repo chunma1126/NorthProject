@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "TimeManager.h"
 class TrashMob3 : public Enemy
 {
 public:
@@ -16,5 +17,6 @@ private:
 	int m_hp;
 public:
 	Vec2 ifPlayerPos = { SCREEN_WIDTH / 2.f,600.f };
+	float m_speed = 50 * fDT;
 };
 
