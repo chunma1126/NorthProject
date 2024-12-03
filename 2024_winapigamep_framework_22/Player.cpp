@@ -22,20 +22,19 @@ Player::Player()
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 
-	SetSize({ 400,400 });
+	SetSize({ 60,60 });
 	this->SetTag(TagEnum::Player);
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
 	m_health->SetHP(4);
 
 	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetOffSetPos({ 25.f, 35.f });
-	this->GetComponent<Collider>()->SetSize({ 75,75 });
-
+	this->GetComponent<Collider>()->SetOffSetPos({ 15.5f, 15.f });
+	this->GetComponent<Collider>()->SetSize({ 10,10 });
 	m_pFire = GET_SINGLE(ResourceManager)->TextureLoad(L"Fire", L"Texture\\Fire.bmp");
 	AddComponent<Animator>();
-	GetComponent<Animator>()->SetPos({ 25,85 });
-	GetComponent<Animator>()->SetSize({ 4,4 });
+	GetComponent<Animator>()->SetPos({ 15.5f, 55.f });
+	GetComponent<Animator>()->SetSize({ 2.4f,2.4f });
 	GetComponent<Animator>()->CreateAnimation(L"Fire", m_pFire, { 0,0 }, { 16,16 }, { 16,0 }, 2, 0.1f, false);
 	GetComponent<Animator>()->PlayAnimation(L"Fire", true);
 
@@ -82,16 +81,9 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	bool isImmortal = IsImmortal();
-
+	cout << vSize.x << "\n";
 	if (isImmortal)
 	{
-	/*	::TransparentBlt(_hdc
-			, (int)(vPos.x - width / 2)
-			, (int)(vPos.y - height / 2)
-			, width + vSize.x / 2, height + vSize.y,
-			m_pTexOnHurt->GetTexDC()
-			, 0, 0, width, height, RGB(255, 0, 255));*/
-
 		::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2)
 			, (int)(vPos.y - height / 2)
@@ -114,7 +106,7 @@ void Player::Render(HDC _hdc)
 		::TransparentBlt(_hdc
 			, (int)(vPos.x - width / 2) + pivotPoint.x
 			, (int)(vPos.y - height / 2) + pivotPoint.y
-			, width + vSize.x / 2, height + vSize.y / 2,
+			, width, height,
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
