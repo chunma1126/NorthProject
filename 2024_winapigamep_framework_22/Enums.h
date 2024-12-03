@@ -34,17 +34,20 @@ enum class EVENT_TYPE
 enum class BUTTON_STATE 
 {
 	DEFAULT,
+	HOVER,
 	CLICK,
 };
 
-enum class TagEnum {
+enum class TagEnum 
+{
 	None,
 	EnemyProjectile,
 	PlayerProjectile,
 	Enemy,
 	Player
 };
-enum class EnemyType {
+enum class EnemyType 
+{
 	Normal,
 	CircleOut
 };

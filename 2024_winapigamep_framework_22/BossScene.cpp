@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "BossScene.h"
 #include "ResourceManager.h"
+#include "CollisionManager.h";
 #include "BulletManager.h"
-#include "Player.h"
 #include "InputManager.h"
 #include "TimeManager.h"
-#include "Background.h"
 #include "UIManager.h"
-#include "CollisionManager.h";
+#include "Background.h"
 #include "AllEnemies.h"
+#include "Player.h"
+#include "EnemyBullet.h"
 
 void BossScene::Init()
 {
@@ -64,8 +65,14 @@ void BossScene::Init()
 
         AddObject(t, LAYER::ENEMY);
     }
- 
-
+    
+    {
+        EnemyBullet* t = new EnemyBullet;
+        t->SetPos({ SCREEN_WIDTH / 2 , 0 });
+        t->SetSize({400,400});
+        t->SetSpeed(10);
+        AddObject(t, LAYER::ENEMY);
+    }
 }
 
 

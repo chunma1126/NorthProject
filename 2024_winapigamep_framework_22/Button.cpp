@@ -25,24 +25,29 @@ void Button::Update()
 
 	if (MouseInRect())
 	{
+		
 		if (state == KEY_STATE::DOWN)
 		{
-			ChangeTex(m_pressTexture);
+			ChangeTex(m_pressTexture,BUTTON_STATE::CLICK);
 		}
 		else if (state == KEY_STATE::UP)
 		{
-			ChangeTex(m_originTexture);
+			ChangeTex(m_originTexture, BUTTON_STATE::DEFAULT);
 			ClickEvent();
+		}
+		else {
+			ChangeTex(m_hoverTexture, BUTTON_STATE::HOVER);
 		}
 	}
 	else
 	{
-		ChangeTex(m_originTexture);
+		ChangeTex(m_originTexture, BUTTON_STATE::DEFAULT);
 	}
 
 }
 
-void Button::ChangeTex(Texture* _tex)
+void Button::ChangeTex(Texture* _tex,BUTTON_STATE _state)
 {
 	m_pTexture = _tex;
+	m_state = _state;
 }
