@@ -18,7 +18,7 @@ void UIManager::Init()
 	{
 		UI* playerHeart = new UI;
 		
-		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart" , L"Texture\\PlayerHeart.bmp"));
+		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart" , L"Texture\\UI\\PlayerHeart.bmp"));
 		playerHeart->SetPos({50 , 50});
 		playerHeart->SetSize({75,75});
 		AddChild(L"PlayerHeart1", playerHeart);
@@ -27,7 +27,7 @@ void UIManager::Init()
 	{
 		UI* playerHeart = new UI;
 
-		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\PlayerHeart.bmp"));
+		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\UI\\PlayerHeart.bmp"));
 		playerHeart->SetPos({ 100 , 50 });
 		playerHeart->SetSize({ 75,75 });
 		AddChild(L"PlayerHeart2", playerHeart);
@@ -36,7 +36,7 @@ void UIManager::Init()
 	{
 		UI* playerHeart = new UI;
 
-		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\PlayerHeart.bmp"));
+		playerHeart->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerHeart", L"Texture\\UI\\PlayerHeart.bmp"));
 		playerHeart->SetPos({ 150 , 50 });
 		playerHeart->SetSize({ 75,75 });
 		AddChild(L"PlayerHeart3", playerHeart);
@@ -45,8 +45,8 @@ void UIManager::Init()
 	{
 		UI* Title = new UI;
 
-		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\Title.bmp"));
-		Title->SetPos({400 , 200 });
+		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\UI\\Title.bmp"));
+		Title->SetPos({225, 200 });
 		Title->SetSize({ 800,200 });
 
 		AddChild(L"Title", Title);
@@ -54,14 +54,14 @@ void UIManager::Init()
 
 	{
 		PlayButton* playButton = new PlayButton;
-		playButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButton", L"Texture\\PlayButton.bmp"));
-		playButton->SetPos({ 400 , 600 });
-		playButton->SetSize({ 400,200 });
+		playButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButton", L"Texture\\UI\\PlayButton.bmp"));
+		playButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2});
+		playButton->SetSize({ 600,200 });
 
-		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonHover", L"Texture\\PlayButtonHover.bmp"));
+		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonHover", L"Texture\\UI\\PlayButtonHover.bmp"));
 		playButton->SetHoverTexture(hover);
 
-		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonPress", L"Texture\\PlayButtonPress.bmp"));
+		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonPress", L"Texture\\UI\\PlayButtonPress.bmp"));
 		playButton->SetPressTexture(press);
 
 		AddChild(L"PlayButton", playButton);
@@ -69,11 +69,15 @@ void UIManager::Init()
 
 	{
 		ExitButton* exitButton = new ExitButton;
-		exitButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButton", L"Texture\\QuitButton.bmp"));
-		exitButton->SetPos({ 400 , 800 });
-		exitButton->SetSize({ 400,200 });
+		exitButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButton", L"Texture\\UI\\QuitButton.bmp"));
+		exitButton->SetPos({ SCREEN_WIDTH / 2 - 140 , SCREEN_HEIGHT / 2 + 130 });
+		exitButton->SetSize({ 600,200 });
 
-		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButtonPress", L"Texture\\QuitButtonPress.bmp"));
+		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButtonHover", L"Texture\\UI\\QuitButtonHover.bmp"));
+		exitButton->SetHoverTexture(hover);
+
+		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"QuitButtonPress", L"Texture\\UI\\QuitButtonPress.bmp"));
+		exitButton->SetHoverTexture(hover);
 		exitButton->SetPressTexture(press);
 
 		AddChild(L"ExitButton", exitButton);

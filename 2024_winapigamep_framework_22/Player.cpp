@@ -24,7 +24,7 @@ Player::Player()
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 
-	SetSize({ 400,400 });
+	SetSize({ 20,20 });
 	this->SetTag(TagEnum::Player);
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
@@ -219,7 +219,7 @@ void Player::OnTakeDamage()
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
 
-	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP() + 1)));
+	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
 	GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 
 	if (m_health->GetHP() <= 0)

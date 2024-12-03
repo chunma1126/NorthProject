@@ -35,6 +35,10 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	if (GetPos().y > SCREEN_HEIGHT)
+	{
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
 }
 
 void Enemy::Render(HDC _hdc)

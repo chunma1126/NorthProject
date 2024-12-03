@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Projectile.h"
 #include "FollowProjectile.h"
+#include "EnemyBullet.h"
 #include "TimeManager.h"
 
 void BulletManager::Init()
@@ -142,7 +143,7 @@ void BulletManager::CircleShot(Vec2 _pos, Scene* _scene, float _interval, float 
 {
 	for (int i = 0; i < 360; i += _interval)
 	{
-		Projectile* pObj = new Projectile;
+		Projectile* pObj = new EnemyBullet;
 		pObj->SetPos(_pos);
 		pObj->SetSize({ 400.f,400.f });
 		pObj->SetSpeed(_bulletSpeed);
