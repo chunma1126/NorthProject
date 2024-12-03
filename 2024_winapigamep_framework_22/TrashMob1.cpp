@@ -10,7 +10,6 @@
 #include "SceneManager.h"
 
 
-
 TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
@@ -18,8 +17,6 @@ TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
 	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,58 }, { 48,48 }, { 48,0 }, 4, 0.2f);
 	GetComponent<Animator>()->PlayAnimation(L"Enemy_1", true);
 	GetComponent<Animator>()->SetSize({ 4,4 });
-
-
 	GetComponent<Collider>()->SetSize({ 125,125 });
 
 }

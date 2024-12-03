@@ -178,6 +178,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DelayedCall.h" />
+    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="EnemyCircleOut.h" />
     <ClInclude Include="EnemySpawnEventManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DelayedCall.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="EnemyCircleOut.cpp" />
     <ClCompile Include="EnemySpawnEventManager.cpp" />
     <ClCompile Include="Enemy.cpp" />

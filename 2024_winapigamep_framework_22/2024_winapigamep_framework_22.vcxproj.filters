@@ -155,7 +155,18 @@
     <ClInclude Include="TrashMob3.h">
       <Filter>Engine\04. Scene\won</Filter>
     </ClInclude>
-    <ClInclude Include="wonBoss.h" />
+    <ClInclude Include="AllEnemies.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="DelayedCall.h" />
+    <ClInclude Include="EnemyCircleOut.h" />
+    <ClInclude Include="EnemySpawnEventManager.h" />
+    <ClInclude Include="ExitButton.h" />
+    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="EnemyBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -262,6 +273,16 @@
     <ClCompile Include="TrashMob3.cpp">
       <Filter>Engine\04. Scene\won</Filter>
     </ClCompile>
-    <ClCompile Include="wonBoss.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="DelayedCall.cpp" />
+    <ClCompile Include="EnemyCircleOut.cpp" />
+    <ClCompile Include="EnemySpawnEventManager.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
   </ItemGroup>
 </Project>

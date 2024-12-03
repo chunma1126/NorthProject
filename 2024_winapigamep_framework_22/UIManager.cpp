@@ -58,6 +58,9 @@ void UIManager::Init()
 		playButton->SetPos({ 400 , 600 });
 		playButton->SetSize({ 400,200 });
 
+		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonHover", L"Texture\\PlayButtonHover.bmp"));
+		playButton->SetHoverTexture(hover);
+
 		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButtonPress", L"Texture\\PlayButtonPress.bmp"));
 		playButton->SetPressTexture(press);
 
@@ -75,7 +78,6 @@ void UIManager::Init()
 
 		AddChild(L"ExitButton", exitButton);
 	}
-	
 }
 
 void UIManager::Update()

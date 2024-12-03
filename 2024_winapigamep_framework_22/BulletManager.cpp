@@ -148,6 +148,8 @@ void BulletManager::CircleShot(Vec2 _pos, Scene* _scene, float _interval, float 
 		pObj->SetSpeed(_bulletSpeed);
 
 		pObj->SetName(L"Projectile");
+        pObj->SetTag(TagEnum::EnemyProjectile);
+
 		_scene->AddObject(pObj, LAYER::PROJECTILE);
 
 		float angle = i * (PI / 180.0f);

@@ -12,6 +12,8 @@
 #include "Animation.h"
 #include "Enemy.h"
 #include "HealthComponent.h"
+#include "UIManager.h"
+#include "UI.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -170,10 +172,15 @@ void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
 	pProj->SetSpeed(1000);
+
 	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
+	vPos.y -= 20.f;
+	vPos.x += 25.f;
+
 	pProj->SetPos(vPos);
+
 	pProj->SetSize({ 30.f,30.f });
+
 	pProj->SetDir({ 0.f, -1.f });
 	pProj->SetTag(TagEnum::PlayerProjectile);
 	//pProj->SetName(L"PlayerBullet");
@@ -211,6 +218,10 @@ void Player::OnTakeDamage()
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
+
+	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP() + 1)));
+	GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
+
 	if (m_health->GetHP() <= 0)
 	{
 		Dead();
