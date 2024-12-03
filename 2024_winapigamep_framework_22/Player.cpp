@@ -83,7 +83,6 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	bool isImmortal = IsImmortal();
-	cout << vSize.x << "\n";
 	if (isImmortal)
 	{
 		::TransparentBlt(_hdc
