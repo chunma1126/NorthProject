@@ -24,9 +24,7 @@ void BossScene::Init()
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
 
-    Vec2 vec{1,1};
-    ShotInfo shotInfo = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2},this,20,200.f };
-    ShotInfo shotInfo_1 = { {SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2}, this ,0.005f,700.f };
+   
 
    /* GET_SINGLE(BulletManager)->HeartDataInit(270.f);
     GET_SINGLE(BulletManager)->HeartShot(shotInfo);
@@ -54,12 +52,19 @@ void BossScene::Init()
     GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
     GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
     GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-    
-    Enemy* t = new Enemy(L"Enemy_1", L"Texture\\Enemy_1.bmp");
 
-    t->SetPos({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
-    t->SetTag(TagEnum::Enemy);
-    AddObject(t , LAYER::ENEMY);
+
+    {
+        TrashMob1* t = new TrashMob1(L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp");
+        t->SetScene(this);
+
+        t->SetSize({ 100,100 });
+        t->SetPos({ SCREEN_WIDTH / 2 , 0 });
+        t->SetTag(TagEnum::Enemy);
+
+        AddObject(t, LAYER::ENEMY);
+    }
+ 
 
 }
 

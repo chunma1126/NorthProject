@@ -2,6 +2,7 @@
 #include "Object.h"
 class Texture;
 class HealthComponent;
+class Scene;
 class Enemy :
     public Object
 {
@@ -12,6 +13,7 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+	void SetScene(Scene* _scene) { m_curScene = _scene; }
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
@@ -19,5 +21,6 @@ public:
 protected:
 	Texture* m_texture = nullptr;
 	HealthComponent* m_health = nullptr;
+	Scene* m_curScene = nullptr;
 };
 

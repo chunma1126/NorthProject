@@ -101,7 +101,7 @@ void BulletManager::Update()
 
             for (auto item : m_roseVec)
             {
-                item->SetSpeed(m_roseShotInfo.bulletSpeed);
+                item->SetSpeed(m_roseShotBulletSpeed);
                 Vec2 currentProjectile = item->GetPos();
 
                 float centerX = SCREEN_WIDTH / 2;
@@ -126,63 +126,66 @@ void BulletManager::Update()
 
 }
 
-void BulletManager::BasicShot(ShotInfo& _shotInfo, Vec2 _dir)
+void BulletManager::BasicShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir)
 {
     Projectile* p = new Projectile;
 
-    p->SetPos(_shotInfo.pos);
+    p->SetPos(_pos);
     p->SetDir(_dir);
-    p->SetSpeed(_shotInfo.bulletSpeed);
+    p->SetSpeed(_bulletSpeed);
     p->SetName(L"Projectile");
     
-    _shotInfo.scene->AddObject(p,LAYER::PROJECTILE);
-
+    _scene->AddObject(p,LAYER::PROJECTILE);
 }
 
-void BulletManager::CircleShot(ShotInfo& _shotInfo)
+void BulletManager::CircleShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed)
 {
-	for (int i = 0; i < 360; i += _shotInfo.interval)
+	for (int i = 0; i < 360; i += _interval)
 	{
 		Projectile* pObj = new Projectile;
-		pObj->SetPos(_shotInfo.pos);
+		pObj->SetPos(_pos);
 		pObj->SetSize({ 400.f,400.f });
-		pObj->SetSpeed(_shotInfo.bulletSpeed);
+		pObj->SetSpeed(_bulletSpeed);
 
 		pObj->SetName(L"Projectile");
-		_shotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+		_scene->AddObject(pObj, LAYER::PROJECTILE);
 
 		float angle = i * (PI / 180.0f);
 		pObj->SetDir({ cosf(angle), sinf(angle)});
 	}
 }
 
-void BulletManager::CircleShotGoToTarget(ShotInfo& _shotInfo, Object* _target , float _changeTime)
+void BulletManager::CircleShotGoToTarget(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, float _changeTime)
 {
-	for (int i = 0; i < 360; i += _shotInfo.interval)
+	for (int i = 0; i < 360; i += _interval)
 	{
 		FollowProjectile* pObj = new FollowProjectile;
 
-		pObj->SetPos(_shotInfo.pos);
+		pObj->SetPos(_pos);
 		pObj->SetSize({ 400.f,400.f });
-		pObj->SetSpeed(_shotInfo.bulletSpeed);
+		pObj->SetSpeed(_bulletSpeed);
 		pObj->SetChangeTime(_changeTime);
 		pObj->SetName(L"Projectile");
 		pObj->SetTarget(_target);
 
-		_shotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+		_scene->AddObject(pObj, LAYER::PROJECTILE);
 
 		float angle = i * (PI / 180.0f);
 		pObj->SetDir({ cosf(angle), sinf(angle)});
 	}
 }
 
-void BulletManager::SpinShot(ShotInfo& _shotInfo, float& _spinAngle, float _turnSpeed,float _endTime)
+void BulletManager::SpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, float& _spinAngle, float _turnSpeed, float _endTime)
 {
+    m_spinShotPos = _pos;
+    m_spinShotScene = _scene;
+    m_spinShotInterval = _interval;
+    m_spinShotBulletSpeed = _bulletSpeed;
 
 	m_isSpinShot = true;
-	m_spinShotInfo = _shotInfo;
-	m_spinAngle = _spinAngle;
-	m_spinTurnSpeed = _turnSpeed;
+
+    m_spinAngle = _spinAngle;
+    m_spinTurnSpeed = _turnSpeed;
 	m_spinEndTime = _endTime;
 
 }
@@ -190,7 +193,7 @@ void BulletManager::SpinShot(ShotInfo& _shotInfo, float& _spinAngle, float _turn
 void BulletManager::ApplySpinShot()
 {
 	m_spinShotTimer += fDT;
-	if (m_spinShotTimer < m_spinShotInfo.interval) return;
+	if (m_spinShotTimer < m_spinShotInterval) return;
 
 	m_spinEndTimer += m_spinShotTimer;
 	m_spinShotTimer = 0.0f;
@@ -202,17 +205,17 @@ void BulletManager::ApplySpinShot()
 
 	Projectile* pObj = new Projectile;
 
-    pObj->SetPos(m_spinShotInfo.pos);
+    pObj->SetPos(m_spinShotPos);
 	pObj->SetSize({ 400.f, 400.f });
-	pObj->SetSpeed(m_spinShotInfo.bulletSpeed);
+	pObj->SetSpeed(m_spinShotBulletSpeed);
 
 	Vec2 dir = { cosf(angleInRadians), sinf(angleInRadians) };
 	pObj->SetDir(dir);
 
-	m_spinShotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+	m_spinShotScene->AddObject(pObj, LAYER::PROJECTILE);
 }
 
-void BulletManager::ShapeShot(ShotInfo& _shotInfo, Vec2 _dir, int _vertex, float _size, float _rotationSpeed)
+void BulletManager::ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir, int _vertex, float _size, float _rotationSpeed)
 {
     float angleIncrement = 360.0f / _vertex;
     float radius = _size;
@@ -228,23 +231,23 @@ void BulletManager::ShapeShot(ShotInfo& _shotInfo, Vec2 _dir, int _vertex, float
         float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
 
         pObj->SetPos({ x, y });
-        pObj->SetSize(_shotInfo.pos);
+        pObj->SetSize(_pos);
         pObj->SetName(L"Projectile");
         pObj->SetDir(_dir);
-        pObj->SetSpeed(_shotInfo.bulletSpeed);
+        pObj->SetSpeed(_bulletSpeed);
 
-        _shotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+        _scene->AddObject(pObj, LAYER::PROJECTILE);
     }
 }
 
-void BulletManager::HeartShot(ShotInfo& _shotInfo)
+void BulletManager::HeartShot(Vec2 _pos, Scene* _scene, float _bulletSpeed)
 {
     for (int i = 0; i < 34; ++i)
     {
         Projectile* p = new Projectile;
 
-        p->SetPos(_shotInfo.pos);
-        p->SetSpeed(m_speeds[i] + _shotInfo.bulletSpeed);
+        p->SetPos(_pos);
+        p->SetSpeed(m_speeds[i] + _bulletSpeed);
         p->SetSize({200,200});
 
         float angleDegrees = m_direction[i] + m_heartRotation; 
@@ -257,11 +260,11 @@ void BulletManager::HeartShot(ShotInfo& _shotInfo)
 
         p->SetDir({ vx, vy });
 
-        _shotInfo.scene->AddObject(p,LAYER::PROJECTILE);
+        _scene->AddObject(p,LAYER::PROJECTILE);
     }
 }
 
-void BulletManager::HeartShotGoToTarget(ShotInfo& _shotInfo, Object* _target,float _changeTime)
+void BulletManager::HeartShotGoToTarget(Vec2 _pos, Scene* _scene, float _bulletSpeed, Object* _target, float _changeTime)
 {
     for (int i = 0; i < 34; ++i)
     {
@@ -269,8 +272,8 @@ void BulletManager::HeartShotGoToTarget(ShotInfo& _shotInfo, Object* _target,flo
 
         p->SetTarget(_target);
         p->SetChangeTime(_changeTime);
-        p->SetPos(_shotInfo.pos);
-        p->SetSpeed(m_speeds[i] + _shotInfo.bulletSpeed);
+        p->SetPos(_pos);
+        p->SetSpeed(m_speeds[i] + _bulletSpeed);
         p->SetSize({ 200,200 });
 
         float angleDegrees = m_direction[i] + m_heartRotation;
@@ -282,7 +285,7 @@ void BulletManager::HeartShotGoToTarget(ShotInfo& _shotInfo, Object* _target,flo
 
         p->SetDir({ vx, vy });
 
-        _shotInfo.scene->AddObject(p, LAYER::PROJECTILE);
+        _scene->AddObject(p, LAYER::PROJECTILE);
     }
 }
 
@@ -291,7 +294,7 @@ void BulletManager::HeartDataInit(float _rotation)
     m_heartRotation = _rotation;
 }
 
-void BulletManager::RoseShot(ShotInfo& _shotInfo,Vec2 _dir, int _petals, float _size)
+void BulletManager::RoseShot(Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir, int _petals, float _size)
 {
     int vertex = 360; 
     float k = static_cast<float>(_petals); 
@@ -309,21 +312,24 @@ void BulletManager::RoseShot(ShotInfo& _shotInfo,Vec2 _dir, int _petals, float _
         float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
 
         pObj->SetPos({ x, y });
-        pObj->SetSize(_shotInfo.pos);
         pObj->SetName(L"Projectile");
         pObj->SetDir(_dir);
-        pObj->SetSpeed(_shotInfo.bulletSpeed);
+        pObj->SetSpeed(_bulletSpeed);
 
-        _shotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+        _scene->AddObject(pObj, LAYER::PROJECTILE);
     }
 }
 
-void BulletManager::RoseSpinShot(ShotInfo& _shotInfo, Object* _target,int _petals, float _size,float _endTime,float _rotationSpeed)
+void BulletManager::RoseSpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, int _petals, float _size, float _endTime, float _rotationSpeed)
 {
     m_isRoseShot = true;
     m_roseShotEnd = false;
 
-    m_roseShotInfo = _shotInfo;
+
+    m_roseShotPos = _pos;
+    m_roseShotScene = _scene;
+    m_roseShotInterval = _interval;
+    m_roseShotBulletSpeed = _bulletSpeed;
 
     m_target = _target;
     m_roseSize = _size;
@@ -336,7 +342,7 @@ void BulletManager::ApplyRoseSpinShot()
 {
     m_roseShotTimer += fDT;
 
-    if (m_roseShotTimer < m_roseShotInfo.interval) return;
+    if (m_roseShotTimer < m_roseShotInterval) return;
     
     m_roseEndTimer += m_roseShotTimer;
     m_roseShotTimer = 0;
@@ -358,13 +364,12 @@ void BulletManager::ApplyRoseSpinShot()
     float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
 
     pObj->SetPos({ x, y });
-    pObj->SetSize(m_roseShotInfo.pos);
     pObj->SetSpeed(0);
 
     pObj->SetName(L"Projectile");
     m_roseVec.push_back(pObj);
 
-    m_roseShotInfo.scene->AddObject(pObj, LAYER::PROJECTILE);
+    m_roseShotScene->AddObject(pObj, LAYER::PROJECTILE);
 
     currentIndex = (++currentIndex) % vertex;
 
