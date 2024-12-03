@@ -98,7 +98,7 @@ void Player::Render(HDC _hdc)
 			, (int)(vPos.x - width / 2)
 			, (int)(vPos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y / 2,
-			m_pTex->GetTexDC()
+			m_pTexOnHurt->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 	else {
