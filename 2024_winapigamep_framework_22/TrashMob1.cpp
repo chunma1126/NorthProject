@@ -23,11 +23,13 @@ TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
 
 TrashMob1::~TrashMob1()
 {
-
+	cout << "응어아잇 부르르";
 }
 
 void TrashMob1::Update()
 {
+	Enemy::Update();
+
 	Vec2 curPos = GetPos();
 	curPos.y += 100 * fDT;
 	SetPos(curPos);
@@ -40,6 +42,9 @@ void TrashMob1::Update()
 		GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 200 }, m_curScene, 40, 400);
 
 	}
+
+	
+	
 }
 
 

@@ -210,7 +210,7 @@ void Player::OnTakeDamage()
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
 
-	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP() + 1)));
+	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
 	GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 
 	if (m_health->GetHP() <= 0)

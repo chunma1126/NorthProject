@@ -6,6 +6,7 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "Enemy.h"
+#include "Animator.h"
 Projectile::Projectile()
 //	: m_dir(-1.f)
 	: m_angle(0.f)
@@ -16,9 +17,15 @@ Projectile::Projectile()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\Bullet.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\PlayerBullet.bmp");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
+
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Bullet", m_pTex, { 0,0 }, { 24,24 }, {24 , 0} , 4 , 0.1f , false);
+	GetComponent<Animator>()->SetSize({2,2});
+	GetComponent<Animator>()->PlayAnimation(L"Bullet" , true);
+
 }
 Projectile::Projectile(const wstring& _key, const wstring& _path)
 	: m_angle(0.f)
@@ -28,6 +35,10 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(_key, _path);
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
+
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Bullet", m_pTex, { 0,0 }, { 24,24 }, { 24 , 0 }, 4, 0.2f, false);
+	GetComponent<Animator>()->PlayAnimation(L"Bullet", true);
 }
 
 Projectile::~Projectile()
@@ -59,14 +70,16 @@ void Projectile::Render(HDC _hdc)
 	Vec2 vSize = GetSize();
 	//ELLIPSE_RENDER(_hdc, vPos.x, vPos.y
 	//	, vSize.x, vSize.y);
-	int width = m_pTex->GetWidth();
+	/*int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	::TransparentBlt(_hdc
 		, (int)(vPos.x - width / 2)
 		, (int)(vPos.y - height / 2)
 		, width, height,
 		m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+		, 0, 0, width, height, RGB(255, 0, 255));*/
+
+
 	ComponentRender(_hdc);
 }
 
