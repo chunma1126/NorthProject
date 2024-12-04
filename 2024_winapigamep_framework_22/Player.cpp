@@ -25,6 +25,7 @@ Player::Player()
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
 
 	SetSize({ 60,60 });
+	SetPos(spawnPosition);
 	this->SetTag(TagEnum::Player);
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
@@ -190,6 +191,7 @@ void Player::Dead()
 
 void Player::OnHit(Collider* _other)
 {
+	cout << "h";
 	if (IsImmortal()) return;
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();

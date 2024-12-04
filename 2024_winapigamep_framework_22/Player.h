@@ -17,7 +17,7 @@ private:
 	const float defaultSpeed = 200;
 	const float runningSpeed = 350;
 	const float rpm = 600;
-	const Vec2 spawnPosition = Vec2(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT * 2.f / 3.f);
+	const Vec2 spawnPosition = Vec2(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT * 2.5f / 3.f);
 	const Vec2 boundary = Vec2(500, 500);
 	Vec2 pivotPoint = Vec2(15.f, 15.f);
 private:
