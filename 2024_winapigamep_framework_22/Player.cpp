@@ -165,8 +165,8 @@ void Player::CreateProjectile()
 	pProj->SetSpeed(1000);
 
 	Vec2 vPos = GetPos();
-	vPos.y -= 20.f;
-	vPos.x += 25.f;
+	vPos.x += 15.f;
+	vPos.y += -0.2f;
 
 	pProj->SetPos(vPos);
 
