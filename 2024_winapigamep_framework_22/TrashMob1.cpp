@@ -39,7 +39,10 @@ void TrashMob1::Update()
 	if (m_shotTimer >= m_shotTime)
 	{
 		m_shotTimer = 0;
-		GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 200 }, m_curScene, 40, 400);
+		int idx = cnt % 5;
+		float angle = arr[idx];
+		cnt++;
+		GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 50 }, m_curScene, angle, 400);
 
 	}
 
