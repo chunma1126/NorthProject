@@ -88,15 +88,19 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum otherTag = pOtherObj->GetTag();
 	TagEnum myTag = this->GetTag();
-				GET_SINGLE(EventManager)->DeleteObject(this);
 	switch (myTag)
 	{
 		case TagEnum::EnemyProjectile:
-			if (otherTag == TagEnum::Player)
+		{
+			//if (otherTag == TagEnum::Player)
+
+		}
 			break;
 		case TagEnum::PlayerProjectile:
+		{
 			if (otherTag == TagEnum::Enemy)
 				GET_SINGLE(EventManager)->DeleteObject(this);
+		}
 			break;
 	}
 }
