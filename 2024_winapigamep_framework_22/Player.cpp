@@ -19,7 +19,7 @@ Player::Player()
 {
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\PlayerDead.wav", false);
-
+	
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
@@ -40,7 +40,6 @@ Player::Player()
 	GetComponent<Animator>()->SetSize({ 2.4f,2.4f });
 	GetComponent<Animator>()->CreateAnimation(L"Fire", m_pFire, { 0,0 }, { 16,16 }, { 16,0 }, 2, 0.1f, false);
 	GetComponent<Animator>()->PlayAnimation(L"Fire", true);
-
 }
 Player::~Player()
 {

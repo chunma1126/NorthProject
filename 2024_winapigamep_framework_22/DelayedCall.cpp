@@ -30,6 +30,8 @@ void DelayedCall::OnFinish()
 		pObj = new TrashMob1(m_spawnStruct.key, m_spawnStruct.path);
 		break;
 	}
+	if(m_spawnStruct.hp != 0)
+		pObj->SetHP(m_spawnStruct.hp);
 	pObj->SetScene(GET_SINGLE(SceneManager)->GetCurrentScene().get());
 	pObj->SetPos({ m_spawnStruct.position.x, m_spawnStruct.position.y });
 	pObj->SetSize({ 100.f,100.f });

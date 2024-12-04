@@ -51,6 +51,11 @@ void Enemy::Render(HDC _hdc)
 
 }
 
+void Enemy::SetHP(float hp)
+{
+	m_health->SetHP(hp);
+}
+
 void Enemy::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();

@@ -29,7 +29,7 @@ TrashMob1::~TrashMob1()
 void TrashMob1::Update()
 {
 	Enemy::Update();
-
+	
 	Vec2 curPos = GetPos();
 	curPos.y += 100 * fDT;
 	SetPos(curPos);

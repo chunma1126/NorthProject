@@ -6,6 +6,7 @@ public:
 	EnemyType enemyType = EnemyType::Normal;
 	const wstring key;
 	const wstring path;
+	int hp;
 };
 class DelayedCall
 {
