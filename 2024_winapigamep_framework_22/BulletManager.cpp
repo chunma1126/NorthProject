@@ -134,7 +134,7 @@ void BulletManager::BasicShot(Vec2 _pos, Scene* _scene, float _interval, float _
     p->SetPos(_pos);
     p->SetDir(_dir);
     p->SetSpeed(_bulletSpeed);
-    p->SetName(L"Projectile");
+    //p->SetName(L"Projectile");
     
     _scene->AddObject(p,LAYER::PROJECTILE);
 }
@@ -148,7 +148,7 @@ void BulletManager::CircleShot(Vec2 _pos, Scene* _scene, float _interval, float 
 		pObj->SetSize({ 400.f,400.f });
 		pObj->SetSpeed(_bulletSpeed);
 
-		pObj->SetName(L"Projectile");
+		//pObj->SetName(L"Projectile");
         pObj->SetTag(TagEnum::EnemyProjectile);
 
 		_scene->AddObject(pObj, LAYER::PROJECTILE);
@@ -168,7 +168,7 @@ void BulletManager::CircleShotGoToTarget(Vec2 _pos, Scene* _scene, float _interv
 		pObj->SetSize({ 400.f,400.f });
 		pObj->SetSpeed(_bulletSpeed);
 		pObj->SetChangeTime(_changeTime);
-		pObj->SetName(L"Projectile");
+		//pObj->SetName(L"Projectile");
 		pObj->SetTarget(_target);
 
 		_scene->AddObject(pObj, LAYER::PROJECTILE);
@@ -235,7 +235,7 @@ void BulletManager::ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2
 
         pObj->SetPos({ x, y });
         pObj->SetSize(_pos);
-        pObj->SetName(L"Projectile");
+        //pObj->SetName(L"Projectile");
         pObj->SetDir(_dir);
         pObj->SetSpeed(_bulletSpeed);
 
@@ -315,7 +315,7 @@ void BulletManager::RoseShot(Scene* _scene, float _interval, float _bulletSpeed,
         float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
 
         pObj->SetPos({ x, y });
-        pObj->SetName(L"Projectile");
+        //pObj->SetName(L"Projectile");
         pObj->SetDir(_dir);
         pObj->SetSpeed(_bulletSpeed);
 

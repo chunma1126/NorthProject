@@ -49,6 +49,7 @@ enum class TagEnum
 enum class EnemyType 
 {
 	Normal,
+	TrashMob1,
 	CircleOut
 };
 

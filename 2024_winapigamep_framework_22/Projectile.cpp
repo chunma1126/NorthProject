@@ -93,15 +93,14 @@ void Projectile::EnterCollision(Collider* _other)
 		case TagEnum::EnemyProjectile:
 		{
 			//if (otherTag == TagEnum::Player)
-
 		}
-			break;
+		break;
 		case TagEnum::PlayerProjectile:
 		{
 			if (otherTag == TagEnum::Enemy)
 				GET_SINGLE(EventManager)->DeleteObject(this);
 		}
-			break;
+		break;
 	}
 }
 
