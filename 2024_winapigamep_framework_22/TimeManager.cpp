@@ -42,8 +42,8 @@ void TimeManager::Update()
 		static wchar_t buf[100] = {};
 		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)",m_fps, m_dT
 										,mousepos.x, mousepos.y);
-		::SetWindowText(GET_SINGLE(Core)->GetHwnd()
-						, buf);
+		//disable this when releasing;
+		::SetWindowText(GET_SINGLE(Core)->GetHwnd(), buf);
 	}
 	m_time += m_dT;
 }
