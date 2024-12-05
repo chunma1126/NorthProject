@@ -169,6 +169,7 @@
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="RestartButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -291,6 +292,7 @@
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="RestartButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />

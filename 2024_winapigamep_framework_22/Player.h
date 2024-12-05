@@ -32,6 +32,8 @@ private:
 	void OnHit(Collider* _other);
 	void OnTakeDamage();
 private:
+	bool m_isDead;
+
 	float m_immortalTime = 4.f;
 	float lastShotTime = 0;
 	bool isSlow = false;
@@ -40,5 +42,7 @@ private:
 	Texture* m_pTexOnHurt;
 	Texture* m_pHitbox;
 	Texture* m_pFire;
+
+	Texture* m_explosion;
 };
 

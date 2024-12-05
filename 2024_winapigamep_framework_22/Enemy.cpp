@@ -35,18 +35,20 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-
+	cout << "ÇØÀçµÊ" << endl;
 }
 
 void Enemy::Update()
 {
-
-	if (GetPos().y > SCREEN_HEIGHT)
+	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
+		m_vPos.x < -m_vSize.x || m_vPos.x > SCREEN_WIDTH + m_vSize.x)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 
 	m_shotTimer += fDT;
+
+
 
 }
 

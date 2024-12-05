@@ -19,9 +19,10 @@
 Player::Player()
 	: m_pTex(nullptr)
 {
+
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\PlayerDead.wav", false);
-	
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
@@ -39,13 +40,17 @@ Player::Player()
 	this->GetComponent<Collider>()->SetSize({ 10,10 });
 	m_pFire = GET_SINGLE(ResourceManager)->TextureLoad(L"Fire", L"Texture\\Fire.bmp");
 	AddComponent<Animator>();
-	GetComponent<Animator>()->SetPos({ 15.5f, 55.f });
+	GetComponent<Animator>()->SetPos({ 15.5f, 54.f });
 	GetComponent<Animator>()->SetSize({ 2.4f,2.4f });
 	GetComponent<Animator>()->CreateAnimation(L"Fire", m_pFire, { 0,0 }, { 16,16 }, { 16,0 }, 2, 0.1f, false);
 	GetComponent<Animator>()->PlayAnimation(L"Fire", true);
 
 	AddComponent<CameraComponent>();
 	GetComponent<CameraComponent>()->SetOwner(this);
+
+	m_explosion = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion" , L"Texture\\explosion.bmp");
+	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_explosion, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
+	
 
 }
 Player::~Player()
@@ -55,6 +60,8 @@ Player::~Player()
 }
 void Player::Update()
 {
+	if (m_isDead)return;
+
 	m_immortalTime += GET_SINGLE(TimeManager)->GetDT();
 
 	if (GET_KEY(KEY_TYPE::RIGHT))
@@ -84,6 +91,10 @@ void Player::Update()
 
 void Player::Render(HDC _hdc)
 {
+	ComponentRender(_hdc);
+
+	if (m_isDead)return;
+
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 
@@ -123,7 +134,7 @@ void Player::Render(HDC _hdc)
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 
-	ComponentRender(_hdc);
+	
 	
 
 }
@@ -195,7 +206,13 @@ void Player::CreateUltmite()
 
 void Player::Dead()
 {
-	cout << "PLAYER dead, game over\n";
+	m_isDead = true;
+
+	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver",true);
+	GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", true);
+	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDead");
+
+	GetComponent<Animator>()->PlayAnimation(L"Explosion", false);
 }
 
 void Player::OnHit(Collider* _other)
@@ -225,7 +242,7 @@ void Player::OnTakeDamage()
 
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
-	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
+	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
 
 	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
 	GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);

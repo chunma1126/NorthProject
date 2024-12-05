@@ -101,6 +101,8 @@ void ResourceManager::PlayAudio(const wstring& _key)
 	m_pSoundSystem->playSound(ptSound->pSound, nullptr, false, &m_pChannel[(UINT)eChannel]);
 }
 
+
+
 void ResourceManager::Stop(SOUND_CHANNEL _channel)
 {
 	m_pChannel[(UINT)_channel]->stop();
