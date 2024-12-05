@@ -18,25 +18,22 @@ void BossScene::Init()
 
 	m_player = new Player;
 	AddObject(m_player, LAYER::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	{
+		GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+		GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
+		GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
+	}
+	{
+		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart1", true);
+		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
+		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
+	}
+	{
+		DelayedCall* delayedCall = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.2f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp" });
+		DelayedCall* delayedCall1 = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.8f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp" });
 
-	GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart1", true);
-	GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
-	GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
-
-	DelayedCall* delayedCall0 = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.2f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-	DelayedCall* delayedCall1 = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.8f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-
-	DelayedCall* delayedCall2 = new DelayedCall(5.f, { {SCREEN_WIDTH * 0.2f , -20.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-	DelayedCall* delayedCall3 = new DelayedCall(5.f, { {SCREEN_WIDTH * 0.8f , -20.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-
-	DelayedCall* delayedCall4 = new DelayedCall(7.f, { {SCREEN_WIDTH * 0.2f , -40.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-	DelayedCall* delayedCall5 = new DelayedCall(7.f, { {SCREEN_WIDTH * 0.8f , -40.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 5 });
-
-	DelayedCall* middle0 = new DelayedCall(7.f, { {SCREEN_WIDTH * 0.5f , -40.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 15 });
-
+	}
+	
 
 	//GET_SINGLE(BulletManager)->HeartDataInit(270.f);
 	//GET_SINGLE(BulletManager)->HeartShot(shotInfo);

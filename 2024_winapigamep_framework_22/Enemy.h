@@ -27,7 +27,8 @@ protected:
 protected:
 	float m_shotTime = 1;
 	float m_shotTimer = 0;
-
+	
+	bool dirRight = true;
 
 };
 

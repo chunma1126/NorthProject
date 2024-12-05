@@ -30,8 +30,32 @@ void TrashMob1::Update()
 	Enemy::Update();
 	
 	Vec2 curPos = GetPos();
-	curPos.y += 100 * fDT;
-	SetPos(curPos);
+
+	if (curPos.y > SCREEN_HEIGHT / 2)
+	{
+		stayTimer += fDT;
+
+		if (stayTimer >= stayTime)
+		{
+			dirRight = curPos.x < SCREEN_WIDTH / 2 ? false : true;
+
+			if (dirRight)
+			{
+				curPos.x += 100 * fDT;
+			}
+			else
+			{
+				curPos.x -= 100 * fDT;
+			}
+		}
+
+	}
+	else
+	{
+		
+		curPos.y += 100 * fDT;
+		SetPos(curPos);
+	}
 
 	m_shotTimer += fDT;
 
@@ -42,8 +66,10 @@ void TrashMob1::Update()
 		float angle = arr[idx];
 		cnt++;
 		GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 50 }, m_curScene, angle, 400);
-
 	}
+
+
+
 }
 
 

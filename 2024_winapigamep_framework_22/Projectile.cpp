@@ -56,10 +56,13 @@ void Projectile::Update()
 	vPos.y += m_vDir.y * m_speed * fDT;
 	SetPos(vPos);
 	Vec2 vSize = GetSize();
-	if (vPos.y < -vSize.y)
+	if (vPos.y < -vSize.y || vPos.y > SCREEN_HEIGHT + vSize.y || 
+		vPos.x < -vSize.x || vPos.x > SCREEN_WIDTH + vSize.x)   
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
+
+
 }
 
 void Projectile::Render(HDC _hdc)

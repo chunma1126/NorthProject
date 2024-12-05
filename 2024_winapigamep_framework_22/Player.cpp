@@ -118,7 +118,7 @@ void Player::Render(HDC _hdc)
 		::TransparentBlt(_hdc
 			, (int)(screenpos.x - width / 2) + pivotPoint.x
 			, (int)(screenpos.y - height / 2) + pivotPoint.y
-			, width + vSize.x / 2, height + vSize.y / 2,
+			, width + vSize.x / 20, height + vSize.y / 20,
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
