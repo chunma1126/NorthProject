@@ -32,11 +32,12 @@ private:
 	void OnHit(Collider* _other);
 	void OnTakeDamage();
 private:
-	bool m_isDead;
+	bool m_isDead = false;
+	bool isSlow = false;
 
 	float m_immortalTime = 4.f;
 	float lastShotTime = 0;
-	bool isSlow = false;
+
 	HealthComponent* m_health = nullptr;
 	Texture* m_pTex;
 	Texture* m_pTexOnHurt;

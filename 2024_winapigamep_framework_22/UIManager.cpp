@@ -8,11 +8,11 @@
 #include "PlayButton.h"
 #include "ExitButton.h"
 #include "RestartButton.h"
+#include "EventManager.h"
+#include "GDISelector.h"
 
 void UIManager::Init()
 {
-	
-
 	{
 		UI* playerHeart = new UI;
 		
@@ -114,15 +114,6 @@ void UIManager::Init()
 
 void UIManager::Update()
 {
-	//if (GET_KEYDOWN(KEY_TYPE::P))
-	//{
-	//	SetActiveChild(L"PlayerHeart3", false);
-	//}
-	//if (GET_KEYDOWN(KEY_TYPE::O))
-	//{
-	//	SetActiveChild(L"PlayerHeart3", true);
-	//}
-
 	for (auto& item : uiLists)
 	{
 		item.second->Update();
@@ -156,6 +147,15 @@ void UIManager::SetActiveChild(wstring _key, bool _active)
 
 	uiLists[_key]->SetActive(_active);
 }
+
+void UIManager::ChangeScore()
+{
+
+
+
+}
+
+
 
 UI* UIManager::GetChild(wstring _key)
 {

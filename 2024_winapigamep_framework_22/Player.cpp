@@ -16,6 +16,7 @@
 #include "UI.h"
 #include "Camera.h"
 #include "CameraComponent.h"
+#include "EventManager.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -133,10 +134,6 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
-
-	
-	
-
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -217,7 +214,6 @@ void Player::Dead()
 
 void Player::OnHit(Collider* _other)
 {
-	cout << "h";
 	if (IsImmortal()) return;
 
 
@@ -239,6 +235,8 @@ void Player::OnHit(Collider* _other)
 void Player::OnTakeDamage()
 {
 	GetComponent<CameraComponent>()->Shake(5, 0.7f);
+
+	GET_SINGLE(EventManager)->RemoveScore(200);
 
 	SetPos(spawnPosition);
 	m_immortalTime = 0;

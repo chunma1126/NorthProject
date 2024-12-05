@@ -12,6 +12,7 @@ public:
 public :
 	void AddChild(wstring _key,UI* _newUI);
 	void SetActiveChild(wstring _key , bool _active);
+	void ChangeScore();
 	UI* GetChild(wstring _key);
 
 
