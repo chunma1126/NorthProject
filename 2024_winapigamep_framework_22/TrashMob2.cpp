@@ -1,80 +1,53 @@
 #include "pch.h"
 #include "TrashMob2.h"
-#include "Collider.h"
 #include "EventManager.h"
 #include "TimeManager.h"
+#include "ResourceManager.h"
+#include "Animator.h"
+#include "Collider.h"
+#include "BulletManager.h"
+#include "SceneManager.h"
 
-TrashMob2::TrashMob2()
-	: m_hp(5)
+TrashMob2::TrashMob2(const wstring& _key, const wstring& _path)
+	: Enemy(_key, _path)
 {
-	this->AddComponent<Collider>();
-	/*if (m_right) {
-		for (int i = 0; i < 150; ++i) {
-			Vec2 down = { -40 * fDT,40 * fDT };
-			Vec2 curPos = GetPos();
-			SetPos(curPos + down);
-		}
-	}
-	else {
-		for (int i = 0; i < 150; ++i) {
-			Vec2 down = { 40 * fDT,40 * fDT };
-			Vec2 curPos = GetPos();
-			SetPos(curPos + down);
-		}
-	}*/
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Enemy_2", m_texture, { 0,0 }, { 48,48 }, { 48,0 }, 4, 0.2f);
+	GetComponent<Animator>()->PlayAnimation(L"Enemy_2", true);
+	GetComponent<Animator>()->SetSize({ 4,4 });
+
+	GetComponent<Collider>()->SetSize({ 125,125 });
+
+	m_shotTime = 0.1f;
 }
 
 TrashMob2::~TrashMob2()
 {
+
 }
 
 void TrashMob2::Update()
-{	 
-	if (m_right) {
-			Vec2 down = { -40 * fDT,40 * fDT };
-			Vec2 curPos = GetPos();
-			SetPos(curPos + down);
-	}
-	else {
-			Vec2 down = { 40 * fDT,40 * fDT };
-			Vec2 curPos = GetPos();
-			SetPos(curPos + down);
-	}
-	
-}	 
-	 
-void TrashMob2::Render(HDC _hdc)
 {
-	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
-	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	RECT_RENDER(_hdc, vPos.x, vPos.y
-		, vSize.x, vSize.y);
-	ComponentRender(_hdc);
-	//SelectObject(_hdc, oldbrush); 
-	//DeleteObject(brush);
-}
-
-void TrashMob2::EnterCollision(Collider* _other)
-{
-	std::cout << "Enter" << std::endl;
-	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"PlayerBullet")
+	if (m_shotTimer >= m_shotTime)
 	{
-		m_hp -= 1;
-		if (m_hp <= 0)
-			GET_SINGLE(EventManager)->DeleteObject(this);
+		GET_SINGLE(BulletManager)->BasicShot(m_vPos, m_curScene, 400, { 0,1 });
+		m_shotTimer = 0;
 	}
-}
 
-void TrashMob2::StayCollision(Collider* _other)
-{
-	//std::cout << "Stay" << std::endl;
-}
+	Enemy::Update();
 
-void TrashMob2::ExitCollision(Collider* _other)
-{
-	std::cout << "Exit" << std::endl;
+	Vec2 pos = GetPos();
+
+	float speed = 40.f;        
+	float zigzagAmplitude = 300.f; 
+	float zigzagFrequency = 1.5f;
+
+	float time = GET_SINGLE(TimeManager)->GetTime();
+	pos.x += zigzagAmplitude * sin(time) * fDT;
+	pos.y += speed * fDT; 
+
+
+
+    SetPos(pos);
+
 }

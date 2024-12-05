@@ -58,7 +58,7 @@ ATOM BaseWindow::MyRegisterClass()
     wcex.cbWndExtra = 0;
     wcex.hInstance = m_hInst;
     wcex.hIcon = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_MY2024WINAPIGAMEPFRAMEWORK22));
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hCursor = LoadCursor(nullptr, IDC_CROSS);
     wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = L"North Project";

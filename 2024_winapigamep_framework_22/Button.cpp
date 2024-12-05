@@ -3,6 +3,18 @@
 #include "InputManager.h"
 #include "Texture.h"
 #include "GDISelector.h"
+#include "ResourceManager.h";
+
+Button::Button()
+{
+	GET_SINGLE(ResourceManager)->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav", false);
+}
+
+Button::~Button()
+{
+
+}
+
 RECT Button::GetRect()
 {
 	int width = m_pTexture->GetWidth();
@@ -41,6 +53,7 @@ void Button::Update()
 		}
 		else if (state == KEY_STATE::UP)
 		{
+			GET_SINGLE(ResourceManager)->PlayAudio(L"ButtonClick");
 			ChangeTex(m_originTexture, BUTTON_STATE::DEFAULT);
 			ClickEvent();
 		}

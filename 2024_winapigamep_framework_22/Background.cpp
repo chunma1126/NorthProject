@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "TimeManager.h"
+#include "Background.h"
 Background::Background()
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Background", L"Texture\\Background.bmp");
@@ -31,17 +32,18 @@ void Background::Render(HDC _hdc)
     int height = SCREEN_HEIGHT;
 
     ::BitBlt(_hdc
-        , pos.x 
-        , pos.y - SCREEN_HEIGHT
+        , m_vPos.x
+        , m_vPos.y
         , width, height,
         m_pTexture->GetTexDC()
         , 0, 0, SRCCOPY);
-
+    
     ::BitBlt(_hdc
-        , pos.x
-        , pos.y
+        , m_vPos.x
+        , m_vPos.y - SCREEN_HEIGHT
         , width, height,              
         m_pTexture->GetTexDC()
         , 0, 0,SRCCOPY);
+
 }
 

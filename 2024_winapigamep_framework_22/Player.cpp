@@ -14,12 +14,15 @@
 #include "HealthComponent.h"
 #include "UIManager.h"
 #include "UI.h"
+#include "Camera.h"
+#include "CameraComponent.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\guntest.mp3", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDeath", L"Sound\\PlayerDead.wav", false);
 	
+
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
@@ -40,6 +43,10 @@ Player::Player()
 	GetComponent<Animator>()->SetSize({ 2.4f,2.4f });
 	GetComponent<Animator>()->CreateAnimation(L"Fire", m_pFire, { 0,0 }, { 16,16 }, { 16,0 }, 2, 0.1f, false);
 	GetComponent<Animator>()->PlayAnimation(L"Fire", true);
+
+	AddComponent<CameraComponent>();
+	GetComponent<CameraComponent>()->SetOwner(this);
+
 }
 Player::~Player()
 {
@@ -83,19 +90,23 @@ void Player::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	bool isImmortal = IsImmortal();
+
+	Vec2 screenpos = GET_SINGLE(Camera)->GetCameraPos();
+
 	if (isImmortal)
 	{
 		::TransparentBlt(_hdc
-			, (int)(vPos.x - width / 2)
-			, (int)(vPos.y - height / 2)
+			, (int)(screenpos.x - width / 2)
+			, (int)(screenpos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y / 2,
 			m_pTexOnHurt->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
-	else {
+	else
+	{
 		::TransparentBlt(_hdc
-			, (int)(vPos.x - width / 2)
-			, (int)(vPos.y - height / 2)
+			, (int)(screenpos.x - width / 2)
+			, (int)(screenpos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y / 2,
 			m_pTex->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
@@ -105,17 +116,16 @@ void Player::Render(HDC _hdc)
 		int width = m_pHitbox->GetWidth();
 		int height = m_pHitbox->GetHeight();
 		::TransparentBlt(_hdc
-			, (int)(vPos.x - width / 2) + pivotPoint.x
-			, (int)(vPos.y - height / 2) + pivotPoint.y
-			, width, height,
+			, (int)(screenpos.x - width / 2) + pivotPoint.x
+			, (int)(screenpos.y - height / 2) + pivotPoint.y
+			, width + vSize.x / 2, height + vSize.y / 2,
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 
 	ComponentRender(_hdc);
-	//::StretchBlt();
-	//::AlphaBlend();
-	//::PlgBlt();
+	
+
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -192,12 +202,16 @@ void Player::OnHit(Collider* _other)
 {
 	cout << "h";
 	if (IsImmortal()) return;
+
+
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();
+
 	switch (pOtherObjTag)
 	{
 	case TagEnum::EnemyProjectile:
 	case TagEnum::Enemy:
+		
 		m_health->TakeDamage(1);
 		OnTakeDamage();
 		break;
@@ -207,6 +221,8 @@ void Player::OnHit(Collider* _other)
 
 void Player::OnTakeDamage()
 {
+	GetComponent<CameraComponent>()->Shake(5, 0.7f);
+
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDeath");
