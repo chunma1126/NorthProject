@@ -167,6 +167,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="MidBoss.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -284,5 +285,6 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="MidBoss.cpp" />
   </ItemGroup>
 </Project>
