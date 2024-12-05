@@ -50,18 +50,19 @@ Projectile::~Projectile()
 
 void Projectile::Update()
 {
+
 	Vec2 vPos = GetPos();
 
 	vPos.x += m_vDir.x * m_speed * fDT;
 	vPos.y += m_vDir.y * m_speed * fDT;
 	SetPos(vPos);
-	Vec2 vSize = GetSize();
-	if (vPos.y < -vSize.y || vPos.y > SCREEN_HEIGHT + vSize.y || 
-		vPos.x < -vSize.x || vPos.x > SCREEN_WIDTH + vSize.x)   
+
+
+	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
+		m_vPos.x < -m_vSize.x || m_vPos.x > SCREEN_WIDTH + m_vSize.x)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
-
 
 }
 

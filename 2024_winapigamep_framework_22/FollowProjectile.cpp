@@ -2,9 +2,10 @@
 #include "FollowProjectile.h"
 #include "EventManager.h"
 #include "TimeManager.h"
-
+#include "Projectile.h"
 void FollowProjectile::Update()
 {
+
 	m_changeTimer += fDT;
 
 	if (m_changeTimer >= m_followChangeTime && m_isFollowing == false)
@@ -35,11 +36,11 @@ void FollowProjectile::Update()
 		vPos.y += m_vDir.y * m_speed * fDT;
 		SetPos(vPos);
 		Vec2 vSize = GetSize();
-		if (vPos.y < -vSize.y)
-		{
-			GET_SINGLE(EventManager)->DeleteObject(this);
-		}
 	}
 
-
+	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
+		m_vPos.x < -m_vSize.x || m_vPos.x > SCREEN_WIDTH + m_vSize.x)
+	{
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
 }

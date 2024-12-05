@@ -38,7 +38,7 @@ void TrashMob1::Update()
 		if (stayTimer >= stayTime)
 		{
 			dirRight = curPos.x < SCREEN_WIDTH / 2 ? false : true;
-
+			
 			if (dirRight)
 			{
 				curPos.x += 100 * fDT;
@@ -48,15 +48,14 @@ void TrashMob1::Update()
 				curPos.x -= 100 * fDT;
 			}
 		}
-
 	}
 	else
 	{
 		
 		curPos.y += 100 * fDT;
-		SetPos(curPos);
+		
 	}
-
+	SetPos(curPos);
 	m_shotTimer += fDT;
 
 	if (m_shotTimer >= m_shotTime)

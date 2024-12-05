@@ -7,13 +7,11 @@
 #include "Button.h"
 #include "PlayButton.h"
 #include "ExitButton.h"
+#include "RestartButton.h"
 
 void UIManager::Init()
 {
-	for (auto& item : uiLists)
-	{
-		item.second->Init();
-	}
+	
 
 	{
 		UI* playerHeart = new UI;
@@ -53,6 +51,16 @@ void UIManager::Init()
 	}
 
 	{
+		UI* gameOver = new UI;
+
+		gameOver->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GameOver", L"Texture\\UI\\GameOver.bmp"));
+		gameOver->SetSize({ 1350,150 });
+		gameOver->SetPos({ SCREEN_WIDTH / 2 - 340 , SCREEN_HEIGHT / 2 - 150});
+		AddChild(L"GameOver", gameOver);
+		
+	}
+
+	{
 		PlayButton* playButton = new PlayButton;
 		playButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"PlayButton", L"Texture\\UI\\PlayButton.bmp"));
 		playButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2});
@@ -81,6 +89,26 @@ void UIManager::Init()
 		exitButton->SetPressTexture(press);
 
 		AddChild(L"ExitButton", exitButton);
+	}
+
+	{
+		RestartButton* restartButton = new RestartButton;
+		restartButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButton", L"Texture\\UI\\RestartButton.bmp"));
+		restartButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2 });
+		restartButton->SetSize({ 600,200 });
+
+		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButtonHover", L"Texture\\UI\\RestartButtonHover.bmp"));
+		restartButton->SetHoverTexture(hover);
+
+		Texture* press = (GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButtonPress", L"Texture\\UI\\RestartButtonPress.bmp"));
+		restartButton->SetPressTexture(press);
+
+		AddChild(L"RestartButton", restartButton);
+	}
+
+	for (auto& item : uiLists)
+	{
+		item.second->Init();
 	}
 }
 

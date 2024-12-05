@@ -3,6 +3,7 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "Component.h"
+#include "EventManager.h"
 Object::Object()
 	: m_vPos{}
 	, m_vSize{}
@@ -29,6 +30,9 @@ void Object::LateUpdate()
 			com->LateUpdate();
 		}
 	}
+
+	
+
 }
 
 void Object::ComponentRender(HDC _hdc)
