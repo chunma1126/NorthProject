@@ -29,6 +29,14 @@ void DelayedCall::OnFinish()
 	case EnemyType::TrashMob1:
 		pObj = new TrashMob1(m_spawnStruct.key, m_spawnStruct.path);
 		break;
+	case EnemyType::MidBoss:
+		pObj = new MidBoss(m_spawnStruct.key, m_spawnStruct.path);
+		break;
+	}
+	if (pObj == nullptr)
+	{
+		cout << "\nfailed to spawn Enemy" << (int)enemyType;
+		return;
 	}
 	if(m_spawnStruct.hp != 0)
 		pObj->SetHP(m_spawnStruct.hp);

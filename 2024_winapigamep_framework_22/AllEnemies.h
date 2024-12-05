@@ -5,3 +5,4 @@
 #include "TrashMob1.h"
 #include "TrashMob2.h"
 #include "TrashMob3.h"
+#include "MidBoss.h"
