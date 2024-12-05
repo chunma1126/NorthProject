@@ -19,7 +19,7 @@ private:
 	const float rpm = 600;
 	const Vec2 spawnPosition = Vec2(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT * 2.5f / 3.f);
 	const Vec2 boundary = Vec2(500, 500);
-	Vec2 pivotPoint = Vec2(15.f, 15.f);
+	Vec2 pivotPoint = Vec2(0.f, 0.f);
 private:
 	bool IsImmortal() { return m_immortalTime < immortalTimeEnd; }
 private:
