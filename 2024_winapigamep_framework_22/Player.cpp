@@ -49,9 +49,9 @@ Player::Player()
 	AddComponent<CameraComponent>();
 	GetComponent<CameraComponent>()->SetOwner(this);
 
-	m_explosion = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion" , L"Texture\\explosion.bmp");
+	m_explosion = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion", L"Texture\\explosion.bmp");
 	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_explosion, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
-	
+
 
 }
 Player::~Player()
@@ -87,7 +87,7 @@ void Player::Update()
 
 	Vec2 vPos = GetPos();
 	SetPos(vPos + dir);
-	//Clamp();
+	Clamp();
 }
 
 void Player::Render(HDC _hdc)
@@ -150,7 +150,22 @@ void Player::Clamp()
 {
 	int x = GetPos().x;
 	int y = GetPos().y;
-	cout << x << " " << y << SCREEN_WIDTH << "_" << SCREEN_HEIGHT << "\n";
+	Vec2 result = GetPos();
+	//if (x < boundaryMin.x) x = boundaryMin.x;
+	//if (x > boundaryMax.x) {
+	//	cout << "x";
+	//	x = boundaryMax.x;
+	//}
+	//
+	//if (y < boundaryMin.y) y = boundaryMin.y;
+	//if (y > boundaryMax.y) {
+	//	cout << "Y";
+	//	y = boundaryMax.y;
+	//}
+	//result.x = x;
+	//result.y = y;
+	SetPos({ result });
+	//cout << x << "_" << y << " " << boundaryMax.x << "_" << boundaryMax.y << "\n";
 }
 
 bool Player::TryShoot()
@@ -205,7 +220,7 @@ void Player::Dead()
 {
 	m_isDead = true;
 
-	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver",true);
+	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver", true);
 	GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", true);
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDead");
 
@@ -224,7 +239,7 @@ void Player::OnHit(Collider* _other)
 	{
 	case TagEnum::EnemyProjectile:
 	case TagEnum::Enemy:
-		
+
 		m_health->TakeDamage(1);
 		OnTakeDamage();
 		break;

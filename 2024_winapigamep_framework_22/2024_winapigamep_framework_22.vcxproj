@@ -193,6 +193,7 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MidBoss.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OJYScene.h" />
     <ClInclude Include="pch.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MidBoss.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OJYScene.cpp" />
     <ClCompile Include="PlayButton.cpp" />
