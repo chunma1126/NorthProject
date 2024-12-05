@@ -167,6 +167,8 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -178,6 +180,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="2024_winapigamep_framework_22.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="x64\1 cursor.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -284,5 +289,10 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

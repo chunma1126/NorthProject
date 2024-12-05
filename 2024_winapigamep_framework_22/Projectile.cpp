@@ -26,6 +26,8 @@ Projectile::Projectile()
 	GetComponent<Animator>()->SetSize({2,2});
 	GetComponent<Animator>()->PlayAnimation(L"Bullet" , true);
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"Hit", L"Sound\\Hit.wav", false);
+
 }
 Projectile::Projectile(const wstring& _key, const wstring& _path)
 	: m_angle(0.f)
@@ -37,7 +39,7 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
 
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"Bullet", m_pTex, { 0,0 }, { 24,24 }, { 24 , 0 }, 4, 0.2f, false);
+	GetComponent<Animator>()->CreateAnimation(L"Bullet", m_pTex, { 0,0 }, { 24,24 }, { 24 , 0 }, 4, 0.04f, false);
 	GetComponent<Animator>()->PlayAnimation(L"Bullet", true);
 }
 
@@ -49,10 +51,6 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	Vec2 vPos = GetPos();
-	// 삼각함수의 단위가 2가지가 있다.
-	// 라디안, 디그리
-	//vPos.x += cosf(m_angle) * 500.f * fDT;
-	//vPos.y += sinf(m_angle) * 500.f * fDT;
 
 	vPos.x += m_vDir.x * m_speed * fDT;
 	vPos.y += m_vDir.y * m_speed * fDT;
@@ -66,20 +64,6 @@ void Projectile::Update()
 
 void Projectile::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	//ELLIPSE_RENDER(_hdc, vPos.x, vPos.y
-	//	, vSize.x, vSize.y);
-	/*int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));*/
-
-
 	ComponentRender(_hdc);
 }
 
@@ -88,15 +72,21 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum otherTag = pOtherObj->GetTag();
 	TagEnum myTag = this->GetTag();
-				GET_SINGLE(EventManager)->DeleteObject(this);
+	
 	switch (myTag)
 	{
 		case TagEnum::EnemyProjectile:
 			if (otherTag == TagEnum::Player)
+			{
+				GET_SINGLE(ResourceManager)->PlayAudio(L"Hit");
+			}
 			break;
 		case TagEnum::PlayerProjectile:
 			if (otherTag == TagEnum::Enemy)
+			{
+				GET_SINGLE(ResourceManager)->PlayAudio(L"Hit");
 				GET_SINGLE(EventManager)->DeleteObject(this);
+			}
 			break;
 	}
 }

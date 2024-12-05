@@ -4,6 +4,9 @@ class Texture;
 class Button: public UI
 {
 public:
+	Button();
+	~Button();
+
 	RECT GetRect();
 	bool MouseInRect();
 

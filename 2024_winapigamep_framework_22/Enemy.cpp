@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "Animator.h"
+#include "TimeManager.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -23,6 +24,9 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 	m_health->SetHP(4);
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(_key, _path);
 
+
+	SetTag(TagEnum::Enemy);
+
 	/*AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,0 }, { 16,16 }, { 16,0 }, 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"Enemy_1", true);
@@ -31,14 +35,19 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
+
 }
 
 void Enemy::Update()
 {
+
 	if (GetPos().y > SCREEN_HEIGHT)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
+
+	m_shotTimer += fDT;
+
 }
 
 void Enemy::Render(HDC _hdc)

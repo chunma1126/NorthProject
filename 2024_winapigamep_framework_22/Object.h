@@ -50,9 +50,7 @@ public:
 		}
 		return component;
 	}
-private:
-	//POINT m_ptPos;
-	//POINT m_ptSize;
+protected:
 	Vec2 m_vPos;
 	Vec2 m_vSize;
 	vector<Component*> m_vecComponents;

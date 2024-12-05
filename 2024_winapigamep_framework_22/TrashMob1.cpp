@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 #include "Animator.h"
 #include "Collider.h"
-#include "Texture.h"
 #include "BulletManager.h"
 #include "SceneManager.h"
 
@@ -23,7 +22,7 @@ TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
 
 TrashMob1::~TrashMob1()
 {
-	cout << "응어아잇 부르르";
+	
 }
 
 void TrashMob1::Update()
@@ -39,12 +38,9 @@ void TrashMob1::Update()
 	if (m_shotTimer >= m_shotTime)
 	{
 		m_shotTimer = 0;
-		GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 200 }, m_curScene, 40, 400);
-
+		GET_SINGLE(BulletManager)->CircleShot(m_vPos, m_curScene, 40, 400);
+		
 	}
-
-	
-	
 }
 
 

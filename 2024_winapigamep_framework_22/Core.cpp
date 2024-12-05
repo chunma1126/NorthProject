@@ -9,6 +9,7 @@
 #include "BulletManager.h"
 #include "UIManager.h"
 #include "EnemySpawnEventManager.h"
+#include "Camera.h"
 bool Core::Init(HWND _hwnd)
 {
 	// ���� �ʱ�ȭ
@@ -30,7 +31,7 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
-
+	GET_SINGLE(Camera)->Init();
 	GET_SINGLE(BulletManager)->Init();//���߿� ���� ���� �ٲ���ߵ�.
 	GET_SINGLE(UIManager)->Init();
 

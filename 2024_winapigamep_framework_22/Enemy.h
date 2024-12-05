@@ -22,5 +22,11 @@ protected:
 	Texture* m_texture = nullptr;
 	HealthComponent* m_health = nullptr;
 	Scene* m_curScene = nullptr;
+
+protected:
+	float m_shotTime = 1;
+	float m_shotTimer = 0;
+
+
 };
 
