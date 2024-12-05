@@ -14,6 +14,7 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void SetScene(Scene* _scene) { m_curScene = _scene; }
+	void SetHP(float hp);
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);

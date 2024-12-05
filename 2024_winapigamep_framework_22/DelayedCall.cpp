@@ -17,7 +17,7 @@ DelayedCall::~DelayedCall()
 void DelayedCall::OnFinish()
 {
 	EnemyType enemyType = m_spawnStruct.enemyType;
-	Object* pObj = nullptr;
+	Enemy* pObj = nullptr;
 	switch (enemyType)
 	{
 	case EnemyType::Normal:
@@ -26,8 +26,15 @@ void DelayedCall::OnFinish()
 	case EnemyType::CircleOut:
 		pObj = new EnemyCircleOut(m_spawnStruct.key, m_spawnStruct.path);
 		break;
+	case EnemyType::TrashMob1:
+		pObj = new TrashMob1(m_spawnStruct.key, m_spawnStruct.path);
+		break;
 	}
+	if(m_spawnStruct.hp != 0)
+		pObj->SetHP(m_spawnStruct.hp);
+	pObj->SetScene(GET_SINGLE(SceneManager)->GetCurrentScene().get());
 	pObj->SetPos({ m_spawnStruct.position.x, m_spawnStruct.position.y });
 	pObj->SetSize({ 100.f,100.f });
+	pObj->SetTag(TagEnum::Enemy);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pObj, LAYER::ENEMY);
 }
