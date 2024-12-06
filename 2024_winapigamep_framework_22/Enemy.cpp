@@ -49,8 +49,6 @@ void Enemy::Update()
 
 	m_shotTimer += fDT;
 
-
-
 }
 
 void Enemy::Render(HDC _hdc)
@@ -70,13 +68,17 @@ void Enemy::SetHP(float hp)
 
 void Enemy::EnterCollision(Collider* _other)
 {
+	if (GetComponent<HealthComponent>()->IsDead())return;
+
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
 		const float damagedTaken = 1;
 		m_health->TakeDamage(damagedTaken);
-		if (m_health->IsDead()) {
-			GET_SINGLE(UIManager)->AddScore(40.f);
+		if (m_health->IsDead()) 
+		{
+			GET_SINGLE(UIManager)->AddScore(5);
+			cout << "ÀÀ¾î¾ÆÀÕ";
 			GET_SINGLE(EventManager)->DeleteObject(this);
 		}
 	}

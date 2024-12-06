@@ -44,22 +44,22 @@ void UIManager::Init()
 	{
 		m_scoreUIs[0] = new UI;
 
-		m_scoreUIs[0]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
-		m_scoreUIs[0]->SetPos({ 50 , 120 });
+		m_scoreUIs[0]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[0]->SetPos({ 140 , 90 });
 		m_scoreUIs[0]->SetSize({ 75,75 });
 		AddChild(L"FirstScore", m_scoreUIs[0]);
 		
 		m_scoreUIs[1] = new UI;
 
-		m_scoreUIs[1]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
-		m_scoreUIs[1]->SetPos({ 95 , 120 });
+		m_scoreUIs[1]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[1]->SetPos({ 95 , 90 });
 		m_scoreUIs[1]->SetSize({ 75,75 });
 		AddChild(L"SecondeScore", m_scoreUIs[1]);
 
 		m_scoreUIs[2] = new UI;
 
-		m_scoreUIs[2]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
-		m_scoreUIs[2]->SetPos({ 140 , 120 });
+		m_scoreUIs[2]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[2]->SetPos({ 50 , 90 });
 		m_scoreUIs[2]->SetSize({ 75,75 });
 		AddChild(L"ThirdScore", m_scoreUIs[2]);
 	}
@@ -176,24 +176,56 @@ void UIManager::SetActiveChild(wstring _key, bool _active)
 	uiLists[_key]->SetActive(_active);
 }
 
-void UIManager::ChangeScore(bool _isNegative)
+void UIManager::ChangeScore()
 {
-	int multiplier = _isNegative ? -1 : 1;
 	int currentScore = m_gameScore;
 
 	int index = 0;
-
+	
 	while (currentScore > 1)
 	{
-		m_gameTotalScores[index++] = currentScore % 10;
+		m_gameTotalScores[index++] += currentScore % 10;
 		currentScore /= 10;
 	}
 
-	/*for (int i = 0; i < index; i++)
+	m_gameScore = 0;
+
+	for (int i = 0; i < 2; i++)
 	{
-		wstring number = std::to_wstring(m_gameScore);
+		if (m_gameTotalScores[i] >= 10) 
+		{
+			m_gameTotalScores[i] %= 10;
+			m_gameTotalScores[i + 1] += 1;
+		}
+	}
+
+	if (m_gameTotalScores[2] >= 10)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			m_gameTotalScores[i] = 9;
+		}
+	}
+
+	for (int i = 2; i >= 0; i--)
+	{	
+		wstring number = std::to_wstring(m_gameTotalScores[i]);
 		m_scoreUIs[i]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(number, L"Texture\\Number\\" + number + L".bmp"));
-	}*/
+	}
+
+}
+
+void UIManager::ResetScore()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		m_gameTotalScores[i] = 0;
+	}
+
+	for (int i = 2; i >= 0; i--)
+	{
+		m_scoreUIs[i]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+	}
 }
 
 void UIManager::SetPosChild(wstring _key, Vec2 _pos)

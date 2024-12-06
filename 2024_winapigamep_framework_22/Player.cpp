@@ -91,20 +91,6 @@ void Player::Update()
 	{
 		SetPos(newPos);
 	}
-
-	if (GET_KEYDOWN(KEY_TYPE::P))
-	{
-		GET_SINGLE(UIManager)->AddScore(20);
-	}
-
-	if (GET_KEYDOWN(KEY_TYPE::O))
-	{
-		GET_SINGLE(UIManager)->RemoveScore(101);
-	}
-	
-
-
-	
 }
 
 void Player::Render(HDC _hdc)
@@ -228,7 +214,6 @@ void Player::OnHit(Collider* _other)
 {
 	if (IsImmortal()) return;
 
-
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();
 
@@ -248,8 +233,6 @@ void Player::OnTakeDamage()
 {
 	GetComponent<CameraComponent>()->Shake(5, 0.7f);
 
-	GET_SINGLE(UIManager)->RemoveScore(200);
-
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
@@ -262,5 +245,4 @@ void Player::OnTakeDamage()
 		Dead();
 		return;
 	}
-
 }

@@ -14,20 +14,14 @@ public :
 	void SetActiveChild(wstring _key , bool _active);
 	void SetPosChild(wstring _key , Vec2 _pos);
 
-	void ChangeScore(bool _isNagative = false);
-
+	void ChangeScore();
+	void ResetScore();
 	void AddScore(float _value)
 	{
 		m_gameScore += _value;
 	
 		ChangeScore();
 	};
-	void RemoveScore(float _value)
-	{
-		m_gameScore -= _value;
-		
-		ChangeScore(true);
-	}
 
 private :
 	std::map<wstring, UI*> uiLists;
