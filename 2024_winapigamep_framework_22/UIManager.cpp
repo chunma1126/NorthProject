@@ -40,6 +40,30 @@ void UIManager::Init()
 		AddChild(L"PlayerHeart3", playerHeart);
 	}
 
+	//Score
+	{
+		m_scoreUIs[0] = new UI;
+
+		m_scoreUIs[0]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
+		m_scoreUIs[0]->SetPos({ 50 , 120 });
+		m_scoreUIs[0]->SetSize({ 75,75 });
+		AddChild(L"FirstScore", m_scoreUIs[0]);
+		
+		m_scoreUIs[1] = new UI;
+
+		m_scoreUIs[1]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
+		m_scoreUIs[1]->SetPos({ 95 , 120 });
+		m_scoreUIs[1]->SetSize({ 75,75 });
+		AddChild(L"SecondeScore", m_scoreUIs[1]);
+
+		m_scoreUIs[2] = new UI;
+
+		m_scoreUIs[2]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\1.bmp"));
+		m_scoreUIs[2]->SetPos({ 140 , 120 });
+		m_scoreUIs[2]->SetSize({ 75,75 });
+		AddChild(L"ThirdScore", m_scoreUIs[2]);
+	}
+
 	{
 		UI* Title = new UI;
 
@@ -106,10 +130,13 @@ void UIManager::Init()
 		AddChild(L"RestartButton", restartButton);
 	}
 
+	
+
 	for (auto& item : uiLists)
 	{
 		item.second->Init();
 	}
+	
 }
 
 void UIManager::Update()
@@ -126,6 +153,7 @@ void UIManager::Render(HDC _hdc)
 	{
 		item.second->Render(_hdc);
 	}
+
 }
 
 void UIManager::AddChild(wstring _key,UI* _newUI)
@@ -148,16 +176,27 @@ void UIManager::SetActiveChild(wstring _key, bool _active)
 	uiLists[_key]->SetActive(_active);
 }
 
-void UIManager::ChangeScore()
+void UIManager::ChangeScore(bool _isNegative)
 {
+	int multiplier = _isNegative ? -1 : 1;
+	int currentScore = m_gameScore;
 
+	int index = 0;
 
+	while (currentScore > 1)
+	{
+		m_gameTotalScores[index++] = currentScore % 10;
+		currentScore /= 10;
+	}
 
+	/*for (int i = 0; i < index; i++)
+	{
+		wstring number = std::to_wstring(m_gameScore);
+		m_scoreUIs[i]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(number, L"Texture\\Number\\" + number + L".bmp"));
+	}*/
 }
 
-
-
-UI* UIManager::GetChild(wstring _key)
+void UIManager::SetPosChild(wstring _key, Vec2 _pos)
 {
-	return uiLists[_key];
+	uiLists[_key]->SetPos(_pos);
 }

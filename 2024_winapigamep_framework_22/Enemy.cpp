@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "TimeManager.h"
+#include "UIManager.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -35,7 +36,7 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-	cout << "ÇØÀçµÊ" << endl;
+	//cout << "ÇØÀçµÊ" << endl;
 }
 
 void Enemy::Update()
@@ -75,7 +76,7 @@ void Enemy::EnterCollision(Collider* _other)
 		const float damagedTaken = 1;
 		m_health->TakeDamage(damagedTaken);
 		if (m_health->IsDead()) {
-			GET_SINGLE(EventManager)->AddScore(40.f);
+			GET_SINGLE(UIManager)->AddScore(40.f);
 			GET_SINGLE(EventManager)->DeleteObject(this);
 		}
 	}
