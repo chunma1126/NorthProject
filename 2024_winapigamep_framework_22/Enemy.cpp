@@ -9,6 +9,7 @@
 #include "TimeManager.h"
 #include "UIManager.h"
 #include "Item.h"
+
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -45,19 +46,6 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-	m_mt.seed(m_rd());
-	std::uniform_int_distribution<int> random(0, 100);
-	int rand = random(m_mt);
-
-	/*if (rand < 30)
-	{
-		Item* item = new Item;
-		item->SetPos(GetPos());
-		GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
-	}*/
-	Item* item = new Item;
-	item->SetPos(GetPos());
-	GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
 
 	cout << "ÇØÁ¦µÊ" << endl;
 }
@@ -74,6 +62,17 @@ void Enemy::Update()
 
 	if (m_health->IsDead() && m_explosionComplete)
 	{
+		m_mt.seed(m_rd());
+		std::uniform_int_distribution<int> random(0, 100);
+		int rand = random(m_mt);
+
+		if (rand < 30)
+		{
+			Item* item = new Item;
+			item->SetPos(GetPos());
+			GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
+		}
+		
 		GET_SINGLE(UIManager)->AddScore(5);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}

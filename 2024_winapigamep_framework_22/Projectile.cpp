@@ -45,7 +45,11 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 
 Projectile::~Projectile()
 {
-	
+	/*if (m_pTex != nullptr)
+	{
+		delete m_pTex;
+		m_pTex = nullptr;
+	}*/
 }
 
 void Projectile::Update()

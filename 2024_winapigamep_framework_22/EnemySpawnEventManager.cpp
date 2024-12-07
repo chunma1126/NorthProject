@@ -20,3 +20,14 @@ void EnemySpawnEventManager::AddDelayedCall(DelayedCall* pDelayedCall)
 {
 	m_delayedCalls.push_back(pDelayedCall);
 }
+
+void EnemySpawnEventManager::Release()
+{
+    vector<DelayedCall*>::iterator iter;
+    for (iter = m_delayedCalls.begin(); iter != m_delayedCalls.end(); ++iter) {
+        if (*iter != nullptr) { 
+            delete* iter;      
+        }
+    }
+    m_delayedCalls.clear();
+}

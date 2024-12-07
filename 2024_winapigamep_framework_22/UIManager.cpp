@@ -178,6 +178,16 @@ void UIManager::Render(HDC _hdc)
 
 }
 
+void UIManager::Release()
+{
+	map<wstring, UI*>::iterator iter;
+	for (iter = uiLists.begin(); iter != uiLists.end(); ++iter) {
+		if (iter->second != nullptr)
+			delete iter->second;
+	}
+	uiLists.clear();
+}
+
 void UIManager::AddChild(wstring _key,UI* _newUI)
 {
 	uiLists[_key] = _newUI;

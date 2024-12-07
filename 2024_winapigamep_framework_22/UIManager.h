@@ -8,7 +8,7 @@ public:
 	void Init();
 	void Update();
 	void Render(HDC _hdc);
-
+	void Release();
 public :
 	void AddChild(wstring _key,UI* _newUI);
 	void SetActiveChild(wstring _key , bool _active);

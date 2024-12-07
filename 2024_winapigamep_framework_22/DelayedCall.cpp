@@ -51,4 +51,5 @@ void DelayedCall::OnFinish()
 	pObj->SetSize({ 100.f,100.f });
 	pObj->SetTag(TagEnum::Enemy);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pObj, LAYER::ENEMY);
+
 }
