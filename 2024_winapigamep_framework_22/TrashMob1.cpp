@@ -26,6 +26,8 @@ void TrashMob1::Update()
 {
 	Enemy::Update();
 	
+	if (m_isDead)return;
+
 	Vec2 curPos = GetPos();
 
 	if (curPos.y > SCREEN_HEIGHT / 2)

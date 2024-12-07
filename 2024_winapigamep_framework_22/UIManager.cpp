@@ -31,6 +31,28 @@ void UIManager::Init()
 		AddChild(L"PlayerHeart2", playerHeart);
 	}
 
+	//tutorialInfo
+	{
+		UI* showKeys = new UI;
+
+		showKeys->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"ShowKeys", L"Texture\\UI\\ShowKeys.bmp"));
+		showKeys->SetPos({ SCREEN_WIDTH /2 - 300 , SCREEN_HEIGHT - 200 });
+		showKeys->SetSize({ 150,80 });
+		
+		AddChild(L"ShowKeys", showKeys);
+	}
+
+	{
+		UI* moveKeys = new UI;
+
+		moveKeys->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"MoveKeys", L"Texture\\UI\\ShowWASD.bmp"));
+		moveKeys->SetPos({ SCREEN_WIDTH / 2 - 150 , SCREEN_HEIGHT - 200 });
+		moveKeys->SetSize({ 150,80 });
+
+		AddChild(L"MoveKeys", moveKeys);
+	}
+
+
 	{
 		UI* playerHeart = new UI;
 

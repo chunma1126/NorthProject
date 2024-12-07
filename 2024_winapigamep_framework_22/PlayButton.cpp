@@ -13,6 +13,8 @@ void PlayButton::ClickEvent()
 	GET_SINGLE(UIManager)->SetActiveChild(L"Title", false);
 	GET_SINGLE(UIManager)->SetActiveChild(L"PlayButton", false);
 	GET_SINGLE(UIManager)->SetActiveChild(L"ExitButton", false);
+	GET_SINGLE(UIManager)->SetActiveChild(L"ShowKeys", false);
+	GET_SINGLE(UIManager)->SetActiveChild(L"MoveKeys", false);
 
 	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->LoadSound(L"InGameBGM",L"Sound\\InGameBGM.mp3",true);

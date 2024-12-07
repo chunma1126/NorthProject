@@ -23,6 +23,7 @@ TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 void TrashMob3::Update()
 {
     Enemy::Update();
+    if (m_isDead)return;
 
     m_angle += fDT * 2.0f; 
     if (m_angle >= 2 * M_PI)
