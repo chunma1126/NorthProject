@@ -38,8 +38,8 @@ Player::Player()
 	m_health->SetHP(4);
 
 	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetOffSetPos({ 15.5f, 15.f });
-	this->GetComponent<Collider>()->SetSize({ 10,10 });
+	this->GetComponent<Collider>()->SetOffSetPos({ 15.5f, 17.5f });
+	this->GetComponent<Collider>()->SetSize({ 7,7 });
 	m_pFire = GET_SINGLE(ResourceManager)->TextureLoad(L"Fire", L"Texture\\Fire.bmp");
 	AddComponent<Animator>();
 	GetComponent<Animator>()->SetPos({ 15.5f, 54.f });
@@ -101,7 +101,6 @@ void Player::Update()
 
 void Player::Render(HDC _hdc)
 {
-	ComponentRender(_hdc);
 
 	if (m_isDead)return;
 
@@ -143,6 +142,7 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
+	ComponentRender(_hdc);
 
 }
 
