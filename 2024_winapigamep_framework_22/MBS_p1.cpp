@@ -3,15 +3,12 @@
 
 void MBS_p1::Enter()
 {
-	cout << "enter";
 }
 
 void MBS_p1::Update()
 {
-	cout << "upd";
 }
 
 void MBS_p1::Exit()
 {
-	cout << "exot";
 }

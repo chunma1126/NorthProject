@@ -47,7 +47,6 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 Enemy::~Enemy()
 {
 
-	cout << "ÇØÁ¦µÊ" << endl;
 }
 
 void Enemy::Update()

@@ -41,7 +41,6 @@ void DelayedCall::OnFinish()
 	}
 	if (pObj == nullptr)
 	{
-		cout << "\nfailed to spawn Enemy" << (int)enemyType;
 		return;
 	}
 	if(m_spawnStruct.hp != 0)

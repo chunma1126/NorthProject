@@ -280,5 +280,4 @@ void UIManager::OnCompleteBossScene()
 {
 	SetActiveChild(L"Clear",true);
 	SetActiveChild(L"RestartButton", true);
-	
 }

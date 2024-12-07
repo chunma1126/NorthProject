@@ -93,7 +93,6 @@ void Player::Update()
 		SetPos(newPos);
 	}
 	
-	GET_SINGLE(UIManager)->OnCompleteBossScene();
 }
 
 void Player::Render(HDC _hdc)
@@ -255,7 +254,7 @@ void Player::CreateProjectile()
 
 void Player::CreateUltmite()
 {
-	cout << "created ultimite\n";
+
 }
 
 void Player::Dead()

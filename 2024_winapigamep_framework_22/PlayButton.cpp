@@ -8,7 +8,6 @@ void PlayButton::ClickEvent()
 	if (!m_active)return;
 
 
-	cout << "시작입니다 " << endl;
 
 	GET_SINGLE(UIManager)->SetActiveChild(L"Title", false);
 	GET_SINGLE(UIManager)->SetActiveChild(L"PlayButton", false);

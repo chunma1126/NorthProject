@@ -3,7 +3,6 @@
 
 void MBS_p2::Enter()
 {
-	cout << "ent2";
 }
 
 void MBS_p2::Update()
