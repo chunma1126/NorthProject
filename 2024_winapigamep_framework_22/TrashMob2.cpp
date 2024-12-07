@@ -21,10 +21,6 @@ TrashMob2::TrashMob2(const wstring& _key, const wstring& _path)
 	m_shotTime = 0.1f;
 }
 
-TrashMob2::~TrashMob2()
-{
-
-}
 
 void TrashMob2::Update()
 {
@@ -38,16 +34,20 @@ void TrashMob2::Update()
 
 	Vec2 pos = GetPos();
 
-	float speed = 40.f;        
-	float zigzagAmplitude = 300.f; 
-	float zigzagFrequency = 1.5f;
+	if (pos.y >= SCREEN_HEIGHT / 2) 
+	{
 
-	float time = GET_SINGLE(TimeManager)->GetTime();
-	pos.x += zigzagAmplitude * sin(time) * fDT;
-	pos.y += speed * fDT; 
+	}
+	else
+	{
+		float speed = 40.f;
+		float zigzagAmplitude = 100;
+		float zigzagFrequency = 1.5f;
 
-
+		float time = GET_SINGLE(TimeManager)->GetTime();
+		pos.x += zigzagAmplitude * sin(time) * fDT;
+		pos.y += speed * fDT;
+	}
 
     SetPos(pos);
-
 }

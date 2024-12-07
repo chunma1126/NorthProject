@@ -3,7 +3,7 @@
 #include "Object.h"
 #include "Projectile.h"
 #include "FollowProjectile.h"
-#include "EnemyBullet.h"
+#include "EnemyProjectile.h"
 #include "TimeManager.h"
 
 void BulletManager::Init()
@@ -129,7 +129,7 @@ void BulletManager::Update()
 
 void BulletManager::BasicShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir)
 {
-    Projectile* p = new EnemyBullet;
+    Projectile* p = new EnemyProjectile;
 
     p->SetPos(_pos);
     p->SetDir(_dir);
@@ -144,7 +144,7 @@ void BulletManager::CircleShot(Vec2 _pos, Scene* _scene, float _interval, float 
 {
 	for (int i = 0; i < 360; i += _interval)
 	{
-		Projectile* pObj = new EnemyBullet;
+		Projectile* pObj = new EnemyProjectile;
 		pObj->SetPos(_pos);
 		pObj->SetSize({ 400.f,400.f });
 		pObj->SetSpeed(_bulletSpeed);
@@ -209,7 +209,7 @@ void BulletManager::ApplySpinShot()
 
 	float angleInRadians = m_spinAngle * (PI / 180.0f);
 
-	Projectile* pObj = new EnemyBullet;
+	Projectile* pObj = new EnemyProjectile;
 
     pObj->SetPos(m_spinShotPos);
 	pObj->SetSize({ 400.f, 400.f });
@@ -232,7 +232,7 @@ void BulletManager::ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2
         float angleDegrees = i * angleIncrement;
         float angleRadians = angleDegrees * (M_PI / 180.0f);
 
-        Projectile* pObj = new EnemyBullet;
+        Projectile* pObj = new EnemyProjectile;
 
         float x = SCREEN_WIDTH / 2 + radius * cosf(angleRadians);
         float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
@@ -251,7 +251,7 @@ void BulletManager::HeartShot(Vec2 _pos, Scene* _scene, float _bulletSpeed)
 {
     for (int i = 0; i < 34; ++i)
     {
-        Projectile* p = new EnemyBullet;
+        Projectile* p = new EnemyProjectile;
 
         p->SetPos(_pos);
         p->SetSpeed(m_speeds[i] + _bulletSpeed);
@@ -314,7 +314,7 @@ void BulletManager::RoseShot(Scene* _scene, float _interval, float _bulletSpeed,
 
         float radius = _size * sinf(k * angleRadians);
 
-        Projectile* pObj = new EnemyBullet;
+        Projectile* pObj = new EnemyProjectile;
 
         float x = SCREEN_WIDTH / 2 + radius * cosf(angleRadians);
         float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
@@ -367,7 +367,7 @@ void BulletManager::ApplyRoseSpinShot()
 
     float radius = m_roseSize * sinf(m_rosePetals * angleRadians);
     
-    Projectile* pObj = new EnemyBullet;
+    Projectile* pObj = new EnemyProjectile;
 
     float x = SCREEN_WIDTH / 2 + radius * cosf(angleRadians);
     float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);

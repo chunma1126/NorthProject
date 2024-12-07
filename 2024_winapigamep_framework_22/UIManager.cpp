@@ -40,6 +40,30 @@ void UIManager::Init()
 		AddChild(L"PlayerHeart3", playerHeart);
 	}
 
+	//Score
+	{
+		m_scoreUIs[0] = new UI;
+
+		m_scoreUIs[0]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[0]->SetPos({ 140 , 90 });
+		m_scoreUIs[0]->SetSize({ 75,75 });
+		AddChild(L"FirstScore", m_scoreUIs[0]);
+		
+		m_scoreUIs[1] = new UI;
+
+		m_scoreUIs[1]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[1]->SetPos({ 95 , 90 });
+		m_scoreUIs[1]->SetSize({ 75,75 });
+		AddChild(L"SecondeScore", m_scoreUIs[1]);
+
+		m_scoreUIs[2] = new UI;
+
+		m_scoreUIs[2]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+		m_scoreUIs[2]->SetPos({ 50 , 90 });
+		m_scoreUIs[2]->SetSize({ 75,75 });
+		AddChild(L"ThirdScore", m_scoreUIs[2]);
+	}
+
 	{
 		UI* Title = new UI;
 
@@ -106,10 +130,13 @@ void UIManager::Init()
 		AddChild(L"RestartButton", restartButton);
 	}
 
+	
+
 	for (auto& item : uiLists)
 	{
 		item.second->Init();
 	}
+	
 }
 
 void UIManager::Update()
@@ -126,6 +153,7 @@ void UIManager::Render(HDC _hdc)
 	{
 		item.second->Render(_hdc);
 	}
+
 }
 
 void UIManager::AddChild(wstring _key,UI* _newUI)
@@ -150,14 +178,57 @@ void UIManager::SetActiveChild(wstring _key, bool _active)
 
 void UIManager::ChangeScore()
 {
+	int currentScore = m_gameScore;
 
+	int index = 0;
+	
+	while (currentScore > 1)
+	{
+		m_gameTotalScores[index++] += currentScore % 10;
+		currentScore /= 10;
+	}
 
+	m_gameScore = 0;
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (m_gameTotalScores[i] >= 10) 
+		{
+			m_gameTotalScores[i] %= 10;
+			m_gameTotalScores[i + 1] += 1;
+		}
+	}
+
+	if (m_gameTotalScores[2] >= 10)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			m_gameTotalScores[i] = 9;
+		}
+	}
+
+	for (int i = 2; i >= 0; i--)
+	{	
+		wstring number = std::to_wstring(m_gameTotalScores[i]);
+		m_scoreUIs[i]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(number, L"Texture\\Number\\" + number + L".bmp"));
+	}
 
 }
 
-
-
-UI* UIManager::GetChild(wstring _key)
+void UIManager::ResetScore()
 {
-	return uiLists[_key];
+	for (int i = 0; i < 3; i++)
+	{
+		m_gameTotalScores[i] = 0;
+	}
+
+	for (int i = 2; i >= 0; i--)
+	{
+		m_scoreUIs[i]->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"0", L"Texture\\Number\\0.bmp"));
+	}
+}
+
+void UIManager::SetPosChild(wstring _key, Vec2 _pos)
+{
+	uiLists[_key]->SetPos(_pos);
 }

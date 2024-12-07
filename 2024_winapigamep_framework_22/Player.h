@@ -24,7 +24,6 @@ private:
 private:
 	bool IsImmortal() { return m_immortalTime < immortalTimeEnd; }
 private:
-	void Clamp();
 	bool TryShoot();
 	bool TryUltimite();
 	void CreateProjectile();

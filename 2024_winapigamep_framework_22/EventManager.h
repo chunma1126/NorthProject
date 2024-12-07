@@ -17,21 +17,11 @@ class EventManager
 public:
 	void Update();
 	void DeleteObject(Object* _pObj);
-	void AddScore(float _value) 
-	{
-		m_gameScore += _value;
-	};
-	void RemoveScore(float _value)
-	{
-		m_gameScore -= _value;
-	}
-
-	// todo..
 private:
 	void Excute(const tEvent& _eve);
 private:
 	vector<tEvent> m_vecEvent;
 	vector<Object*> m_vecDead;
 
-	float m_gameScore = 0;
+	
 };

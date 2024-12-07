@@ -29,6 +29,12 @@ void DelayedCall::OnFinish()
 	case EnemyType::TrashMob1:
 		pObj = new TrashMob1(m_spawnStruct.key, m_spawnStruct.path);
 		break;
+	case EnemyType::TrashMob2:
+		pObj = new TrashMob2(m_spawnStruct.key, m_spawnStruct.path);
+		break;
+	case EnemyType::TrashMob3:
+		pObj = new TrashMob3(m_spawnStruct.key, m_spawnStruct.path);
+		break;
 	case EnemyType::MidBoss:
 		pObj = new MidBoss(m_spawnStruct.key, m_spawnStruct.path);
 		break;

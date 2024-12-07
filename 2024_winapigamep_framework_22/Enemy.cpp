@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "TimeManager.h"
+#include "UIManager.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -35,7 +36,26 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-	cout << "ÇØÀçµÊ" << endl;
+	Object::~Object();
+
+	if (m_texture != nullptr)
+	{
+		delete m_texture;
+		m_texture = nullptr;
+	}
+
+	if (m_curScene != nullptr)
+	{
+		delete m_curScene;
+		m_curScene = nullptr;
+	}
+
+	if (m_health != nullptr)
+	{
+		delete m_health;
+		m_health = nullptr;
+	}
+
 }
 
 void Enemy::Update()
@@ -47,8 +67,6 @@ void Enemy::Update()
 	}
 
 	m_shotTimer += fDT;
-
-
 
 }
 
@@ -69,13 +87,17 @@ void Enemy::SetHP(float hp)
 
 void Enemy::EnterCollision(Collider* _other)
 {
+	if (GetComponent<HealthComponent>()->IsDead())return;
+
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
 		const float damagedTaken = 1;
 		m_health->TakeDamage(damagedTaken);
-		if (m_health->IsDead()) {
-			GET_SINGLE(EventManager)->AddScore(40.f);
+		if (m_health->IsDead()) 
+		{
+			GET_SINGLE(UIManager)->AddScore(5);
+			cout << "ÀÀ¾î¾ÆÀÕ";
 			GET_SINGLE(EventManager)->DeleteObject(this);
 		}
 	}
