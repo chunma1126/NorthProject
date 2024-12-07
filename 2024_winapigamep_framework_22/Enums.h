@@ -57,3 +57,11 @@ enum class EnemyType
 	CircleOut
 };
 
+enum class MidBossState
+{
+	p1 = 0,
+	p2,
+	p3,
+	p4,
+	p5
+};
