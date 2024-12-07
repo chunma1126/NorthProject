@@ -1,11 +1,12 @@
 #pragma once
 
 class State;
+class MidBoss;
 //just for midboss for now
 class StateMachine
 {
 public:
-	StateMachine();
+	StateMachine(MidBoss* midBoss);
 	~StateMachine();
 public:
 	void ChangeState(MidBossState newState);
