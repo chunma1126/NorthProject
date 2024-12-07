@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "UIManager.h"
+#include "EventManager.h"
 #include "Background.h"
 #include "AllEnemies.h"
 #include "Player.h"
@@ -64,13 +65,13 @@ void BossScene::Init()
 void BossScene::Update()
 {
 	Scene::Update();
-	//if (m_finalBossAllowed)
-	//{
-	//	m_finalBossAllowed = false;
-	//	new DelayedCall(50, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
-	//}
+	if (GET_SINGLE(EventManager)->m_isBossEnter )
+	{
+		GET_SINGLE(EventManager)->m_isBossEnter = false;
+		cout << "ÀÀ¾î¾ÆÀÕ";
+		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f,0.f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
+	}
 }
-
 
 
 BossScene::~BossScene()

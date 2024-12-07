@@ -51,6 +51,6 @@ void TrashMob3::Update()
 
 void TrashMob3::OnDead()
 {
-    //BossScene::OnFinalBossEnable();
+    GET_SINGLE(EventManager)->m_isBossEnter = true;
 }
 

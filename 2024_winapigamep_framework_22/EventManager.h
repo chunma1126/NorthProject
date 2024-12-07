@@ -18,6 +18,9 @@ public:
 	void Update();
 	void DeleteObject(Object* _pObj);
 	void CreateObject(Object* _pObj,LAYER _layer);
+
+	bool m_isBossEnter;
+
 private:
 	void Excute(const tEvent& _eve);
 private:
