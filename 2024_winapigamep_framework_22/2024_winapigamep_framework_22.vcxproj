@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -193,6 +193,8 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MBS_p1.h" />
+    <ClInclude Include="MBS_p2.h" />
     <ClInclude Include="MidBoss.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OJYScene.h" />
@@ -206,6 +208,8 @@
     <ClInclude Include="RestartButton.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
@@ -245,6 +249,8 @@
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MBS_p1.cpp" />
+    <ClCompile Include="MBS_p2.cpp" />
     <ClCompile Include="MidBoss.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OJYScene.cpp" />
@@ -256,6 +262,8 @@
     <ClCompile Include="RestartButton.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
