@@ -16,6 +16,8 @@ Enemy::Enemy()
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
 	m_health->SetHP(4);
+
+	
 }
 Enemy::Enemy(const wstring& _key, const wstring& _path)
 {
@@ -32,6 +34,8 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 	SetTag(TagEnum::Enemy);
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyDead", L"Sound\\EnemyDead.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyHit", L"Sound\\EnemyHit.wav", false);
 	/*AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,0 }, { 16,16 }, { 16,0 }, 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"Enemy_1", true);
@@ -102,15 +106,21 @@ void Enemy::EnterCollision(Collider* _other)
 {
 	if (GetComponent<HealthComponent>()->IsDead())return;
 
+
+	
+
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
 		const float damagedTaken = 1;
 		m_health->TakeDamage(damagedTaken);
+
+		GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyHit");
 		if (m_health->IsDead()) 
 		{
 			m_isDead = true;
 			GetComponent<Animator>()->PlayAnimation(L"Explosion",false);
+			GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyDead");
 		}
 	}
 }
