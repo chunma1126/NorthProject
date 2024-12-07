@@ -16,7 +16,7 @@ TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 	GetComponent<Collider>()->SetSize({ 125,125 });
 
 	m_shotTime = 2.f;
-    m_center = { SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 };
+    m_center = { SCREEN_WIDTH / 2 , 100 };
 }
 
 
@@ -32,7 +32,7 @@ void TrashMob3::Update()
     float offsetX = m_radius * cos(m_angle);
     float offsetY = m_radius * sin(m_angle);
 
-    Vec2 pos = m_center +Vec2{offsetX , offsetY};
+    Vec2 pos = m_center + Vec2{offsetX , offsetY};
     SetPos(pos);
 
     if (m_shotTime <= m_shotTimer)

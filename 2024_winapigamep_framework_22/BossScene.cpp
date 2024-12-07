@@ -44,7 +44,7 @@ void BossScene::Init()
 		GET_SINGLE(ResourceManager)->PlayAudio(L"InGameBGM");
 	}
 
-	 midBoss = new DelayedCall(0.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	 midBoss = new DelayedCall(0.f, { {SCREEN_WIDTH * 0.5f, 0.f}, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
 
 	 
 	 

@@ -189,7 +189,7 @@
     <Image Include="2024_winapigamep_framework_22.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="x64\1 cursor.bmp">
+    <Image Include="x64\gameIcon.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
