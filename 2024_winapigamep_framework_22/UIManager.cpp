@@ -87,10 +87,20 @@ void UIManager::Init()
 	}
 
 	{
+		UI* Clear = new UI;
+
+		Clear->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Clear", L"Texture\\UI\\Clear.bmp"));
+		Clear->SetPos({SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2});
+		Clear->SetSize({ 400,100 });
+
+		AddChild(L"Clear", Clear);
+	}
+
+	{
 		UI* Title = new UI;
 
 		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\UI\\Title.bmp"));
-		Title->SetPos({225, 200 });
+		Title->SetPos({ 225, 200 });
 		Title->SetSize({ 800,200 });
 
 		AddChild(L"Title", Title);
@@ -140,7 +150,7 @@ void UIManager::Init()
 	{
 		RestartButton* restartButton = new RestartButton;
 		restartButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButton", L"Texture\\UI\\RestartButton.bmp"));
-		restartButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2 });
+		restartButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2 + 140 });
 		restartButton->SetSize({ 600,200 });
 
 		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButtonHover", L"Texture\\UI\\RestartButtonHover.bmp"));
@@ -150,6 +160,7 @@ void UIManager::Init()
 		restartButton->SetPressTexture(press);
 
 		AddChild(L"RestartButton", restartButton);
+
 	}
 
 	
@@ -175,7 +186,6 @@ void UIManager::Render(HDC _hdc)
 	{
 		item.second->Render(_hdc);
 	}
-
 }
 
 void UIManager::Release()
@@ -206,6 +216,7 @@ void UIManager::SetActiveChild(wstring _key, bool _active)
 	}
 
 	uiLists[_key]->SetActive(_active);
+	
 }
 
 void UIManager::ChangeScore()
@@ -263,4 +274,11 @@ void UIManager::ResetScore()
 void UIManager::SetPosChild(wstring _key, Vec2 _pos)
 {
 	uiLists[_key]->SetPos(_pos);
+}
+
+void UIManager::OnCompleteBossScene()
+{
+	SetActiveChild(L"Clear",true);
+	SetActiveChild(L"PlayButton", true);
+	
 }

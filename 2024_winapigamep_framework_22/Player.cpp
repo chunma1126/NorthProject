@@ -92,11 +92,8 @@ void Player::Update()
 	{
 		SetPos(newPos);
 	}
+	
 
-	if (GET_KEYDOWN(KEY_TYPE::P))
-	{
-		OnLevelUp();
-	}
 }
 
 void Player::Render(HDC _hdc)
@@ -185,6 +182,7 @@ void Player::CreateProjectile()
 	Vec2 vPos = GetPos();
 	vPos.x += 16.0f;
 	vPos.y += -0.2f;
+
 
 	switch (m_level)
 	{
