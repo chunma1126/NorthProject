@@ -9,6 +9,5 @@ void RestartButton::ClickEvent()
 	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver", false);
 	GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", false);
 
-
-
+	GET_SINGLE(UIManager)->ResetScore();
 }

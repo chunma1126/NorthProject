@@ -50,6 +50,8 @@ enum class EnemyType
 {
 	Normal,
 	TrashMob1,
+	TrashMob2,
+	TrashMob3,
 	MidBoss,
 	CircleOut
 };

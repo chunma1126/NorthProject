@@ -51,9 +51,8 @@ Player::Player()
 
 	m_explosion = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion", L"Texture\\explosion.bmp");
 	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_explosion, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
-
-
 }
+
 Player::~Player()
 {
 	//if (nullptr != m_pTex)
@@ -85,9 +84,13 @@ void Player::Update()
 	dir.Normalize();
 	dir = dir * (fDT * speed);
 
-	Vec2 vPos = GetPos();
-	SetPos(vPos + dir);
-	Clamp();
+	Vec2 newPos = dir + m_vPos;
+
+	if (newPos.x >= 0 && newPos.x <= SCREEN_WIDTH - 25 &&
+		newPos.y >= 0 && newPos.y  <= SCREEN_HEIGHT - 100)
+	{
+		SetPos(newPos);
+	}
 }
 
 void Player::Render(HDC _hdc)
@@ -134,6 +137,7 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
+
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -144,28 +148,6 @@ void Player::EnterCollision(Collider* _other)
 void Player::StayCollision(Collider* _other)
 {
 	OnHit(_other);
-}
-
-void Player::Clamp()
-{
-	int x = GetPos().x;
-	int y = GetPos().y;
-	Vec2 result = GetPos();
-	//if (x < boundaryMin.x) x = boundaryMin.x;
-	//if (x > boundaryMax.x) {
-	//	cout << "x";
-	//	x = boundaryMax.x;
-	//}
-	//
-	//if (y < boundaryMin.y) y = boundaryMin.y;
-	//if (y > boundaryMax.y) {
-	//	cout << "Y";
-	//	y = boundaryMax.y;
-	//}
-	//result.x = x;
-	//result.y = y;
-	SetPos({ result });
-	//cout << x << "_" << y << " " << boundaryMax.x << "_" << boundaryMax.y << "\n";
 }
 
 bool Player::TryShoot()
@@ -224,13 +206,13 @@ void Player::Dead()
 	GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", true);
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDead");
 
+	GetComponent<Animator>()->SetSize({5,5});
 	GetComponent<Animator>()->PlayAnimation(L"Explosion", false);
 }
 
 void Player::OnHit(Collider* _other)
 {
 	if (IsImmortal()) return;
-
 
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();
@@ -251,8 +233,6 @@ void Player::OnTakeDamage()
 {
 	GetComponent<CameraComponent>()->Shake(5, 0.7f);
 
-	GET_SINGLE(EventManager)->RemoveScore(200);
-
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
@@ -265,5 +245,4 @@ void Player::OnTakeDamage()
 		Dead();
 		return;
 	}
-
 }

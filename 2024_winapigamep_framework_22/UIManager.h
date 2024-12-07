@@ -12,12 +12,25 @@ public:
 public :
 	void AddChild(wstring _key,UI* _newUI);
 	void SetActiveChild(wstring _key , bool _active);
-	void ChangeScore();
-	UI* GetChild(wstring _key);
+	void SetPosChild(wstring _key , Vec2 _pos);
 
+	void ChangeScore();
+	void ResetScore();
+	void AddScore(float _value)
+	{
+		m_gameScore += _value;
+	
+		ChangeScore();
+	};
 
 private :
 	std::map<wstring, UI*> uiLists;
 
+	int m_gameScore = 0;
+	int m_gameTotalScores[3] = {0,0,0};
+
+	UI* m_scoreUIs[3];
+
+	
 };
 

@@ -20,10 +20,7 @@ TrashMob1::TrashMob1(const wstring& _key, const wstring& _path)
 
 }
 
-TrashMob1::~TrashMob1()
-{
-	
-}
+
 
 void TrashMob1::Update()
 {

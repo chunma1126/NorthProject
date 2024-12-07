@@ -3,59 +3,46 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "TimeManager.h"
-
-TrashMob3::TrashMob3()
-	: m_hp(5)
+#include "Animator.h"
+#include "BulletManager.h"
+TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
+	: Enemy(_key, _path)
 {
-	this->AddComponent<Collider>();
-	
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Enemy_3", m_texture, { 0,106 }, { 48,31 }, { 48,0 }, 4, 0.1f);
+	GetComponent<Animator>()->PlayAnimation(L"Enemy_3", true);
+	GetComponent<Animator>()->SetSize({ 4,4 });
+
+	GetComponent<Collider>()->SetSize({ 125,125 });
+
+	m_shotTime = 2.f;
+    m_center = { SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 };
 }
 
-TrashMob3::~TrashMob3()
-{
-}
 
 void TrashMob3::Update()
-{	 
-	Vec2 dir = ifPlayerPos - GetPos();
-	Vec2 curPos = GetPos();
-	Vec2 movement = dir * m_speed;
-	SetPos(curPos + movement);
-	
-}	 
-	 
-void TrashMob3::Render(HDC _hdc)
 {
-	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
-	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	RECT_RENDER(_hdc, vPos.x, vPos.y
-		, vSize.x, vSize.y);
-	ComponentRender(_hdc);
-	//SelectObject(_hdc, oldbrush); 
-	//DeleteObject(brush);
+    Enemy::Update();
+
+    m_angle += fDT * 2.0f; 
+    if (m_angle >= 2 * M_PI)
+        m_angle -= 2 * M_PI;
+
+    float offsetX = m_radius * cos(m_angle);
+    float offsetY = m_radius * sin(m_angle);
+
+    Vec2 pos = m_center +Vec2{offsetX , offsetY};
+    SetPos(pos);
+
+    if (m_shotTime <= m_shotTimer)
+    {
+        m_shotTimer = 0;
+        if (m_player == nullptr)
+        {
+            vector<Object*> player = m_curScene->GetLayerObjects(LAYER::PLAYER);
+            m_player = player[0];
+        }
+        GET_SINGLE(BulletManager)->CircleShotGoToTarget(GetPos() , m_curScene ,50 , 100 , m_player, 2.f);
+    }
 }
 
-void TrashMob3::EnterCollision(Collider* _other)
-{
-	std::cout << "Enter" << std::endl;
-	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"PlayerBullet")
-	{
-		m_hp -= 1;
-		if (m_hp <= 0)
-			GET_SINGLE(EventManager)->DeleteObject(this);
-	}
-}
-
-void TrashMob3::StayCollision(Collider* _other)
-{
-	//std::cout << "Stay" << std::endl;
-}
-
-void TrashMob3::ExitCollision(Collider* _other)
-{
-	std::cout << "Exit" << std::endl;
-}
