@@ -46,8 +46,10 @@ Texture* ResourceManager::TextureFind(const wstring& _key)
 void ResourceManager::Release()
 {
 	map<wstring, Texture*>::iterator iter;
-	for (iter = m_mapTextures.begin(); iter != m_mapTextures.end(); ++iter)
-		delete iter->second;
+	for (iter = m_mapTextures.begin(); iter != m_mapTextures.end(); ++iter) {
+		if(iter->second != nullptr)
+			delete iter->second;
+	}
 	m_mapTextures.clear();
 
 	// SOUND

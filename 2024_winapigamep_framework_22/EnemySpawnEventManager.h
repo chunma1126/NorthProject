@@ -6,6 +6,7 @@ class EnemySpawnEventManager
 public:
 	void Update();
 	void AddDelayedCall(DelayedCall* pDelayedCall);
+	void Release();
 private:
 	vector<DelayedCall*> m_delayedCalls;
 };

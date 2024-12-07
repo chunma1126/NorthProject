@@ -1,11 +1,19 @@
 #pragma once
 #include "Scene.h"
+class DelayedCall;
 class Player;
+class Background;
 class BossScene : public Scene
 {
-	void Init() override;
+public:
+	~BossScene();
 
+	void Init() override;
 private :
 	Player* m_player;
+	Background* m_backGround;
+	DelayedCall* midBoss;
+
+
 };
 

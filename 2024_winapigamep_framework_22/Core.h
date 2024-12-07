@@ -70,7 +70,8 @@ private:
 //	static Core* GetInst()
 //	{
 //		if (nullptr == m_pInst)
-//			m_pInst = new Core;
+//			m_pInst = 
+// Core;
 //		return m_pInst;
 //	}
 //	static void DestoryInst()

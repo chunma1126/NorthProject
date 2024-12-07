@@ -6,10 +6,6 @@ public:
 	EnemyProjectile();
 	~EnemyProjectile();
 
-	//void Update() override;
-
 	void Render(HDC _hdc) override;
-
-
 };
 

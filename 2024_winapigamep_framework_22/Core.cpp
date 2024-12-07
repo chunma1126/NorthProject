@@ -61,6 +61,8 @@ void Core::CleanUp()
 	}
 
 	GET_SINGLE(ResourceManager)->Release();
+	GET_SINGLE(UIManager)->Release();
+	GET_SINGLE(EnemySpawnEventManager)->Release();
 }
 
 void Core::GameLoop()
