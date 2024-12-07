@@ -51,7 +51,7 @@ void BossScene::Init()
 
 
 
-	DelayedCall* midBoss = new DelayedCall(0.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	DelayedCall* midBoss = new DelayedCall(0.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.3f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
 
 	//GET_SINGLE(BulletManager)->HeartDataInit(270.f);
 	//GET_SINGLE(BulletManager)->HeartShot(shotInfo);

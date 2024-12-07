@@ -5,7 +5,7 @@
 StateMachine::StateMachine()
 {
 	m_stateHT[MidBossState::p1] = new MBS_p1();
-	m_stateHT[MidBossState::p2] = new MBS_p1();
+	m_stateHT[MidBossState::p2] = new MBS_p2();
 	m_currentState = m_stateHT[MidBossState::p1];
 	m_currentState->Enter();
 }
