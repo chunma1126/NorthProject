@@ -5,6 +5,8 @@
 class FollowProjectile :public Projectile
 {
 public:
+	FollowProjectile();
+
 	void Update() override;
 	void SetTarget(Object* _target) { m_target = _target; }
 	void SetChangeTime(float _time) { m_followChangeTime = _time; }

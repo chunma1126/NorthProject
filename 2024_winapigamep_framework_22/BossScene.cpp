@@ -39,7 +39,6 @@ void BossScene::Init()
 		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart2", true);
 		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
 
-		GET_SINGLE(UIManager)->OnCompleteBossScene();
 	}
 	{
 		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);

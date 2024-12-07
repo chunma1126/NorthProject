@@ -83,8 +83,6 @@ void BulletManager::Init()
 
 void BulletManager::Update()
 {
-    
-
 	if (m_isSpinShot)
 	{
 		if (m_spinEndTimer >= m_spinEndTime)

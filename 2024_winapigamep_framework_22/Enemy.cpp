@@ -16,9 +16,7 @@ Enemy::Enemy()
 	this->AddComponent<Collider>();
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
-	//m_health->SetHP(4);
-	SetName(L"Enemy");
-	
+	m_health->SetHP(4);
 }
 Enemy::Enemy(const wstring& _key, const wstring& _path)
 {
@@ -34,14 +32,10 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 	GetComponent<Animator>()->SetSize(m_vSize);
 	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_deadTexture, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
 
-	SetTag(TagEnum::Enemy);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyDead", L"Sound\\EnemyDead.wav", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyHit", L"Sound\\EnemyHit.wav", false);
-	/*AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"Enemy_1", m_texture, { 0,0 }, { 16,16 }, { 16,0 }, 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"Enemy_1", true);
-	GetComponent<Animator>()->SetSize({ 10,10 });*/
+	
 }
 
 Enemy::~Enemy()
@@ -58,8 +52,6 @@ void Enemy::Update()
 	}
 
 	if (GET_SINGLE(EventManager)->GetPlayerDead())return;
-	
-
 
 	m_shotTimer += fDT;
 
@@ -92,12 +84,7 @@ void Enemy::Update()
 
 void Enemy::Render(HDC _hdc)
 {	
-	/*Vec2 vPos = GetPos();
-	int width = m_texture->GetWidth();
-	int height = m_texture->GetHeight();*/
-	
 	ComponentRender(_hdc);
-
 }
 
 void Enemy::SetHP(float hp)
@@ -109,22 +96,17 @@ void Enemy::EnterCollision(Collider* _other)
 {
 	if (GetComponent<HealthComponent>()->IsDead())return;
 
-
-	
-
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
-		const float damagedTaken = 1;
+		float damagedTaken = 1;
 		m_health->TakeDamage(damagedTaken);
 
 		GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyHit");
+
 		if (m_health->IsDead()) 
 		{
-			m_isDead = true;
 			OnDead();
-			GetComponent<Animator>()->PlayAnimation(L"Explosion",false);
-			GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyDead");
 		}
 	}
 }
@@ -139,5 +121,8 @@ void Enemy::ExitCollision(Collider* _other)
 
 void Enemy::OnDead()
 {
+	m_isDead = true;
+	GetComponent<Animator>()->PlayAnimation(L"Explosion", false);
+	GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyDead");
 }
 

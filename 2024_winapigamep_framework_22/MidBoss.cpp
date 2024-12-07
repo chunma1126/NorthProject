@@ -15,15 +15,18 @@ MidBoss::MidBoss(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
 	m_stateMachine = new StateMachine(this);
-	GetComponent<Collider>()->SetSize({400,400});
+	GetComponent<Collider>()->SetSize({600,400});
+	GetComponent<Collider>()->SetOffSetPos({ 25,0 });
+
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
-	
-	GetComponent<HealthComponent>()->SetHP(5);
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"Clear",L"Sound\\Clear.wav",false);
 }
 
 MidBoss::~MidBoss()
 {
 	GET_SINGLE(UIManager)->OnCompleteBossScene();
+	GET_SINGLE(ResourceManager)->PlayAudio(L"Clear");
 }
 
 void MidBoss::Update()

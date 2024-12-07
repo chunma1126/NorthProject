@@ -42,7 +42,7 @@ Player::Player()
 
 	AddComponent<HealthComponent>();
 	m_health = GetComponent<HealthComponent>();
-	m_health->SetHP(100);
+	m_health->SetHP(1);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOffSetPos({ 15.5f, 17.5f });
@@ -61,6 +61,7 @@ Player::Player()
 
 	m_explosion = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion", L"Texture\\explosion.bmp");
 	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_explosion, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
+
 }
 
 Player::~Player()
@@ -106,6 +107,7 @@ void Player::Update()
 
 void Player::Render(HDC _hdc)
 {
+	ComponentRender(_hdc);
 	if (m_isDead)return;
 
 	Vec2 vPos = GetPos();
@@ -147,7 +149,7 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
-	ComponentRender(_hdc);
+	
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -302,7 +304,6 @@ void Player::OnHit(Collider* _other)
 	{
 	case TagEnum::EnemyProjectile:
 	case TagEnum::Enemy:
-
 		m_health->TakeDamage(1);
 		OnTakeDamage();
 		break;
@@ -312,24 +313,21 @@ void Player::OnHit(Collider* _other)
 
 void Player::OnTakeDamage()
 {
-	GetComponent<CameraComponent>()->Shake(5, 0.7f);
-
 	SetPos(spawnPosition);
-
 	m_immortalTime = 0;
 
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
+	GetComponent<CameraComponent>()->Shake(5, 0.7f);
 
+	//ui
 	{
 		std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
 		GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
-
 	}
 	
 	if (m_health->GetHP() <= 0)
 	{
 		Dead();
-		return;
 	}
 }
 
