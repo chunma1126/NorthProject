@@ -44,6 +44,7 @@ enum class TagEnum
 	EnemyProjectile,
 	PlayerProjectile,
 	Enemy,
+	Item,
 	Player
 };
 enum class EnemyType 

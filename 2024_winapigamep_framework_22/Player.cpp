@@ -24,7 +24,8 @@ Player::Player()
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
-
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
+	
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
 	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
@@ -90,6 +91,11 @@ void Player::Update()
 		newPos.y >= 0 && newPos.y  <= SCREEN_HEIGHT - 100)
 	{
 		SetPos(newPos);
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::P))
+	{
+		OnLevelUp();
 	}
 }
 
@@ -176,22 +182,78 @@ bool Player::TryUltimite()
 
 void Player::CreateProjectile()
 {
-	Projectile* pProj = new Projectile;
-	pProj->SetSpeed(1000);
-
 	Vec2 vPos = GetPos();
 	vPos.x += 16.0f;
 	vPos.y += -0.2f;
 
-	pProj->SetPos(vPos);
+	switch (m_level)
+	{
+	case 1:
+	{
+		// 레벨 1: 하나만 발사
+		Projectile* pProj = new Projectile;
+		pProj->SetSpeed(1000);
+		pProj->SetPos(vPos);
+		pProj->SetSize({ 30.f, 30.f });
+		pProj->SetDir({ 0.f, -1.f });
+		pProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
+	}
+	break;
+	case 2:
+	{
+		Vec2 leftDir = { -0.1f, -1.f };  
+		Vec2 rightDir = { 0.1f, -1.f };  
 
-	pProj->SetSize({ 30.f,30.f });
+		Projectile* pLeftProj = new Projectile;
+		pLeftProj->SetSpeed(1000);
+		pLeftProj->SetPos(vPos);
+		pLeftProj->SetSize({ 30.f, 30.f });
+		pLeftProj->SetDir(leftDir);
+		pLeftProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pLeftProj, LAYER::PROJECTILE);
 
-	pProj->SetDir({ 0.f, -1.f });
-	pProj->SetTag(TagEnum::PlayerProjectile);
-	//pProj->SetName(L"PlayerBullet");
-	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
+		Projectile* pRightProj = new Projectile;
+		pRightProj->SetSpeed(1000);
+		pRightProj->SetPos(vPos);
+		pRightProj->SetSize({ 30.f, 30.f });
+		pRightProj->SetDir(rightDir);
+		pRightProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pRightProj, LAYER::PROJECTILE);
+	}
+	break;
+	case 3:
+	{
+		Projectile* pCenterProj = new Projectile;
+		pCenterProj->SetSpeed(1000);
+		pCenterProj->SetPos(vPos);
+		pCenterProj->SetSize({ 30.f, 30.f });
+		pCenterProj->SetDir({ 0.f, -1.f });
+		pCenterProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pCenterProj, LAYER::PROJECTILE);
+
+		Vec2 leftDir = { -0.1f, -1.f };
+		Projectile* pLeftProj = new Projectile;
+		pLeftProj->SetSpeed(1000);
+		pLeftProj->SetPos(vPos);
+		pLeftProj->SetSize({ 30.f, 30.f });
+		pLeftProj->SetDir(leftDir);
+		pLeftProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pLeftProj, LAYER::PROJECTILE);
+
+		Vec2 rightDir = { 0.1f, -1.f };
+		Projectile* pRightProj = new Projectile;
+		pRightProj->SetSpeed(1000);
+		pRightProj->SetPos(vPos);
+		pRightProj->SetSize({ 30.f, 30.f });
+		pRightProj->SetDir(rightDir);
+		pRightProj->SetTag(TagEnum::PlayerProjectile);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pRightProj, LAYER::PROJECTILE);
+	}
+	break;
+	}
 }
+
 
 void Player::CreateUltmite()
 {
@@ -219,6 +281,11 @@ void Player::OnHit(Collider* _other)
 
 	switch (pOtherObjTag)
 	{
+	case TagEnum::Item :
+	{
+		OnLevelUp();
+	}
+	break;
 	case TagEnum::EnemyProjectile:
 	case TagEnum::Enemy:
 
@@ -245,4 +312,11 @@ void Player::OnTakeDamage()
 		Dead();
 		return;
 	}
+}
+
+void Player::OnLevelUp()
+{
+	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerPowerUp");
+	++m_level;
+	if (m_level >= 3)m_level = 3;
 }

@@ -17,7 +17,8 @@ void TitleScene::Init()
 	GET_SINGLE(UIManager)->SetActiveChild(L"Title",true);
     GET_SINGLE(UIManager)->SetActiveChild(L"PlayButton", true);
     GET_SINGLE(UIManager)->SetActiveChild(L"ExitButton", true);
-
+    GET_SINGLE(UIManager)->SetActiveChild(L"ShowKeys", true);
+    GET_SINGLE(UIManager)->SetActiveChild(L"MoveKeys", true);
 
     {
         GET_SINGLE(ResourceManager)->LoadSound(L"TitleBGM", L"Sound\\TitleBGM.mp3", true);

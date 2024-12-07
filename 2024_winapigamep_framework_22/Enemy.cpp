@@ -8,6 +8,7 @@
 #include "Animator.h"
 #include "TimeManager.h"
 #include "UIManager.h"
+#include "Item.h"
 Enemy::Enemy()
 {
 	this->SetTag(TagEnum::Enemy);
@@ -25,6 +26,9 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 	m_health->SetHP(4);
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(_key, _path);
 
+	m_deadTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion", L"Texture\\explosion.bmp");
+	AddComponent<Animator>();
+	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_deadTexture, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
 
 	SetTag(TagEnum::Enemy);
 
@@ -36,26 +40,21 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-	Object::~Object();
+	m_mt.seed(m_rd());
+	std::uniform_int_distribution<int> random(0, 100);
+	int rand = random(m_mt);
 
-	if (m_texture != nullptr)
+	/*if (rand < 30)
 	{
-		delete m_texture;
-		m_texture = nullptr;
-	}
+		Item* item = new Item;
+		item->SetPos(GetPos());
+		GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
+	}*/
+	Item* item = new Item;
+	item->SetPos(GetPos());
+	GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
 
-	if (m_curScene != nullptr)
-	{
-		delete m_curScene;
-		m_curScene = nullptr;
-	}
-
-	if (m_health != nullptr)
-	{
-		delete m_health;
-		m_health = nullptr;
-	}
-
+	cout << "ÇØÁ¦µÊ" << endl;
 }
 
 void Enemy::Update()
@@ -67,6 +66,20 @@ void Enemy::Update()
 	}
 
 	m_shotTimer += fDT;
+
+	if (m_health->IsDead() && m_explosionComplete)
+	{
+		GET_SINGLE(UIManager)->AddScore(5);
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
+	else if (m_health->IsDead())
+	{
+		m_explosionTimer += fDT;
+		if (m_explosionTime <= m_explosionTimer)
+		{
+			m_explosionComplete = true;
+		}
+	}
 
 }
 
@@ -96,9 +109,8 @@ void Enemy::EnterCollision(Collider* _other)
 		m_health->TakeDamage(damagedTaken);
 		if (m_health->IsDead()) 
 		{
-			GET_SINGLE(UIManager)->AddScore(5);
-			cout << "ÀÀ¾î¾ÆÀÕ";
-			GET_SINGLE(EventManager)->DeleteObject(this);
+			m_isDead = true;
+			GetComponent<Animator>()->PlayAnimation(L"Explosion",false);
 		}
 	}
 }

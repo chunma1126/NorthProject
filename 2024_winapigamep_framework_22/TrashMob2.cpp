@@ -24,28 +24,44 @@ TrashMob2::TrashMob2(const wstring& _key, const wstring& _path)
 
 void TrashMob2::Update()
 {
+	Enemy::Update();
+
+	if (m_isDead)return;
+
 	if (m_shotTimer >= m_shotTime)
 	{
 		GET_SINGLE(BulletManager)->BasicShot(m_vPos, m_curScene, 400, { 0,1 });
 		m_shotTimer = 0;
 	}
 
-	Enemy::Update();
 
 	Vec2 pos = GetPos();
 
-	if (pos.y >= SCREEN_HEIGHT / 2) 
+	if (pos.y >= SCREEN_HEIGHT / 2 - 200) 
 	{
+		stayTimer += fDT;
+		if (stayTimer >= stayTime)
+		{
+			dirRight = pos.x < SCREEN_WIDTH / 2 ? false : true;
 
+			if (dirRight)
+			{
+				pos.x += 100 * fDT;
+			}
+			else
+			{
+				pos.x -= 100 * fDT;
+			}
+		}
 	}
 	else
 	{
 		float speed = 40.f;
 		float zigzagAmplitude = 100;
 		float zigzagFrequency = 1.5f;
-
 		float time = GET_SINGLE(TimeManager)->GetTime();
-		pos.x += zigzagAmplitude * sin(time) * fDT;
+
+		pos.x += zigzagAmplitude * cos(time * zigzagFrequency) * fDT;
 		pos.y += speed * fDT;
 	}
 

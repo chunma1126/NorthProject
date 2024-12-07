@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "EventManager.h"
 #include "Object.h"
+#include "SceneManager.h"
+#include "Scene.h"
 void EventManager::Update()
 {
 	// 이전 프레임에서 등록해둔 
@@ -28,6 +30,18 @@ void EventManager::DeleteObject(Object* _pObj)
 	}
 }
 
+void EventManager::CreateObject(Object* _pObj,LAYER _layer)
+{
+	tEvent eve = {};
+	eve.eveType = EVENT_TYPE::CREATE_OBJECT;
+	eve.obj = _pObj;
+	eve.objType = _layer;
+	if (std::find(m_vecEvent.begin(), m_vecEvent.end(), eve) == m_vecEvent.end())
+	{
+		m_vecEvent.push_back(eve);
+	}
+}
+
 void EventManager::Excute(const tEvent& _eve)
 {
 	switch (_eve.eveType)
@@ -40,7 +54,12 @@ void EventManager::Excute(const tEvent& _eve)
 	}
 	break;
 	case EVENT_TYPE::CREATE_OBJECT:
-		break;
+	{
+		Object* pCreateObj = _eve.obj;
+		auto curScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+		curScene->AddObject(pCreateObj,_eve.objType);
+	}
+	break;
 	case EVENT_TYPE::SCENE_CHANGE:
 		break;
 	}
