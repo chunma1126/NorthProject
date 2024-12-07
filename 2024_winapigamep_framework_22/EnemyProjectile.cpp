@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "EnemyBullet.h"
+#include "EnemyProjectile.h"
 #include "ResourceManager.h"
 #include "Animator.h"
 #include "EventManager.h"
-EnemyBullet::EnemyBullet()
+EnemyProjectile::EnemyProjectile()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"EnemyBullet",L"Texture\\FireBullet.bmp");
 
@@ -16,23 +16,11 @@ EnemyBullet::EnemyBullet()
 
 
 
-EnemyBullet::~EnemyBullet()
+EnemyProjectile::~EnemyProjectile()
 {
 }
 
-//void EnemyBullet::Update()
-//{
-//	Projectile::Update();
-//
-//
-//	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
-//		m_vPos.x < -m_vSize.x || m_vPos.x > SCREEN_WIDTH + m_vSize.x)
-//	{
-//		GET_SINGLE(EventManager)->DeleteObject(this);
-//	}
-//}
-
-void EnemyBullet::Render(HDC _hdc)
+void EnemyProjectile::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
 }

@@ -40,6 +40,8 @@ void Button::Update()
 {
 	UI::Update();
 
+	if (m_active == false)return;
+
 	KEY_STATE state = GET_SINGLE(InputManager)->GetKey(KEY_TYPE::LBUTTON);
 
 	if (MouseInRect())
@@ -55,6 +57,7 @@ void Button::Update()
 		{
 			GET_SINGLE(ResourceManager)->PlayAudio(L"ButtonClick");
 			ChangeTex(m_originTexture, BUTTON_STATE::DEFAULT);
+
 			ClickEvent();
 		}
 	}

@@ -36,7 +36,26 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 Enemy::~Enemy()
 {
-	//cout << "ÇØÀçµÊ" << endl;
+	Object::~Object();
+
+	if (m_texture != nullptr)
+	{
+		delete m_texture;
+		m_texture = nullptr;
+	}
+
+	if (m_curScene != nullptr)
+	{
+		delete m_curScene;
+		m_curScene = nullptr;
+	}
+
+	if (m_health != nullptr)
+	{
+		delete m_health;
+		m_health = nullptr;
+	}
+
 }
 
 void Enemy::Update()

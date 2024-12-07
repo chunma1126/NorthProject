@@ -9,7 +9,7 @@ class Enemy :
 public:
 	Enemy();
 	Enemy(const wstring& _key, const wstring& _path);
-	~Enemy();
+	virtual ~Enemy();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;

@@ -1,10 +1,10 @@
 #pragma once
 #include "Projectile.h"
-class EnemyBullet : public Projectile
+class EnemyProjectile : public Projectile
 {
 public:
-	EnemyBullet();
-	~EnemyBullet();
+	EnemyProjectile();
+	~EnemyProjectile();
 
 	//void Update() override;
 

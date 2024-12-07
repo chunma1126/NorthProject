@@ -4,19 +4,13 @@
 class TrashMob3 : public Enemy
 {
 public:
-	TrashMob3();
-	~TrashMob3();
-public:
+	TrashMob3(const wstring& _key, const wstring& _path);
 	void Update() override;
-	void Render(HDC _hdc) override;
-public:
-	virtual void EnterCollision(Collider* _other);
-	virtual void StayCollision(Collider* _other);
-	virtual void ExitCollision(Collider* _other);
 private:
-	int m_hp;
-public:
-	Vec2 ifPlayerPos = { SCREEN_WIDTH / 2.f,600.f };
-	float m_speed = 50 * fDT;
+	float m_angle = 0.0f;
+	float m_radius = 200.f;
+	Vec2 m_center;
+	Object* m_player;
+
 };
 
