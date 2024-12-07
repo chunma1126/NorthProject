@@ -28,6 +28,8 @@ void BossScene::Init()
 	//DelayedCall* delayedCall0 = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.2f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
 	//DelayedCall* delayedCall1 = new DelayedCall(2.f, { {SCREEN_WIDTH * 0.8f , 0.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
 
+
+
 	DelayedCall* midBoss = new DelayedCall(0.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
 
 	//GET_SINGLE(BulletManager)->HeartDataInit(270.f);
