@@ -93,7 +93,7 @@ void Player::Update()
 		SetPos(newPos);
 	}
 	
-
+	GET_SINGLE(UIManager)->OnCompleteBossScene();
 }
 
 void Player::Render(HDC _hdc)

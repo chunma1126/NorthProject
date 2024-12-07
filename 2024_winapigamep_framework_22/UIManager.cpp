@@ -279,6 +279,6 @@ void UIManager::SetPosChild(wstring _key, Vec2 _pos)
 void UIManager::OnCompleteBossScene()
 {
 	SetActiveChild(L"Clear",true);
-	SetActiveChild(L"PlayButton", true);
+	SetActiveChild(L"RestartButton", true);
 	
 }
