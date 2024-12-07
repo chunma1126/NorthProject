@@ -30,6 +30,7 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 	m_deadTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Explosion", L"Texture\\explosion.bmp");
 	AddComponent<Animator>();
+	GetComponent<Animator>()->SetSize(m_vSize);
 	GetComponent<Animator>()->CreateAnimation(L"Explosion", m_deadTexture, { 0,0 }, { 32,32 }, { 32,0 }, 9, 0.1f, false);
 
 	SetTag(TagEnum::Enemy);

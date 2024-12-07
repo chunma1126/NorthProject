@@ -7,6 +7,7 @@ public:
 	MidBoss(const wstring& _key, const wstring& _path);
 	~MidBoss();
 	void Update() override;
+	void Render(HDC _hdc) override;
 private:
 	void Shot();
 private:
