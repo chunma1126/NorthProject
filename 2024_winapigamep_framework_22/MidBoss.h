@@ -10,9 +10,9 @@ public:
 private:
 	void Shot();
 private:
-	const float m_shotTime = 0.5f;
-private:
 	StateMachine* m_stateMachine = nullptr;
+private:
+	const float m_shotTime = 2;
 private:
 	bool allowShot = false;
 #pragma region p1

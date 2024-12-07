@@ -23,10 +23,14 @@ void MidBoss::Update()
 	Vec2 curPos = GetPos();
 	m_stateMachine->UpdateState();
 
+	//states
+
 	m_timer += fDT;
 	if (m_timer >= m_shotTime)
 	{
-		Shot();
+		m_stateMachine->ChangeState(MidBossState::p2);
+		m_timer = 0;
+		//Shot();
 	}
 }
 void MidBoss::Shot()

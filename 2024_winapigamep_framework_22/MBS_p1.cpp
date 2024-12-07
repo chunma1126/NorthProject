@@ -8,7 +8,7 @@ void MBS_p1::Enter()
 
 void MBS_p1::Update()
 {
-	cout << "Upd";
+	cout << "upd";
 }
 
 void MBS_p1::Exit()
