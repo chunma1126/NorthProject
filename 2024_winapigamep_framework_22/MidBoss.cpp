@@ -8,12 +8,14 @@
 #include "StateMachine.h"
 #include "State.h"
 #include "Texture.h"
+#include "HealthComponent.h"
 MidBoss::MidBoss(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
 	m_stateMachine = new StateMachine(this);
 
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
+	cout << "HP" << m_health->GetHP();
 }
 
 MidBoss::~MidBoss()
@@ -42,6 +44,7 @@ void MidBoss::Render(HDC _hdc)
 		, width + vSize.x / 2, height + vSize.y / 2,
 		m_texture->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
+	this->ComponentRender(_hdc);
 }
 void MidBoss::ChangeState(MidBossState state)
 {

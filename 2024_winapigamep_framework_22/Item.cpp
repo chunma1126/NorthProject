@@ -9,6 +9,9 @@ Item::Item()
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Item" , L"Texture\\Item.bmp");
 	SetSize({ 50,80 });
+	this->SetTag(TagEnum::Item);
+	this->AddComponent<Collider>();
+	this->GetComponent<Collider>()->SetSize({ 40,40 });
 }
 
 Item::~Item()
@@ -44,4 +47,5 @@ void Item::Render(HDC _hdc)
 		, width + vSize.x / 2, height + vSize.y / 2,
 		m_pTexture->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
+	ComponentRender(_hdc);
 }

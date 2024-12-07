@@ -6,8 +6,6 @@ class Background;
 class BossScene : public Scene
 {
 public:
-	~BossScene();
-
 	void Init() override;
 private :
 	Player* m_player;

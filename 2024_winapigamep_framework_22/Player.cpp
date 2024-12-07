@@ -274,18 +274,16 @@ void Player::Dead()
 
 void Player::OnHit(Collider* _other)
 {
-	if (IsImmortal()) return;
-
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();
-
+	if (pOtherObjTag == TagEnum::Item) {
+		cout << "item";
+		OnLevelUp();
+		GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
+	}
+	if (IsImmortal()) return;
 	switch (pOtherObjTag)
 	{
-	case TagEnum::Item :
-	{
-		OnLevelUp();
-	}
-	break;
 	case TagEnum::EnemyProjectile:
 	case TagEnum::Enemy:
 

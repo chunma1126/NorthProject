@@ -16,7 +16,7 @@ Enemy::Enemy()
 	this->AddComponent<Collider>();
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
-	m_health->SetHP(4);
+	//m_health->SetHP(4);
 
 	
 }
@@ -70,7 +70,7 @@ void Enemy::Update()
 		{
 			Item* item = new Item;
 			item->SetPos(GetPos());
-			GET_SINGLE(EventManager)->CreateObject(item, LAYER::PLAYER);
+			GET_SINGLE(EventManager)->CreateObject(item, LAYER::ITEM);
 		}
 		
 		GET_SINGLE(UIManager)->AddScore(5);

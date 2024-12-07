@@ -3,7 +3,15 @@
 MBS_p1::MBS_p1(MidBoss* midBoss)
 	: State(midBoss)
 {
-	stateEndTime = 0;
+	stateEndTime = 10;
+
+}
+
+void MBS_p1::Enter()
+{
+	m_StateTimer = 0;
+	m_timer = 0;
+	m_cnt = 0;
 }
 
 void MBS_p1::Update()

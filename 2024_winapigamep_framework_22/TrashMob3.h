@@ -8,7 +8,7 @@ public:
 	void Update() override;
 private:
 	float m_angle = 0.0f;
-	float m_radius = 200.f;
+	float m_radius = 30.f;
 	Vec2 m_center;
 	Object* m_player;
 
