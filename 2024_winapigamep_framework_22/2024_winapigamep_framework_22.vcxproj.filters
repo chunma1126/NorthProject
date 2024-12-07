@@ -176,6 +176,7 @@
     <ClInclude Include="MBS_p1.h" />
     <ClInclude Include="MBS_p2.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="MBS_p3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -305,6 +306,7 @@
     <ClCompile Include="MBS_p1.cpp" />
     <ClCompile Include="MBS_p2.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="MBS_p3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />
