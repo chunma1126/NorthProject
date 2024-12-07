@@ -13,7 +13,7 @@ public :
 	void AddChild(wstring _key,UI* _newUI);
 	void SetActiveChild(wstring _key , bool _active);
 	void SetPosChild(wstring _key , Vec2 _pos);
-
+	void OnCompleteBossScene();
 	void ChangeScore();
 	void ResetScore();
 	void AddScore(float _value)

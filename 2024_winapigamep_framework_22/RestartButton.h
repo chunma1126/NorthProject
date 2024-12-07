@@ -2,7 +2,7 @@
 #include "Button.h"
 class RestartButton : public Button
 {
-	// Button을(를) 통해 상속됨
+public:
 	void ClickEvent() override;
 };
 
