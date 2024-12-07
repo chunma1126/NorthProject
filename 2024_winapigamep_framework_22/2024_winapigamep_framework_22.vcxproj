@@ -220,7 +220,6 @@
     <ClInclude Include="TrashMob1.h" />
     <ClInclude Include="TrashMob2.h" />
     <ClInclude Include="TrashMob3.h" />
-    <ClInclude Include="TrashScene.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vec2.h" />
@@ -275,7 +274,6 @@
     <ClCompile Include="TrashMob1.cpp" />
     <ClCompile Include="TrashMob2.cpp" />
     <ClCompile Include="TrashMob3.cpp" />
-    <ClCompile Include="TrashScene.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>

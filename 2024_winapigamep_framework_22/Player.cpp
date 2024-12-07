@@ -42,7 +42,7 @@ Player::Player()
 
 	AddComponent<HealthComponent>();
 	m_health = GetComponent<HealthComponent>();
-	m_health->SetHP(1);
+	m_health->SetHP(3);
 
 	AddComponent<Collider>();
 	GetComponent<Collider>()->SetOffSetPos({ 15.5f, 17.5f });
