@@ -19,7 +19,8 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
-
+protected:
+	virtual void OnDead();
 protected:
 	Texture* m_texture = nullptr;
 	Texture* m_deadTexture = nullptr;

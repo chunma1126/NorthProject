@@ -119,6 +119,7 @@ void Enemy::EnterCollision(Collider* _other)
 		if (m_health->IsDead()) 
 		{
 			m_isDead = true;
+			OnDead();
 			GetComponent<Animator>()->PlayAnimation(L"Explosion",false);
 			GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyDead");
 		}
@@ -130,6 +131,10 @@ void Enemy::StayCollision(Collider* _other)
 }
 
 void Enemy::ExitCollision(Collider* _other)
+{
+}
+
+void Enemy::OnDead()
 {
 }
 

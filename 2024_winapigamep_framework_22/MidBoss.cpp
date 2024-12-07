@@ -15,7 +15,8 @@ MidBoss::MidBoss(const wstring& _key, const wstring& _path)
 	m_stateMachine = new StateMachine(this);
 
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
-	cout << "HP" << m_health->GetHP();
+	//cout << "HP" << m_health->GetHP();
+	//SetPos({ SCREEN_HEIGHT * 0.5f, 0.f });
 }
 
 MidBoss::~MidBoss()
