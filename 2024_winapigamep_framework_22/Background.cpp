@@ -7,6 +7,7 @@
 Background::Background()
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Background", L"Texture\\Background.bmp");
+    SetName(L"Background");
 }
 
 Background::~Background()

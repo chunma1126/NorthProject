@@ -5,6 +5,7 @@
 #include "FollowProjectile.h"
 #include "EnemyProjectile.h"
 #include "TimeManager.h"
+#include "EventManager.h"
 
 void BulletManager::Init()
 {
@@ -82,6 +83,8 @@ void BulletManager::Init()
 
 void BulletManager::Update()
 {
+    
+
 	if (m_isSpinShot)
 	{
 		if (m_spinEndTimer >= m_spinEndTime)

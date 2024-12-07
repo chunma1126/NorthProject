@@ -35,7 +35,7 @@ protected:
 	float m_shotTimer = 0;
 	
 	bool dirRight = true;
-	float m_explosionTime = 1.f;
+	float m_explosionTime = 0.7f;
 	float m_explosionTimer;
 	bool m_explosionComplete = false;
 

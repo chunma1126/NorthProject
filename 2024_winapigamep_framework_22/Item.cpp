@@ -9,9 +9,12 @@ Item::Item()
 {
 	m_pTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Item" , L"Texture\\Item.bmp");
 	SetSize({ 50,80 });
-	this->SetTag(TagEnum::Item);
-	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetSize({ 40,40 });
+	SetTag(TagEnum::Item);
+
+	AddComponent<Collider>();
+	GetComponent<Collider>()->SetSize({ 40,40 });
+	GetComponent<Collider>()->SetOffSetPos({  12,20});
+
 }
 
 Item::~Item()

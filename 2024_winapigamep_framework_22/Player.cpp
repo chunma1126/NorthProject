@@ -20,27 +20,36 @@
 Player::Player()
 	: m_pTex(nullptr)
 {
-
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
-	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
+	//sound
+	{
+		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
+		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
+		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
+		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
+		GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.wav", false);
+	}
 	
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
-	m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
-	m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
+	//texture
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
+		m_pTexOnHurt = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerOnHurt", L"Texture\\PlayerDeath.bmp");
+		m_pHitbox = GET_SINGLE(ResourceManager)->TextureLoad(L"Hitbox", L"Texture\\Heart.bmp");
+	}
 
 	SetSize({ 60,60 });
 	SetPos(spawnPosition);
-	this->SetTag(TagEnum::Player);
-	this->AddComponent<HealthComponent>();
-	m_health = this->GetComponent<HealthComponent>();
-	m_health->SetHP(4);
+	SetTag(TagEnum::Player);
 
-	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetOffSetPos({ 15.5f, 17.5f });
-	this->GetComponent<Collider>()->SetSize({ 7,7 });
+	AddComponent<HealthComponent>();
+	m_health = GetComponent<HealthComponent>();
+	m_health->SetHP(100);
+
+	AddComponent<Collider>();
+	GetComponent<Collider>()->SetOffSetPos({ 15.5f, 17.5f });
+	GetComponent<Collider>()->SetSize({ 7,7 });
+
 	m_pFire = GET_SINGLE(ResourceManager)->TextureLoad(L"Fire", L"Texture\\Fire.bmp");
+
 	AddComponent<Animator>();
 	GetComponent<Animator>()->SetPos({ 15.5f, 54.f });
 	GetComponent<Animator>()->SetSize({ 2.4f,2.4f });
@@ -97,7 +106,6 @@ void Player::Update()
 
 void Player::Render(HDC _hdc)
 {
-
 	if (m_isDead)return;
 
 	Vec2 vPos = GetPos();
@@ -105,13 +113,13 @@ void Player::Render(HDC _hdc)
 
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
-	bool isImmortal = IsImmortal();
 
 	Vec2 screenpos = GET_SINGLE(Camera)->GetCameraPos();
 
+	bool isImmortal = IsImmortal();
 	if (isImmortal)
 	{
-		::TransparentBlt(_hdc
+		TransparentBlt(_hdc
 			, (int)(screenpos.x - width / 2)
 			, (int)(screenpos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y / 2,
@@ -120,18 +128,19 @@ void Player::Render(HDC _hdc)
 	}
 	else
 	{
-		::TransparentBlt(_hdc
+		TransparentBlt(_hdc
 			, (int)(screenpos.x - width / 2)
 			, (int)(screenpos.y - height / 2)
 			, width + vSize.x / 2, height + vSize.y / 2,
 			m_pTex->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
+
 	if (isSlow)
 	{
 		int width = m_pHitbox->GetWidth();
 		int height = m_pHitbox->GetHeight();
-		::TransparentBlt(_hdc
+		TransparentBlt(_hdc
 			, (int)(screenpos.x - width / 2) + pivotPoint.x
 			, (int)(screenpos.y - height / 2) + pivotPoint.y
 			, width + vSize.x / 20, height + vSize.y / 20,
@@ -139,7 +148,6 @@ void Player::Render(HDC _hdc)
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 	ComponentRender(_hdc);
-
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -156,7 +164,9 @@ bool Player::TryShoot()
 {
 	float delay = 60 / rpm;
 	float currentTime = GET_SINGLE(TimeManager)->GetTime();
+
 	bool canShot = lastShotTime + delay < currentTime;
+
 	if (canShot)
 	{
 		GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerShoot");
@@ -169,6 +179,7 @@ bool Player::TryShoot()
 bool Player::TryUltimite()
 {
 	bool result = false;
+
 	if (result)
 	{
 		CreateUltmite();
@@ -181,7 +192,6 @@ void Player::CreateProjectile()
 	Vec2 vPos = GetPos();
 	vPos.x += 16.0f;
 	vPos.y += -0.2f;
-
 
 	switch (m_level)
 	{
@@ -254,27 +264,36 @@ void Player::CreateProjectile()
 
 void Player::CreateUltmite()
 {
-	cout << "created ultimite\n";
+	
 }
 
 void Player::Dead()
 {
 	m_isDead = true;
+	GET_SINGLE(EventManager)->SetPlayerDead(m_isDead);
 
-	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver", true);
-	GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", true);
-	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDead");
+	{
+		GET_SINGLE(UIManager)->SetActiveChild(L"GameOver", true);
+		GET_SINGLE(UIManager)->SetActiveChild(L"RestartButton", true);
+	}
 
-	GetComponent<Animator>()->SetSize({5,5});
-	GetComponent<Animator>()->PlayAnimation(L"Explosion", false);
+	{
+		GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerDead");
+		GET_SINGLE(ResourceManager)->PlayAudio(L"GameOver");
+	}
+
+	{
+		GetComponent<Animator>()->SetSize({ 5,5 });
+		GetComponent<Animator>()->PlayAnimation(L"Explosion", false);
+	}
 }
 
 void Player::OnHit(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
 	TagEnum pOtherObjTag = pOtherObj->GetTag();
+
 	if (pOtherObjTag == TagEnum::Item) {
-		cout << "item";
 		OnLevelUp();
 		GET_SINGLE(EventManager)->DeleteObject(pOtherObj);
 	}
@@ -296,12 +315,17 @@ void Player::OnTakeDamage()
 	GetComponent<CameraComponent>()->Shake(5, 0.7f);
 
 	SetPos(spawnPosition);
+
 	m_immortalTime = 0;
+
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
 
-	std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
-	GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
+	{
+		std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
+		GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 
+	}
+	
 	if (m_health->GetHP() <= 0)
 	{
 		Dead();

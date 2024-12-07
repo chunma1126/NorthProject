@@ -10,23 +10,26 @@
 #include "Texture.h"
 #include "HealthComponent.h"
 #include "Collider.h"
+#include "UIManager.h"
 MidBoss::MidBoss(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
 	m_stateMachine = new StateMachine(this);
 	GetComponent<Collider>()->SetSize({400,400});
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
-	//cout << "HP" << m_health->GetHP();
-	//SetPos({ SCREEN_HEIGHT * 0.5f, 0.f });
+	
+	GetComponent<HealthComponent>()->SetHP(5);
 }
 
 MidBoss::~MidBoss()
 {
-
+	GET_SINGLE(UIManager)->OnCompleteBossScene();
 }
 
 void MidBoss::Update()
 {
+	if (GET_SINGLE(EventManager)->GetPlayerDead())return;
+	
 	Enemy::Update();
 	Vec2 curPos = GetPos();
 	m_stateMachine->UpdateState();

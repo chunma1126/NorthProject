@@ -43,17 +43,13 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 	GetComponent<Animator>()->PlayAnimation(L"Bullet", true);
 }
 
-Projectile::~Projectile()
-{
-	/*if (m_pTex != nullptr)
-	{
-		delete m_pTex;
-		m_pTex = nullptr;
-	}*/
-}
-
 void Projectile::Update()
 {
+	if (GET_SINGLE(EventManager)->GetPlayerDead())
+	{
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
+
 
 	Vec2 vPos = GetPos();
 

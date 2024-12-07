@@ -13,8 +13,5 @@ public:
 private:
 	Player* m_player;
 	Background* m_backGround;
-	DelayedCall* midBoss;
-
-
 };
 

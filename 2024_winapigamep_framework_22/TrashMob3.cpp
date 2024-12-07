@@ -36,7 +36,6 @@ void TrashMob3::Update()
 
     Vec2 pos = m_center +Vec2{offsetX , offsetY};
     SetPos(pos);
-    cout << m_health->GetHP() << "\n";
     if (m_shotTime <= m_shotTimer)
     {
         m_shotTimer = 0;
@@ -51,6 +50,6 @@ void TrashMob3::Update()
 
 void TrashMob3::OnDead()
 {
-    GET_SINGLE(EventManager)->m_isBossEnter = true;
+    GET_SINGLE(EventManager)->SetBossEnter(true);
 }
 

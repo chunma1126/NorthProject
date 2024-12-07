@@ -90,8 +90,8 @@ void UIManager::Init()
 		UI* Clear = new UI;
 
 		Clear->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Clear", L"Texture\\UI\\Clear.bmp"));
-		Clear->SetPos({SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2});
-		Clear->SetSize({ 400,100 });
+		Clear->SetPos({ SCREEN_WIDTH / 2 - 120 , SCREEN_HEIGHT / 2 - 150 });
+		Clear->SetSize({ 600,125 });
 
 		AddChild(L"Clear", Clear);
 	}

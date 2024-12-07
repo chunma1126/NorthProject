@@ -17,7 +17,7 @@ Enemy::Enemy()
 	this->AddComponent<HealthComponent>();
 	m_health = this->GetComponent<HealthComponent>();
 	//m_health->SetHP(4);
-
+	SetName(L"Enemy");
 	
 }
 Enemy::Enemy(const wstring& _key, const wstring& _path)
@@ -47,7 +47,6 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 Enemy::~Enemy()
 {
 
-	cout << "ÇØÁ¦µÊ" << endl;
 }
 
 void Enemy::Update()
@@ -57,6 +56,10 @@ void Enemy::Update()
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
+
+	if (GET_SINGLE(EventManager)->GetPlayerDead())return;
+	
+
 
 	m_shotTimer += fDT;
 
