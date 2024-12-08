@@ -200,7 +200,6 @@ void Player::CreateProjectile()
 	{
 	case 1:
 	{
-		// 레벨 1: 하나만 발사
 		Projectile* pProj = new Projectile;
 		pProj->SetSpeed(1000);
 		pProj->SetPos(vPos);
@@ -322,7 +321,8 @@ void Player::OnTakeDamage()
 
 	//ui
 	{
-		std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP())));
+		std::wstring healthPath = L"PlayerHeart" + std::to_wstring(static_cast<int>(std::floor(m_health->GetHP() + 1)));
+		std::wcout << healthPath;
 		GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 	}
 	

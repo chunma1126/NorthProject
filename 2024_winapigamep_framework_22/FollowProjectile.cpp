@@ -16,7 +16,7 @@ FollowProjectile::FollowProjectile()
 }
 void FollowProjectile::Update()
 {
-
+	Projectile::Update();
 	m_changeTimer += fDT;
 
 	if (m_changeTimer >= m_followChangeTime && m_isFollowing == false)
