@@ -16,8 +16,8 @@
 void BossScene::Init()
 {
 	//m_finalBossAllowed = false;
-	Background* b = new Background;
-	AddObject(b, LAYER::BACKGROUND);
+	Background* m_backGround = new Background;
+	AddObject(m_backGround, LAYER::BACKGROUND);
 
 
 	m_player = new Player;
@@ -78,5 +78,5 @@ void BossScene::Update()
 
 BossScene::~BossScene()
 {
-	
+	//delete m_backGround;
 }

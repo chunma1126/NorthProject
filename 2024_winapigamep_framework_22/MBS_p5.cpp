@@ -4,7 +4,7 @@
 MBS_p5::MBS_p5(MidBoss* midboss)
 	: State(midboss)
 {
-	stateEndTime = 20;
+	stateEndTime = 0;//20;
 }
 
 void MBS_p5::Enter()
@@ -13,7 +13,7 @@ void MBS_p5::Enter()
 	m_timerFirst = 0;
 	m_timer = 0;
 	Vec2 pos = m_midBoss->GetPos();
-	GET_SINGLE(BulletManager)->SpinShot(pos, m_midBoss->GetCurrentScene(), 0.01, 500, m_angle, 500, 20);
+//GET_SINGLE(BulletManager)->SpinShot(pos, m_midBoss->GetCurrentScene(), 0.01, 500, m_angle, 500, 20);
 }
 
 void MBS_p5::Update()
@@ -35,6 +35,6 @@ void MBS_p5::Update()
 		//}
 	}
 	else {
-		m_midBoss->ChangeState(MidBossState::p1);
+		m_midBoss->ChangeState(MidBossState::p6);
 	}
 }

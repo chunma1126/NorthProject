@@ -4,3 +4,4 @@
 #include "MBS_p3.h"
 #include "MBS_p4.h"
 #include "MBS_p5.h"
+#include "MBS_p6.h"

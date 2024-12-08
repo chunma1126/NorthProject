@@ -313,6 +313,7 @@ void Player::OnHit(Collider* _other)
 
 void Player::OnTakeDamage()
 {
+	if (godMode) return;
 	SetPos(spawnPosition);
 	m_immortalTime = 0;
 

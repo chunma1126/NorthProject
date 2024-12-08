@@ -4,7 +4,7 @@ MBS_p3::MBS_p3(MidBoss* midboss)
 	: State(midboss)
 	, m_player(nullptr)
 {
-	stateEndTime = 10;
+	stateEndTime = 0;// 10;
 }
 
 void MBS_p3::Enter()

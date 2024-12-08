@@ -17,6 +17,7 @@ private:
 	const float defaultSpeed = 200;
 	const float runningSpeed = 355;
 	const float rpm = 600;
+	const bool godMode = true;
 	const Vec2 spawnPosition = Vec2(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT * 2.5f / 3.f);
 	const Vec2 boundaryMin = Vec2(0, 0);
 	const Vec2 boundaryMax = Vec2(SCREEN_WIDTH - 25, SCREEN_HEIGHT - 112);
