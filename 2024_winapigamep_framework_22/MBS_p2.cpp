@@ -40,7 +40,7 @@ void MBS_p2::Update()
 		}
 	}
 	else {
-		m_midBoss->ChangeState(MidBossState::p1);
+		m_midBoss->ChangeState(MidBossState::p3);
 	}
 }
 

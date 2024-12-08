@@ -3,7 +3,7 @@
 MBS_p1::MBS_p1(MidBoss* midBoss)
 	: State(midBoss)
 {
-	stateEndTime = 20;
+	stateEndTime = 8;
 
 }
 
