@@ -112,6 +112,9 @@ void BulletManager::Update()
 				float relativeX = currentProjectile.x - centerX;
 				float relativeY = currentProjectile.y - centerY;
 
+				relativeX = relativeX == 0 ? -1 : relativeX;
+				relativeY = relativeY == 0 ? -1 : relativeY;
+
 				Vec2 direction = { relativeX, relativeY };
 				direction.Normalize();
 				item->SetDir(direction);
