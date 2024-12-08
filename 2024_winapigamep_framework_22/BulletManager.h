@@ -10,10 +10,10 @@ class BulletManager
 public:
 	void Init();
 	void Update();
-	void BasicShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir);
-	void CircleShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed);
-	void CircleShotGoToTarget(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, float _changeTime);
-	void ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir, int _vertex, float _size, float _rotationSpeed);
+	void BasicShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir);//
+	void CircleShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed);//
+	void CircleShotGoToTarget(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, float _changeTime);//
+	void ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir, int _vertex, float _size, float _rotationSpeed);//
 
 #pragma region Spinshot
 	void SpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, float& _spinAngle, float _turnSpeed, float _endTime);
@@ -22,8 +22,8 @@ public:
 
 #pragma region HeartShot
 	void HeartShot(Vec2 _pos, Scene* _scene, float _bulletSpeed);
-	void HeartShotGoToTarget(Vec2 _pos, Scene* _scene, float _bulletSpeed, Object* _target, float _changeTime);
-	void HeartDataInit(float _rotation);
+	void HeartShotGoToTarget(Vec2 _pos, Scene* _scene, float _bulletSpeed, Object* _target, float _changeTime);//
+	void HeartDataInit(float _rotation);//
 #pragma endregion
 
 #pragma region RoseShot

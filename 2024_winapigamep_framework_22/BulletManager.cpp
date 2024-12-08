@@ -317,8 +317,8 @@ void BulletManager::RoseShot(Scene* _scene, float _interval, float _bulletSpeed,
 
 		Projectile* pObj = new EnemyProjectile;
 
-		float x = SCREEN_WIDTH / 2 + radius * cosf(angleRadians);
-		float y = SCREEN_HEIGHT / 2 + radius * sinf(angleRadians);
+		float x = SCREEN_WIDTH * 0.5f + radius * cosf(angleRadians);
+		float y = SCREEN_HEIGHT * 0.2f + radius * sinf(angleRadians);
 
 		pObj->SetPos({ x, y });
 		pObj->SetName(L"Projectile");
