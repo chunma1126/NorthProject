@@ -100,6 +100,9 @@ void BulletManager::Update()
 		if (m_roseShotEnd)
 		{
 			m_isRoseShot = false;
+			m_roseShotEnd = false;
+			m_roseEndTimer = 0;
+			m_roseShotTimer = 0;
 
 			for (auto item : m_roseVec)
 			{
@@ -337,7 +340,6 @@ void BulletManager::RoseSpinShot(Vec2 _pos, Scene* _scene, float _interval, floa
 {
 	m_isRoseShot = true;
 	m_roseShotEnd = false;
-
 
 	m_roseShotPos = _pos;
 	m_roseShotScene = _scene;

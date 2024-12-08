@@ -4,7 +4,7 @@
 MBS_p6::MBS_p6(MidBoss* midBoss)
 	: State(midBoss)
 {
-	stateEndTime = 20;
+	stateEndTime = 10;
 }
 
 void MBS_p6::Enter()
