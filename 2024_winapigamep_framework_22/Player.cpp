@@ -96,12 +96,16 @@ void Player::Update()
 	dir = dir * (fDT * speed);
 
 	Vec2 newPos = dir + m_vPos;
-
-	if (newPos.x >= 0 && newPos.x <= SCREEN_WIDTH - 25 &&
-		newPos.y >= 0 && newPos.y  <= SCREEN_HEIGHT - 100)
-	{
-		SetPos(newPos);
-	}
+	if (newPos.x < boundaryMin.x) newPos.x = boundaryMin.x;
+	if (newPos.x > boundaryMax.x) newPos.x = boundaryMax.x;
+	if (newPos.y < boundaryMin.y) newPos.y = boundaryMin.y;
+	if (newPos.y > boundaryMax.y) newPos.y = boundaryMax.y;
+	SetPos(newPos);
+	//if (newPos.x >= 0 && newPos.x <= SCREEN_WIDTH - 25 &&
+	//	newPos.y >= 0 && newPos.y  <= SCREEN_HEIGHT - 105)
+	//{
+	//	SetPos(newPos);
+	//}
 	
 }
 
@@ -157,10 +161,7 @@ void Player::EnterCollision(Collider* _other)
 	OnHit(_other);
 }
 
-void Player::StayCollision(Collider* _other)
-{
-	OnHit(_other);
-}
+
 
 bool Player::TryShoot()
 {
