@@ -3,7 +3,7 @@
 MBS_p1::MBS_p1(MidBoss* midBoss)
 	: State(midBoss)
 {
-	stateEndTime = 10;
+	stateEndTime = 20;
 
 }
 
@@ -24,9 +24,11 @@ void MBS_p1::Update()
 		if (m_timer > m_shotTime)
 		{
 			m_timer = 0;
-			int idx = m_cnt % 6;
+			int idx = m_cnt % 8;
 			float angle = m_arr[idx];
 			Vec2 pos = m_midBoss->GetPos();
+			pos.y = SCREEN_HEIGHT * 0.20f;
+			pos.x += 10;
 			GET_SINGLE(BulletManager)->CircleShot({ pos.x ,pos.y + 10 }, m_midBoss->GetCurrentScene(), angle, 400);
 			m_cnt++;
 		}

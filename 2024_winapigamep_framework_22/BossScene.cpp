@@ -71,7 +71,7 @@ void BossScene::Update()
 	if (GET_SINGLE(EventManager)->GetBossEnter())
 	{
 		GET_SINGLE(EventManager)->SetBossEnter(false);
-		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f,0.f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
+		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
 	}
 }
 

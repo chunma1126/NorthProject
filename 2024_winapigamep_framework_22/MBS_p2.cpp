@@ -4,7 +4,7 @@
 MBS_p2::MBS_p2(MidBoss* midboss)
 	: State(midboss)
 {
-	stateEndTime = 10;
+	stateEndTime = 20;
 	//m_midBoss->SetPos({ SCREEN_WIDTH * 0.0f , SCREEN_HEIGHT * 0.f });
 }
 
@@ -23,16 +23,18 @@ void MBS_p2::Update()
 	if (m_StateTimer < stateEndTime)
 	{
 		m_timerFirst += dt;
-		bool allowShot = m_timerFirst > 2;
+		const float timerFirstEndTime = 2;
+		bool allowShot = m_timerFirst > timerFirstEndTime;
 		if (allowShot) {
 			m_timer += dt;
 			if (m_timer > m_shotTime)
 			{
 				m_timer = 0;
-				int idx = m_cnt % 14;
+				int idx = m_cnt % 18;
 				Vec2 dir = m_arr[idx];
 				Vec2 pos = m_midBoss->GetPos();
-				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 500, dir, 30, 50, 100);
+				pos.y = SCREEN_HEIGHT * 0.3f;
+				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 820, dir, 20, 50, 100);
 				m_cnt++;
 			}
 		}
