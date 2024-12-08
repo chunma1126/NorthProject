@@ -4,7 +4,7 @@
 MBS_p2::MBS_p2(MidBoss* midboss)
 	: State(midboss)
 {
-	stateEndTime = 0;// 20;
+	stateEndTime = 10;
 	//m_midBoss->SetPos({ SCREEN_WIDTH * 0.0f , SCREEN_HEIGHT * 0.f });
 }
 

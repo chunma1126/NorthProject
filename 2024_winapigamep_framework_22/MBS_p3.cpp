@@ -4,7 +4,7 @@ MBS_p3::MBS_p3(MidBoss* midboss)
 	: State(midboss)
 	, m_player(nullptr)
 {
-	stateEndTime = 0;// 10;
+	stateEndTime = 10;
 }
 
 void MBS_p3::Enter()
@@ -21,6 +21,7 @@ void MBS_p3::Update()
 	if (m_StateTimer < stateEndTime)
 	{
 		m_timerFirst += dt;
+		m_StateTimer += dt;
 		const float timerFirstEndTime = 0;
 		bool allowShot = m_timerFirst > timerFirstEndTime;
 		if (allowShot) {
