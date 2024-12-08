@@ -23,7 +23,7 @@ void MBS_p2::Update()
 	if (m_StateTimer < stateEndTime)
 	{
 		m_timerFirst += dt;
-		const float timerFirstEndTime = 2;
+		const float timerFirstEndTime = 1.9;
 		bool allowShot = m_timerFirst > timerFirstEndTime;
 		if (allowShot) {
 			m_timer += dt;

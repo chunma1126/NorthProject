@@ -8,7 +8,7 @@ public:
 	void Enter() override;
 	void Update() override;
 private:
-	const float m_shotTime = 0.19f;
+	const float m_shotTime = 0.2f;
 	float m_timerFirst = 0;
 	float m_timer = 0;
 	Vec2 m_arr[18] = {
