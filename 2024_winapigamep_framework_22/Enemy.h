@@ -19,7 +19,8 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
-
+protected:
+	virtual void OnDead();
 protected:
 	Texture* m_texture = nullptr;
 	Texture* m_deadTexture = nullptr;
@@ -34,7 +35,7 @@ protected:
 	float m_shotTimer = 0;
 	
 	bool dirRight = true;
-	float m_explosionTime = 1.f;
+	float m_explosionTime = 0.5f;
 	float m_explosionTimer;
 	bool m_explosionComplete = false;
 

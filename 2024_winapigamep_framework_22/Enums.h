@@ -6,6 +6,7 @@ enum class LAYER
 	PLAYER,
 	PROJECTILE,
 	ENEMY,
+	ITEM,
 	// UI
 	END
 };

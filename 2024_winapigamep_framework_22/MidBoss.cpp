@@ -8,34 +8,34 @@
 #include "StateMachine.h"
 #include "State.h"
 #include "Texture.h"
+#include "HealthComponent.h"
+#include "Collider.h"
+#include "UIManager.h"
 MidBoss::MidBoss(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
-	m_stateMachine = new StateMachine();
+	m_stateMachine = new StateMachine(this);
+	GetComponent<Collider>()->SetSize({ 525,250 });
+	GetComponent<Collider>()->SetOffSetPos({ 25,0 });
 
 	m_texture = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
+	GET_SINGLE(ResourceManager)->LoadSound(L"Clear", L"Sound\\Clear.wav", false);
 }
 
 MidBoss::~MidBoss()
 {
-
+	GET_SINGLE(UIManager)->OnCompleteBossScene();
+	GET_SINGLE(ResourceManager)->PlayAudio(L"Clear");
 }
 
 void MidBoss::Update()
 {
+	if (GET_SINGLE(EventManager)->GetPlayerDead())return;
+
 	Enemy::Update();
 	Vec2 curPos = GetPos();
 	m_stateMachine->UpdateState();
 
-	//states
-
-	m_timer += fDT;
-	if (m_timer >= m_shotTime)
-	{
-		m_stateMachine->ChangeState(MidBossState::p2);
-		m_timer = 0;
-		//Shot();
-	}
 }
 void MidBoss::Render(HDC _hdc)
 {
@@ -46,17 +46,14 @@ void MidBoss::Render(HDC _hdc)
 	int height = m_texture->GetHeight();
 
 	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
+		, (int)(vPos.x - width / 2) - 8
 		, (int)(vPos.y - height / 2)
 		, width + vSize.x / 2, height + vSize.y / 2,
 		m_texture->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
+	this->ComponentRender(_hdc);
 }
-void MidBoss::Shot()
+void MidBoss::ChangeState(MidBossState state)
 {
-	m_timer = 0;
-	int idx = cnt % 5;
-	float angle = arr[idx];
-	cnt++;
-	GET_SINGLE(BulletManager)->CircleShot({ GetPos().x ,GetPos().y + 50 }, m_curScene, angle, 400);
+	m_stateMachine->ChangeState(state);
 }

@@ -17,14 +17,14 @@ Projectile::Projectile()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\Bullet.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\PlayerBullet.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Projectile", L"Texture\\PlayerProjectile.bmp");
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ 20.f,20.f });
 
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"Bullet", m_pTex, { 0,0 }, { 24,24 }, {24 , 0} , 4 , 0.1f , false);
+	GetComponent<Animator>()->CreateAnimation(L"Projectile", m_pTex, { 0,0 }, { 24,24 }, {24 , 0} , 4 , 0.1f , false);
 	GetComponent<Animator>()->SetSize({2,2});
-	GetComponent<Animator>()->PlayAnimation(L"Bullet" , true);
+	GetComponent<Animator>()->PlayAnimation(L"Projectile" , true);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"Hit", L"Sound\\Hit.wav", false);
 
@@ -43,17 +43,13 @@ Projectile::Projectile(const wstring& _key, const wstring& _path)
 	GetComponent<Animator>()->PlayAnimation(L"Bullet", true);
 }
 
-Projectile::~Projectile()
-{
-	/*if (m_pTex != nullptr)
-	{
-		delete m_pTex;
-		m_pTex = nullptr;
-	}*/
-}
-
 void Projectile::Update()
 {
+	if (GET_SINGLE(EventManager)->GetPlayerDead())
+	{
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
+
 
 	Vec2 vPos = GetPos();
 

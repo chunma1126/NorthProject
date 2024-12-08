@@ -8,20 +8,14 @@ public:
 	~MidBoss();
 	void Update() override;
 	void Render(HDC _hdc) override;
-private:
-	void Shot();
+public:
+	void ChangeState(MidBossState state);
+	Scene* GetCurrentScene() { return m_curScene; }
+	const Vec2& GetMidBossPos() { return GetPos(); }
 private:
 	StateMachine* m_stateMachine = nullptr;
 private:
-	const float m_shotTime = 2;
-private:
-	bool allowShot = false;
-#pragma region p1
-	float stayTime = 3.f;
-	float stayTimer = 0;
-#pragma endregion
-	float m_timer = 0;
-	int cnt = 0;
-	float arr[5] = { 60, 25, 30, 25, 60 };
+	bool allowShot = true;
+
 };
 

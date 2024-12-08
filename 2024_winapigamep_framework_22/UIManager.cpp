@@ -90,8 +90,8 @@ void UIManager::Init()
 		UI* Clear = new UI;
 
 		Clear->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Clear", L"Texture\\UI\\Clear.bmp"));
-		Clear->SetPos({SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2});
-		Clear->SetSize({ 400,100 });
+		Clear->SetPos({ SCREEN_WIDTH / 2 - 120 , SCREEN_HEIGHT / 2 - 150 });
+		Clear->SetSize({ 600,125 });
 
 		AddChild(L"Clear", Clear);
 	}
@@ -150,7 +150,7 @@ void UIManager::Init()
 	{
 		RestartButton* restartButton = new RestartButton;
 		restartButton->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButton", L"Texture\\UI\\RestartButton.bmp"));
-		restartButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2 + 140 });
+		restartButton->SetPos({ SCREEN_WIDTH / 2 - 140  , SCREEN_HEIGHT / 2 +50 });
 		restartButton->SetSize({ 600,200 });
 
 		Texture* hover = (GET_SINGLE(ResourceManager)->TextureLoad(L"RestartButtonHover", L"Texture\\UI\\RestartButtonHover.bmp"));

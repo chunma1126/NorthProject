@@ -5,7 +5,7 @@
 #include "EventManager.h"
 EnemyProjectile::EnemyProjectile()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"EnemyBullet",L"Texture\\FireBullet.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"EnemyBullet",L"Texture\\EnemyProjectile.bmp");
 
 	AddComponent<Animator>();
 	GetComponent<Animator>()->SetSize({1,1});

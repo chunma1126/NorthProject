@@ -2,10 +2,10 @@
 #include "StateMachine.h"
 #include "AllStates.h"
 #include "State.h"
-StateMachine::StateMachine()
+StateMachine::StateMachine(MidBoss* midBoss)
 {
-	m_stateHT[MidBossState::p1] = new MBS_p1();
-	m_stateHT[MidBossState::p2] = new MBS_p1();
+	m_stateHT[MidBossState::p1] = new MBS_p1(midBoss);
+	m_stateHT[MidBossState::p2] = new MBS_p2(midBoss);
 	m_currentState = m_stateHT[MidBossState::p1];
 	m_currentState->Enter();
 }

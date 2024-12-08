@@ -5,6 +5,8 @@
 #include "TimeManager.h"
 #include "Animator.h"
 #include "BulletManager.h"
+#include "HealthComponent.h"
+#include "BossScene.h"
 TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
@@ -15,8 +17,8 @@ TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 
 	GetComponent<Collider>()->SetSize({ 125,125 });
 
-	m_shotTime = 2.f;
-    m_center = { SCREEN_WIDTH / 2 , 100 };
+	m_shotTime = 0.95f;
+    m_center = { SCREEN_WIDTH / 2.f , SCREEN_HEIGHT * 0.25f };
 }
 
 
@@ -32,9 +34,8 @@ void TrashMob3::Update()
     float offsetX = m_radius * cos(m_angle);
     float offsetY = m_radius * sin(m_angle);
 
-    Vec2 pos = m_center + Vec2{offsetX , offsetY};
+    Vec2 pos = m_center +Vec2{offsetX , offsetY};
     SetPos(pos);
-
     if (m_shotTime <= m_shotTimer)
     {
         m_shotTimer = 0;
@@ -43,7 +44,12 @@ void TrashMob3::Update()
             vector<Object*> player = m_curScene->GetLayerObjects(LAYER::PLAYER);
             m_player = player[0];
         }
-        GET_SINGLE(BulletManager)->CircleShotGoToTarget(GetPos() , m_curScene ,50 , 100 , m_player, 2.f);
+        GET_SINGLE(BulletManager)->CircleShotGoToTarget(GetPos() , m_curScene , 45, 120 , m_player, 2.f);
     }
+}
+
+void TrashMob3::OnDead()
+{
+    GET_SINGLE(EventManager)->SetBossEnter(true);
 }
 

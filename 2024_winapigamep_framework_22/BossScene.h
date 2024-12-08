@@ -7,13 +7,11 @@ class BossScene : public Scene
 {
 public:
 	~BossScene();
-
 	void Init() override;
-private :
+	void Update() override;
+public:
+private:
 	Player* m_player;
 	Background* m_backGround;
-	DelayedCall* midBoss;
-
-
 };
 

@@ -146,9 +146,6 @@
     <ClInclude Include="TrashMob1.h">
       <Filter>Engine\04. Scene\won</Filter>
     </ClInclude>
-    <ClInclude Include="TrashScene.h">
-      <Filter>Engine\04. Scene\won</Filter>
-    </ClInclude>
     <ClInclude Include="TrashMob2.h">
       <Filter>Engine\04. Scene\won</Filter>
     </ClInclude>
@@ -176,6 +173,8 @@
     <ClInclude Include="MBS_p1.h" />
     <ClInclude Include="MBS_p2.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="MBS_p3.h" />
+    <ClInclude Include="AllStates.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -276,9 +275,6 @@
     <ClCompile Include="TrashMob1.cpp">
       <Filter>Engine\04. Scene\won</Filter>
     </ClCompile>
-    <ClCompile Include="TrashScene.cpp">
-      <Filter>Engine\04. Scene\won</Filter>
-    </ClCompile>
     <ClCompile Include="TrashMob2.cpp">
       <Filter>Engine\04. Scene\won</Filter>
     </ClCompile>
@@ -305,6 +301,7 @@
     <ClCompile Include="MBS_p1.cpp" />
     <ClCompile Include="MBS_p2.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="MBS_p3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />
