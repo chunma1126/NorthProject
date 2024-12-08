@@ -43,26 +43,26 @@ void BossScene::Init()
 	{
 		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 		GET_SINGLE(ResourceManager)->LoadSound(L"InGameBGM", L"Sound\\InGameBGM.mp3", true);
-		//GET_SINGLE(ResourceManager)->PlayAudio(L"InGameBGM");
+		GET_SINGLE(ResourceManager)->PlayAudio(L"InGameBGM");
 	}
 	
 
 
-	//new DelayedCall(3.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
-	//new DelayedCall(3.f, { {SCREEN_WIDTH * 0.5f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
-	//new DelayedCall(3.f, { {SCREEN_WIDTH * 0.8f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
-	//
-	//new DelayedCall(11.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//new DelayedCall(11.f, { {SCREEN_WIDTH * 0.8f , 5.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//
-	//new DelayedCall(17.f, { {SCREEN_WIDTH * 0.8f , -60.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//new DelayedCall(17.f, { {SCREEN_WIDTH * 0.8f , SCREEN_HEIGHT * 0.3f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//
-	//new DelayedCall(17.f, { {SCREEN_WIDTH * 0.2f , -60.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//new DelayedCall(17.f, { {SCREEN_WIDTH * 0.2f , SCREEN_HEIGHT * 0.3f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
-	//
-	//new DelayedCall(25.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
-	new DelayedCall(0.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 1 });
+	new DelayedCall(3.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
+	new DelayedCall(3.f, { {SCREEN_WIDTH * 0.5f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
+	new DelayedCall(3.f, { {SCREEN_WIDTH * 0.8f , 5.f }, EnemyType::TrashMob2, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
+	
+	new DelayedCall(11.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	new DelayedCall(11.f, { {SCREEN_WIDTH * 0.8f , 5.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	
+	new DelayedCall(17.f, { {SCREEN_WIDTH * 0.8f , -60.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	new DelayedCall(17.f, { {SCREEN_WIDTH * 0.8f , SCREEN_HEIGHT * 0.3f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	
+	new DelayedCall(17.f, { {SCREEN_WIDTH * 0.2f , -60.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	new DelayedCall(17.f, { {SCREEN_WIDTH * 0.2f , SCREEN_HEIGHT * 0.3f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 10 });
+	
+	new DelayedCall(25.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
+	//new DelayedCall(0.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 1 });
 }
 
 void BossScene::Update()
@@ -71,7 +71,7 @@ void BossScene::Update()
 	if (GET_SINGLE(EventManager)->GetBossEnter())
 	{
 		GET_SINGLE(EventManager)->SetBossEnter(false);
-		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
+		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 2000 });
 	}
 }
 

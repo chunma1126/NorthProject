@@ -30,20 +30,20 @@ void TimeManager::Update()
 		m_fps = (UINT)(m_framecnt / m_frametime);
 		m_frametime = 0.f;
 		m_framecnt = 0;
-		//wstring strfps = std::to_wstring(m_fps);
-		//wstring strdt = std::to_wstring(m_dT);
-		//wstring str = L"FPS : " + strfps  +
-		//			 L" DT: " + strdt;
-		//TextOut(GET_SINGLE(Core)->GetMainDC(),0,0, 
-		//		str.c_str(),str.length());
+		wstring strfps = std::to_wstring(m_fps);
+		wstring strdt = std::to_wstring(m_dT);
+		wstring str = L"FPS : " + strfps  +
+					 L" DT: " + strdt;
+		TextOut(GET_SINGLE(Core)->GetMainDC(),0,0, 
+				str.c_str(),str.length());
 		//std::format();
 		//POINT mousepos = GET_SINGLE(InputManager)->GetMousePos();
-		/*POINT mousepos = GET_MOUSEPOS;
+		POINT mousepos = GET_MOUSEPOS;
 		static wchar_t buf[100] = {};
 		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)",m_fps, m_dT
-										,mousepos.x, mousepos.y);*/
+										,mousepos.x, mousepos.y);
 		//disable this when releasing;
-		//::SetWindowText(GET_SINGLE(Core)->GetHwnd(), buf);
+		::SetWindowText(GET_SINGLE(Core)->GetHwnd(), buf);
 	}
 	m_time += m_dT;
 }
