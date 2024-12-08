@@ -26,6 +26,7 @@ MidBoss::~MidBoss()
 {
 	GET_SINGLE(UIManager)->OnCompleteBossScene();
 	GET_SINGLE(ResourceManager)->PlayAudio(L"Clear");
+	delete m_stateMachine;
 }
 
 void MidBoss::Update()
