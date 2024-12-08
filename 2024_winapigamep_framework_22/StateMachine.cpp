@@ -9,12 +9,16 @@ StateMachine::StateMachine(MidBoss* midBoss)
 	m_stateHT[MidBossState::p3] = new MBS_p3(midBoss);
 	m_stateHT[MidBossState::p4] = new MBS_p4(midBoss);
 	m_stateHT[MidBossState::p5] = new MBS_p5(midBoss);
+	m_stateHT[MidBossState::p6] = new MBS_p6(midBoss);
 	m_currentState = m_stateHT[MidBossState::p1];
 	m_currentState->Enter();
 }
 
 StateMachine::~StateMachine()
 {
+	for (auto& pair : m_stateHT) {
+		delete pair.second;
+	}
 }
 
 void StateMachine::ChangeState(MidBossState newState)
