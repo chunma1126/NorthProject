@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -198,6 +198,9 @@
     <ClInclude Include="MBS_p1.h" />
     <ClInclude Include="MBS_p2.h" />
     <ClInclude Include="MBS_p3.h" />
+    <ClInclude Include="MBS_p4.h" />
+    <ClInclude Include="MBS_p5.h" />
+    <ClInclude Include="MBS_p6.h" />
     <ClInclude Include="MidBoss.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OJYScene.h" />
@@ -255,6 +258,9 @@
     <ClCompile Include="MBS_p1.cpp" />
     <ClCompile Include="MBS_p2.cpp" />
     <ClCompile Include="MBS_p3.cpp" />
+    <ClCompile Include="MBS_p4.cpp" />
+    <ClCompile Include="MBS_p5.cpp" />
+    <ClCompile Include="MBS_p6.cpp" />
     <ClCompile Include="MidBoss.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OJYScene.cpp" />
