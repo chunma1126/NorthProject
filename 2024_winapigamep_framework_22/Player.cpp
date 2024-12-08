@@ -21,13 +21,11 @@ Player::Player()
 	: m_pTex(nullptr)
 {
 	//sound
-	{
 		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
 		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
 		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
 		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
 		GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.wav", false);
-	}
 	
 	//texture
 	{
