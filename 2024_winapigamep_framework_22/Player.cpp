@@ -167,10 +167,10 @@ bool Player::TryShoot()
 	switch (m_level)
 	{
 	case 2:
-		additionalDelay = 0.015;
+		additionalDelay = 0.017;
 		break;
 	case 3:
-		additionalDelay = 0.02;
+		additionalDelay = 0.021;
 		break;
 	}
 	float delay = 60 / rpm + additionalDelay;
@@ -209,7 +209,7 @@ void Player::CreateProjectile()
 	case 1:
 	{
 		Projectile* pProj = new Projectile;
-		pProj->SetSpeed(1000);
+		pProj->SetSpeed(1060);
 		pProj->SetPos(vPos);
 		pProj->SetSize({ 30.f, 30.f });
 		pProj->SetDir({ 0.f, -1.f });
@@ -227,7 +227,7 @@ void Player::CreateProjectile()
 		}
 
 		Projectile* pLeftProj = new Projectile;
-		pLeftProj->SetSpeed(1000);
+		pLeftProj->SetSpeed(1010);
 		pLeftProj->SetPos(vPos);
 		pLeftProj->SetSize({ 30.f, 30.f });
 		pLeftProj->SetDir(leftDir);
@@ -235,7 +235,7 @@ void Player::CreateProjectile()
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pLeftProj, LAYER::PROJECTILE);
 
 		Projectile* pRightProj = new Projectile;
-		pRightProj->SetSpeed(1000);
+		pRightProj->SetSpeed(1010);
 		pRightProj->SetPos(vPos);
 		pRightProj->SetSize({ 30.f, 30.f });
 		pRightProj->SetDir(rightDir);
@@ -246,7 +246,7 @@ void Player::CreateProjectile()
 	case 3:
 	{
 		Projectile* pCenterProj = new Projectile;
-		pCenterProj->SetSpeed(1000);
+		pCenterProj->SetSpeed(950);
 		pCenterProj->SetPos(vPos);
 		pCenterProj->SetSize({ 30.f, 30.f });
 		pCenterProj->SetDir({ 0.f, -1.f });
@@ -260,7 +260,7 @@ void Player::CreateProjectile()
 			rightDir = { 0.0265f, -1.f };
 		}
 		Projectile* pLeftProj = new Projectile;
-		pLeftProj->SetSpeed(1000);
+		pLeftProj->SetSpeed(910);
 		pLeftProj->SetPos(vPos);
 		pLeftProj->SetSize({ 30.f, 30.f });
 		pLeftProj->SetDir(leftDir);
@@ -268,7 +268,7 @@ void Player::CreateProjectile()
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pLeftProj, LAYER::PROJECTILE);
 
 		Projectile* pRightProj = new Projectile;
-		pRightProj->SetSpeed(1000);
+		pRightProj->SetSpeed(910);
 		pRightProj->SetPos(vPos);
 		pRightProj->SetSize({ 30.f, 30.f });
 		pRightProj->SetDir(rightDir);

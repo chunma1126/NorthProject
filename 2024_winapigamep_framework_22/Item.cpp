@@ -24,7 +24,7 @@ Item::~Item()
 void Item::Update()
 {
 	Vec2 curPos = GetPos();
-	curPos.y += 50 * fDT;
+	curPos.y += 100 * fDT;
 	SetPos(curPos);
 
 	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
