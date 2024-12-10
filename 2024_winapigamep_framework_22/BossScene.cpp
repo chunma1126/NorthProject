@@ -59,7 +59,7 @@ void BossScene::Init()
 	new DelayedCall(13.1f, { {SCREEN_WIDTH * 0.2f , -60.f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 8 });
 	new DelayedCall(13.1f, { {SCREEN_WIDTH * 0.2f , SCREEN_HEIGHT * 0.3f }, EnemyType::TrashMob1, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 9 });
 	
-	new DelayedCall(23.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 100 });
+	new DelayedCall(23.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 150 });
 	//new DelayedCall(0.f, { {SCREEN_WIDTH * 0.2f , 5.f }, EnemyType::TrashMob3, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 1 });
 }
 
