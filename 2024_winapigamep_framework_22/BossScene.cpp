@@ -40,11 +40,9 @@ void BossScene::Init()
 		GET_SINGLE(UIManager)->SetActiveChild(L"PlayerHeart3", true);
 
 	}
-	{
-		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
-		GET_SINGLE(ResourceManager)->LoadSound(L"InGameBGM", L"Sound\\InGameBGM.mp3", true);
-		GET_SINGLE(ResourceManager)->PlayAudio(L"InGameBGM");
-	}
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	GET_SINGLE(ResourceManager)->LoadSound(L"InGameBGM", L"Sound\\InGameBGM.mp3", true);
+	GET_SINGLE(ResourceManager)->PlayAudio(L"InGameBGM");
 	
 
 
@@ -71,7 +69,7 @@ void BossScene::Update()
 	if (GET_SINGLE(EventManager)->GetBossEnter())
 	{
 		GET_SINGLE(EventManager)->SetBossEnter(false);
-		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 2000 });
+		new DelayedCall(1.f, { {SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f}, EnemyType::MidBoss, L"EnemySheetBlue", L"Texture\\EnemySheet_Blue.bmp", 1000 });
 	}
 }
 
