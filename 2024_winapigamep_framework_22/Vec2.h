@@ -67,6 +67,20 @@ public:
 		return x * _other.y - y * _other.x;
 	}
 public:
+	static Vec2 MoveTowards(Vec2 current, Vec2 target, float maxDistanceDelta)
+	{
+		Vec2 direction = target - current;
+		float distance = direction.Length();
+
+		if (distance <= maxDistanceDelta || distance < FLT_EPSILON)
+		{
+			return target;
+		}
+
+		direction.Normalize();
+		return current + direction * maxDistanceDelta;
+	}
+public:
 	float x = 0.f;
 	float y = 0.f;
 };
