@@ -34,7 +34,6 @@ void TrashMob2::Update()
 		m_shotTimer = 0;
 	}
 
-
 	Vec2 pos = GetPos();
 
 	if (pos.y >= SCREEN_HEIGHT / 2 - 200) 
