@@ -17,7 +17,7 @@ void MBS_p6::Enter()
 		vector<Object*> player = m_midBoss->GetCurrentScene()->GetLayerObjects(LAYER::PLAYER);
 		m_player = player[0];
 	}
-	GET_SINGLE(BulletManager)->RoseSpinShot({}, m_midBoss->GetCurrentScene(), 0.02f, 100, m_player, 30, 30, 3, 30);
+	GET_SINGLE(BulletManager)->RoseSpinShot({}, m_midBoss->GetCurrentScene(), 0.02f, 120, m_player, 30, 30, 3, 30);
 }
 
 void MBS_p6::Update()
@@ -45,7 +45,7 @@ void MBS_p6::Update()
 				dir = playerPos - pos;
 			}
 			int petals = m_arr[cnt % 3];
-			GET_SINGLE(BulletManager)->RoseShot(m_midBoss->GetCurrentScene(), 10, 600, dir, petals, 100);
+			GET_SINGLE(BulletManager)->RoseShot(m_midBoss->GetCurrentScene(), -1, 600, dir, petals, 60);
 			cnt++;
 		}
 	}

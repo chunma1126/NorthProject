@@ -8,7 +8,7 @@ public:
 	void Enter() override;
 	void Update() override;
 private:
-	const float m_shotTime = 0.08f;
+	const float m_shotTime = 0.045f;
 	float m_timer = 0;
 	const float m_moveTime = 0.8f;
 	float m_moveTimer = 0;

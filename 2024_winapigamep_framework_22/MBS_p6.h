@@ -8,7 +8,7 @@ public:
 	void Enter() override;
 	void Update() override;
 private:
-	const float m_shotTime = 0.8f;
+	const float m_shotTime = 0.6f;
 	float m_timer = 0;
 	int m_arr[3]{ 3,6,1 };
 	int cnt = 0;

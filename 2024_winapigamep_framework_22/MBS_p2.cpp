@@ -34,7 +34,7 @@ void MBS_p2::Update()
 				Vec2 dir = m_arr[idx];
 				Vec2 pos = m_midBoss->GetPos();
 				pos.y = SCREEN_HEIGHT * 0.3f;
-				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 820, dir, 20, 50, 100);
+				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 710, dir, 20, 50, 100);
 				m_cnt++;
 			}
 		}
