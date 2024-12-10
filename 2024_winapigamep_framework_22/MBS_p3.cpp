@@ -4,7 +4,7 @@ MBS_p3::MBS_p3(MidBoss* midboss)
 	: State(midboss)
 	, m_player(nullptr)
 {
-	stateEndTime = 5;
+	stateEndTime = 4.8;
 }
 
 void MBS_p3::Enter()
@@ -25,6 +25,15 @@ void MBS_p3::Update()
 		const float timerFirstEndTime = 0;
 		bool allowShot = m_timerFirst > timerFirstEndTime;
 		if (allowShot) {
+			Vec2 pos = m_midBoss->GetPos();
+			Vec2 dir = m_targetPos - pos;
+			dir.y = 0;
+			dir.Normalize();
+			dir.x *= 5;
+			Vec2 result = pos + dir;
+			float dt = GET_SINGLE(TimeManager)->GetDT();
+			m_midBoss->SetPos(Vec2::MoveTowards(pos, m_targetPos, 300 * dt));
+			//m_midBoss->SetPos(result);
 			if (m_player == nullptr)
 			{
 				vector<Object*> player = m_midBoss->GetCurrentScene()->GetLayerObjects(LAYER::PLAYER);
@@ -43,13 +52,14 @@ void MBS_p3::Update()
 					Vec2 resultDir = playerPos - pos;
 					dir = resultDir;
 				}
-				GET_SINGLE(BulletManager)->BasicShot(pos, m_midBoss->GetCurrentScene(), 850, dir);
+				GET_SINGLE(BulletManager)->BasicShot(pos, m_midBoss->GetCurrentScene(), 800, dir);
 			}
 			if (m_moveTimer > m_moveTime) {
 				m_moveTimer = 0;
-				int idx = rand() % 10;
+				m_timer = -0.2f;
 				Vec2 randPos = m_arrPos[rand() % 3];
-				m_midBoss->SetPos(randPos);
+				m_targetPos = randPos;
+				//m_midBoss->SetPos(randPos);
 			}
 
 		}

@@ -9,7 +9,7 @@ MBS_p4::MBS_p4(MidBoss* midboss)
 
 void MBS_p4::Enter()
 {
-	m_midBoss->SetPos({ SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f });
+	//m_midBoss->SetPos({ SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f });
 	m_StateTimer = 0;
 	m_timer = 0;
 	m_timerFirst = 0;
@@ -19,8 +19,11 @@ void MBS_p4::Enter()
 void MBS_p4::Update()
 {
 	float dt = GET_SINGLE(TimeManager)->GetDT();
+	Vec2 pos = m_midBoss->GetPos();
+	Vec2 tar = { SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f };
 	if (m_StateTimer < stateEndTime)
 	{
+		m_midBoss->SetPos(Vec2::MoveTowards(pos, tar, 200 * dt));
 		m_timerFirst += dt;
 		m_StateTimer += dt;
 		const float timerFirstEndTime = 0;
@@ -38,7 +41,7 @@ void MBS_p4::Update()
 				Vec2 pos = m_midBoss->GetPos();
 				Vec2 dir = Vec2(0, 1);
 				//GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 100, m_player, 100);
-				GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 55, m_player, 1.f);
+				GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 45, m_player, 1.1f);
 			}
 		}
 	}

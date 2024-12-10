@@ -4,7 +4,7 @@
 MBS_p6::MBS_p6(MidBoss* midBoss)
 	: State(midBoss)
 {
-	stateEndTime = 10;
+	stateEndTime = 7;
 }
 
 void MBS_p6::Enter()
@@ -45,7 +45,8 @@ void MBS_p6::Update()
 				dir = playerPos - pos;
 			}
 			int petals = m_arr[cnt % 3];
-			GET_SINGLE(BulletManager)->RoseShot(m_midBoss->GetCurrentScene(), -1, 600, dir, petals, 60);
+			float size = m_arrSize[cnt % 3];
+			GET_SINGLE(BulletManager)->RoseShot(m_midBoss->GetCurrentScene(), -1, 550, dir, petals, size);
 			cnt++;
 		}
 	}

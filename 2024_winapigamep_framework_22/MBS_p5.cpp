@@ -14,7 +14,7 @@ void MBS_p5::Enter()
 	m_timer = 0;
 	Vec2 pos = m_midBoss->GetPos();
 	m_angle = 0;
-	GET_SINGLE(BulletManager)->SpinShot(pos, m_midBoss->GetCurrentScene(), 0.01, 410, m_angle, 700, 5);
+	GET_SINGLE(BulletManager)->SpinShot(pos, m_midBoss->GetCurrentScene(), 0.01, 430, m_angle, 700, 5);
 }
 
 void MBS_p5::Update()

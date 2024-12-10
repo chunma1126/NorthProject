@@ -8,15 +8,16 @@ public:
 	void Enter() override;
 	void Update() override;
 private:
-	const float m_shotTime = 0.045f;
+	const float m_shotTime = 0.03f;
 	float m_timer = 0;
-	const float m_moveTime = 0.8f;
+	const float m_moveTime = 0.7f;
 	float m_moveTimer = 0;
 	Vec2 m_arrPos[3] = {
-		{SCREEN_WIDTH * 0.1f, SCREEN_HEIGHT * 0.1f},
+		{SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.1f},
 		{SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.1f},
-		{SCREEN_WIDTH * 0.9f, SCREEN_HEIGHT * 0.1f}
+		{SCREEN_WIDTH * 0.6f, SCREEN_HEIGHT * 0.1f}
 	};
+	Vec2 m_targetPos = m_arrPos[0];
 	float m_timerFirst = 0;
 	Object* m_player;
 };
