@@ -87,9 +87,7 @@ void BulletManager::Update()
 	{
 		if (m_spinEndTimer >= m_spinEndTime)
 		{
-			m_spinEndTimer = 0;
-			m_spinShotTimer = 0;
-			m_isSpinShot = false;
+			ResetSpinShot();
 		}
 		else
 		{
@@ -101,10 +99,7 @@ void BulletManager::Update()
 	{
 		if (m_roseShotEnd)
 		{
-			m_isRoseShot = false;
-			m_roseShotEnd = false;
-			m_roseEndTimer = 0;
-			m_roseShotTimer = 0;
+			ResetRoseShot();
 
 			for (auto item : m_roseVec)
 			{
@@ -120,6 +115,21 @@ void BulletManager::Update()
 	}
 
 
+}
+
+void BulletManager::ResetSpinShot()
+{
+	m_spinEndTimer = 0;
+	m_spinShotTimer = 0;
+	m_isSpinShot = false;
+}
+
+void BulletManager::ResetRoseShot()
+{
+	m_isRoseShot = false;
+	m_roseShotEnd = false;
+	m_roseEndTimer = 0;
+	m_roseShotTimer = 0;
 }
 
 void BulletManager::RoseSpinShotComplete(Projectile* item)

@@ -25,6 +25,7 @@ TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 void TrashMob3::Update()
 {
     Enemy::Update();
+
     if (m_isDead)return;
 
     m_angle += fDT * 2.0f; 
@@ -34,7 +35,7 @@ void TrashMob3::Update()
     float offsetX = m_radius * cos(m_angle);
     float offsetY = m_radius * sin(m_angle);
 
-    Vec2 pos = m_center +Vec2{offsetX , offsetY};
+    Vec2 pos = m_center + Vec2{offsetX , offsetY};
     SetPos(pos);
     if (m_shotTime <= m_shotTimer)
     {
@@ -50,6 +51,7 @@ void TrashMob3::Update()
 
 void TrashMob3::OnDead()
 {
+    Enemy::OnDead();
     GET_SINGLE(EventManager)->SetBossEnter(true);
 }
 

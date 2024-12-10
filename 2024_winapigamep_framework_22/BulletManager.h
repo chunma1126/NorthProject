@@ -10,6 +10,8 @@ class BulletManager
 public:
 	void Init();
 	void Update();
+	void ResetSpinShot();
+	void ResetRoseShot();
 	void RoseSpinShotComplete(Projectile* item);
 	void BasicShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir);//
 	void CircleShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed);//
