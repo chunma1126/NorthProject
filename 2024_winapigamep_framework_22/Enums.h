@@ -65,5 +65,6 @@ enum class MidBossState
 	p3,
 	p4,
 	p5,
-	p6
+	p6,
+	Intro
 };
