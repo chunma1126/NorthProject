@@ -167,7 +167,7 @@ bool Player::TryShoot()
 	switch (m_level)
 	{
 	case 2:
-		additionalDelay = 0.005;
+		additionalDelay = 0.015;
 		break;
 	case 3:
 		additionalDelay = 0.02;
@@ -222,8 +222,8 @@ void Player::CreateProjectile()
 		Vec2 leftDir = { -0.12f, -1.f };
 		Vec2 rightDir = { 0.12f, -1.f };
 		if (m_isSlow) {
-			leftDir = { -0.044f, -1.f };
-			rightDir = { 0.044f, -1.f };
+			leftDir = { -0.0265f, -1.f };
+			rightDir = { 0.0265f, -1.f };
 		}
 
 		Projectile* pLeftProj = new Projectile;
@@ -253,7 +253,12 @@ void Player::CreateProjectile()
 		pCenterProj->SetTag(TagEnum::PlayerProjectile);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pCenterProj, LAYER::PROJECTILE);
 
-		Vec2 leftDir = { -0.1f, -1.f };
+		Vec2 leftDir = { -0.12f, -1.f };
+		Vec2 rightDir = { 0.12f, -1.f };
+		if (m_isSlow) {
+			leftDir = { -0.0265f, -1.f };
+			rightDir = { 0.0265f, -1.f };
+		}
 		Projectile* pLeftProj = new Projectile;
 		pLeftProj->SetSpeed(1000);
 		pLeftProj->SetPos(vPos);
@@ -262,7 +267,6 @@ void Player::CreateProjectile()
 		pLeftProj->SetTag(TagEnum::PlayerProjectile);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pLeftProj, LAYER::PROJECTILE);
 
-		Vec2 rightDir = { 0.1f, -1.f };
 		Projectile* pRightProj = new Projectile;
 		pRightProj->SetSpeed(1000);
 		pRightProj->SetPos(vPos);
