@@ -61,7 +61,7 @@ void Enemy::Update()
 		std::uniform_int_distribution<int> random(0, 100);
 		int rand = random(m_mt);
 
-		if (rand < 6)
+		if (rand < 45)
 		{
 			Item* item = new Item;
 			item->SetPos(GetPos());

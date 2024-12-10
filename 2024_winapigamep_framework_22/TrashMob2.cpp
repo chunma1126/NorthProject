@@ -16,7 +16,7 @@ TrashMob2::TrashMob2(const wstring& _key, const wstring& _path)
 	GetComponent<Animator>()->PlayAnimation(L"Enemy_2", true);
 	GetComponent<Animator>()->SetSize({ 4,4 });
 
-	GetComponent<Collider>()->SetSize({ 125,125 });
+	GetComponent<Collider>()->SetSize({ 160,125 });
 
 	m_shotTime = 0.1f;
 }
@@ -55,7 +55,7 @@ void TrashMob2::Update()
 	}
 	else
 	{
-		float speed = 40.f;
+		float speed = 55;
 		float zigzagAmplitude = 100;
 		float zigzagFrequency = 1.5f;
 		float time = GET_SINGLE(TimeManager)->GetTime();

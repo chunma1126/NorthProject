@@ -28,7 +28,7 @@ protected:
 	Scene* m_curScene = nullptr;
 	bool m_isDead;
 protected:
-	float stayTime = 3.f;
+	float stayTime = 2.5f;
 	float stayTimer = 0;
 
 	float m_shotTime = 1;
