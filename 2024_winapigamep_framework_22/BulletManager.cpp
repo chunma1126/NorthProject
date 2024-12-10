@@ -87,6 +87,8 @@ void BulletManager::Update()
 	{
 		if (m_spinEndTimer >= m_spinEndTime)
 		{
+			m_spinEndTimer = 0;
+			m_spinShotTimer = 0;
 			m_isSpinShot = false;
 		}
 		else
@@ -106,21 +108,7 @@ void BulletManager::Update()
 
 			for (auto item : m_roseVec)
 			{
-				item->SetSpeed(m_roseShotBulletSpeed);
-				Vec2 currentProjectile = item->GetPos();
-
-				float centerX = SCREEN_WIDTH / 2;
-				float centerY = SCREEN_HEIGHT / 2;
-
-				float relativeX = currentProjectile.x - centerX;
-				float relativeY = currentProjectile.y - centerY;
-
-				relativeX = relativeX == 0 ? -1 : relativeX;
-				relativeY = relativeY == 0 ? -1 : relativeY;
-
-				Vec2 direction = { relativeX, relativeY };
-				direction.Normalize();
-				item->SetDir(direction);
+				RoseSpinShotComplete(item);
 			}
 
 			m_roseVec.clear();
@@ -132,6 +120,25 @@ void BulletManager::Update()
 	}
 
 
+}
+
+void BulletManager::RoseSpinShotComplete(Projectile* item)
+{
+	item->SetSpeed(m_roseShotBulletSpeed);
+	Vec2 currentProjectile = item->GetPos();
+
+	float centerX = SCREEN_WIDTH / 2;
+	float centerY = SCREEN_HEIGHT / 2;
+
+	float relativeX = currentProjectile.x - centerX;
+	float relativeY = currentProjectile.y - centerY;
+
+	relativeX = relativeX == 0 ? -1 : relativeX;
+	relativeY = relativeY == 0 ? -1 : relativeY;
+
+	Vec2 direction = { relativeX, relativeY };
+	direction.Normalize();
+	item->SetDir(direction);
 }
 
 void BulletManager::BasicShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir)
