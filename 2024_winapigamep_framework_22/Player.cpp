@@ -330,7 +330,13 @@ void Player::OnHit(Collider* _other)
 void Player::OnTakeDamage()
 {
 	if (godMode) return;
-	SetPos(spawnPosition);
+	if (m_health->GetHP() <= 0)
+	{
+		Dead();
+	}
+	else {
+		SetPos(spawnPosition);
+	}
 	m_immortalTime = 0;
 
 	GET_SINGLE(ResourceManager)->PlayAudio(L"PlayerHit");
@@ -343,10 +349,6 @@ void Player::OnTakeDamage()
 		GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 	}
 
-	if (m_health->GetHP() <= 0)
-	{
-		Dead();
-	}
 }
 
 void Player::OnLevelUp()
