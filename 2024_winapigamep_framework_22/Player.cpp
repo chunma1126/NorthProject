@@ -21,12 +21,12 @@ Player::Player()
 	: m_pTex(nullptr)
 {
 	//sound
-		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
-		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
-		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
-		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
-		GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.wav", false);
-	
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerShoot", L"Sound\\PlayerShot.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerDead", L"Sound\\PlayerDead.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"PlayerPowerUp", L"Sound\\PowerUp.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GameOver", L"Sound\\GameOver.wav", false);
+
 	//texture
 	{
 		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
@@ -77,7 +77,7 @@ void Player::Update()
 		TryShoot();
 	if (GET_KEYDOWN(KEY_TYPE::LEFT))
 		CreateUltmite();
-	isSlow = GET_KEY(KEY_TYPE::UP);
+	m_isSlow = GET_KEY(KEY_TYPE::UP);
 
 	Vec2 dir = Vec2();
 	if (GET_KEY(KEY_TYPE::W))
@@ -89,7 +89,7 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::D))
 		dir.x += 1;
 
-	float speed = isSlow ? defaultSpeed : runningSpeed;
+	float speed = m_isSlow ? defaultSpeed : runningSpeed;
 	dir.Normalize();
 	dir = dir * (fDT * speed);
 
@@ -104,7 +104,7 @@ void Player::Update()
 	//{
 	//	SetPos(newPos);
 	//}
-	
+
 }
 
 void Player::Render(HDC _hdc)
@@ -140,7 +140,7 @@ void Player::Render(HDC _hdc)
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
 
-	if (isSlow)
+	if (m_isSlow)
 	{
 		int width = m_pHitbox->GetWidth();
 		int height = m_pHitbox->GetHeight();
@@ -151,7 +151,7 @@ void Player::Render(HDC _hdc)
 			m_pHitbox->GetTexDC()
 			, 0, 0, width, height, RGB(255, 0, 255));
 	}
-	
+
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -167,10 +167,10 @@ bool Player::TryShoot()
 	switch (m_level)
 	{
 	case 2:
-		additionalDelay = 0.01;
+		additionalDelay = 0.005;
 		break;
 	case 3:
-		additionalDelay = 0.022;
+		additionalDelay = 0.02;
 		break;
 	}
 	float delay = 60 / rpm + additionalDelay;
@@ -219,8 +219,12 @@ void Player::CreateProjectile()
 	break;
 	case 2:
 	{
-		Vec2 leftDir = { -0.1f, -1.f };  
-		Vec2 rightDir = { 0.1f, -1.f };  
+		Vec2 leftDir = { -0.12f, -1.f };
+		Vec2 rightDir = { 0.12f, -1.f };
+		if (m_isSlow) {
+			leftDir = { -0.044f, -1.f };
+			rightDir = { 0.044f, -1.f };
+		}
 
 		Projectile* pLeftProj = new Projectile;
 		pLeftProj->SetSpeed(1000);
@@ -274,7 +278,7 @@ void Player::CreateProjectile()
 
 void Player::CreateUltmite()
 {
-	
+
 }
 
 void Player::Dead()
@@ -334,7 +338,7 @@ void Player::OnTakeDamage()
 		std::wcout << healthPath;
 		GET_SINGLE(UIManager)->SetActiveChild(healthPath, false);
 	}
-	
+
 	if (m_health->GetHP() <= 0)
 	{
 		Dead();

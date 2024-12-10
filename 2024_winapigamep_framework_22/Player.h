@@ -35,7 +35,7 @@ private:
 	void OnLevelUp();
 private:
 	bool m_isDead = false;
-	bool isSlow = false;
+	bool m_isSlow = false;
 
 	float m_immortalTime = 4.f;
 	float lastShotTime = 0;
