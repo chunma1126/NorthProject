@@ -99,9 +99,9 @@ void UIManager::Init()
 	{
 		UI* Title = new UI;
 
-		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\UI\\Title.bmp"));
-		Title->SetPos({ 225, 200 });
-		Title->SetSize({ 800,200 });
+		Title->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\UI\\Title2.bmp"));
+		Title->SetPos({ 135, 200 });
+		Title->SetSize({ 1100,200 });
 
 		AddChild(L"Title", Title);
 	}
