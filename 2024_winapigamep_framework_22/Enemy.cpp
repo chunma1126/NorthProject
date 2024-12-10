@@ -35,7 +35,7 @@ Enemy::Enemy(const wstring& _key, const wstring& _path)
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyDead", L"Sound\\EnemyDead.wav", false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"EnemyHit", L"Sound\\EnemyHit.wav", false);
-	
+
 }
 
 Enemy::~Enemy()
@@ -45,7 +45,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	if (m_vPos.y < -m_vSize.y || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
+	if (m_vPos.y < -m_vSize.y - 200 || m_vPos.y > SCREEN_HEIGHT + m_vSize.y ||
 		m_vPos.x < -m_vSize.x || m_vPos.x > SCREEN_WIDTH + m_vSize.x)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
@@ -61,13 +61,13 @@ void Enemy::Update()
 		std::uniform_int_distribution<int> random(0, 100);
 		int rand = random(m_mt);
 
-		if (rand < 35)
+		if (rand < 35 + additionalItemDropPercentage)
 		{
 			Item* item = new Item;
 			item->SetPos(GetPos());
 			GET_SINGLE(EventManager)->CreateObject(item, LAYER::ITEM);
 		}
-		
+
 		GET_SINGLE(UIManager)->AddScore(5);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
@@ -83,7 +83,7 @@ void Enemy::Update()
 }
 
 void Enemy::Render(HDC _hdc)
-{	
+{
 	ComponentRender(_hdc);
 }
 
@@ -94,8 +94,8 @@ void Enemy::SetHP(float hp)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	if (GetComponent<HealthComponent>()->IsDead())return;
-
+	if (GetComponent<HealthComponent>()->IsDead()) return;
+	if (m_godMode) return;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetTag() == TagEnum::PlayerProjectile)
 	{
@@ -104,7 +104,7 @@ void Enemy::EnterCollision(Collider* _other)
 
 		GET_SINGLE(ResourceManager)->PlayAudio(L"EnemyHit");
 
-		if (m_health->IsDead()) 
+		if (m_health->IsDead())
 		{
 			OnDead();
 		}

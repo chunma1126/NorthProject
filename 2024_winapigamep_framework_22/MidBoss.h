@@ -14,8 +14,8 @@ public:
 	const Vec2& GetMidBossPos() { return GetPos(); }
 private:
 	StateMachine* m_stateMachine = nullptr;
+
 private:
 	bool allowShot = true;
-
 };
 

@@ -4,7 +4,7 @@ class Texture;
 class HealthComponent;
 class Scene;
 class Enemy :
-    public Object
+	public Object
 {
 public:
 	Enemy();
@@ -19,9 +19,13 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
+public:
+	void SetGodMode(bool value) { m_godMode = value; }
 protected:
 	virtual void OnDead();
 protected:
+	int additionalItemDropPercentage = 0;
+	bool m_godMode = false;
 	Texture* m_texture = nullptr;
 	Texture* m_deadTexture = nullptr;
 	HealthComponent* m_health = nullptr;
@@ -33,7 +37,7 @@ protected:
 
 	float m_shotTime = 1;
 	float m_shotTimer = 0;
-	
+
 	bool dirRight = true;
 	float m_explosionTime = 0.5f;
 	float m_explosionTimer;
