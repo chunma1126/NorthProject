@@ -181,6 +181,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DelayedCall.h" />
+    <ClInclude Include="EasyScene.h" />
     <ClInclude Include="EnemyProjectile.h" />
     <ClInclude Include="EnemyCircleOut.h" />
     <ClInclude Include="EnemySpawnEventManager.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DelayedCall.cpp" />
+    <ClCompile Include="EasyScene.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
     <ClCompile Include="EnemyCircleOut.cpp" />
     <ClCompile Include="EnemySpawnEventManager.cpp" />
