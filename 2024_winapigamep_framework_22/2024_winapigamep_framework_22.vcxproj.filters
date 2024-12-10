@@ -178,6 +178,7 @@
     <ClInclude Include="MBS_p4.h" />
     <ClInclude Include="MBS_p5.h" />
     <ClInclude Include="MBS_p6.h" />
+    <ClInclude Include="MBS_Intro.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -308,6 +309,7 @@
     <ClCompile Include="MBS_p4.cpp" />
     <ClCompile Include="MBS_p5.cpp" />
     <ClCompile Include="MBS_p6.cpp" />
+    <ClCompile Include="MBS_Intro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />
