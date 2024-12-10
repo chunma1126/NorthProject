@@ -51,7 +51,7 @@ void TrashMob1::Update()
 	else
 	{
 		
-		curPos.y += 100 * fDT;
+		curPos.y += 150 * fDT;
 		
 	}
 	SetPos(curPos);

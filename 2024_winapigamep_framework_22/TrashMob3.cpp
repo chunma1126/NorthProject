@@ -10,6 +10,7 @@
 TrashMob3::TrashMob3(const wstring& _key, const wstring& _path)
 	: Enemy(_key, _path)
 {
+    additionalItemDropPercentage = 100;
 	AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"Enemy_3", m_texture, { 0,106 }, { 48,31 }, { 48,0 }, 4, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"Enemy_3", true);

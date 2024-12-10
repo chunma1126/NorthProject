@@ -39,7 +39,7 @@ void TrashMob2::Update()
 	if (pos.y >= SCREEN_HEIGHT / 2 - 200) 
 	{
 		stayTimer += fDT;
-		if (stayTimer >= stayTime)
+		if (stayTimer >= stayTime - 1.f)
 		{
 			dirRight = pos.x < SCREEN_WIDTH / 2 ? false : true;
 

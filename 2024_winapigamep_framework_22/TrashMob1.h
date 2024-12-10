@@ -14,7 +14,7 @@ private:
 	int cnt = 0;
 	float arr[5] = { 60, 25, 30, 25, 60 };
 
-	float stayTime = 2.5f;
+	float stayTime = 0.75f;
 	float stayTimer = 0;
 
 };
