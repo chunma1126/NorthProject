@@ -4,7 +4,7 @@
 MBS_p2::MBS_p2(MidBoss* midboss)
 	: State(midboss)
 {
-	stateEndTime = 0;// 20;
+	stateEndTime = 10;
 	//m_midBoss->SetPos({ SCREEN_WIDTH * 0.0f , SCREEN_HEIGHT * 0.f });
 }
 
@@ -34,7 +34,7 @@ void MBS_p2::Update()
 				Vec2 dir = m_arr[idx];
 				Vec2 pos = m_midBoss->GetPos();
 				pos.y = SCREEN_HEIGHT * 0.3f;
-				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 820, dir, 20, 50, 100);
+				GET_SINGLE(BulletManager)->ShapeShot(pos, m_midBoss->GetCurrentScene(), 710, dir, 20, 50, 100);
 				m_cnt++;
 			}
 		}

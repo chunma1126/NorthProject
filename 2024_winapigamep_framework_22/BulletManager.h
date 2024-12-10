@@ -16,8 +16,8 @@ public:
 	void ShapeShot(Vec2 _pos, Scene* _scene, float _bulletSpeed, Vec2 _dir, int _vertex, float _size, float _rotationSpeed);//
 
 #pragma region Spinshot
-	void SpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, float& _spinAngle, float _turnSpeed, float _endTime);
-	void ApplySpinShot();
+	void SpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, float& _spinAngle, float _turnSpeed, float _endTime);//
+	void ApplySpinShot();//
 #pragma endregion
 
 #pragma region HeartShot
@@ -27,7 +27,7 @@ public:
 #pragma endregion
 
 #pragma region RoseShot
-	void RoseShot(Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir, int _petals, float _size);
+	void RoseShot(Scene* _scene, float _interval, float _bulletSpeed, Vec2 _dir, int _petals, float _size);//
 	void RoseSpinShot(Vec2 _pos, Scene* _scene, float _interval, float _bulletSpeed, Object* _target, int _petals, float _size, float _endTime, float _rotationSpeed);
 	void ApplyRoseSpinShot();
 #pragma endregion

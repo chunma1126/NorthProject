@@ -4,7 +4,7 @@
 MBS_p4::MBS_p4(MidBoss* midboss)
 	: State(midboss)
 {
-	stateEndTime = 0;// 10;
+	stateEndTime = 5;
 }
 
 void MBS_p4::Enter()
@@ -22,6 +22,7 @@ void MBS_p4::Update()
 	if (m_StateTimer < stateEndTime)
 	{
 		m_timerFirst += dt;
+		m_StateTimer += dt;
 		const float timerFirstEndTime = 0;
 		bool allowShot = m_timerFirst > timerFirstEndTime;
 		if (allowShot) {
@@ -37,7 +38,7 @@ void MBS_p4::Update()
 				Vec2 pos = m_midBoss->GetPos();
 				Vec2 dir = Vec2(0, 1);
 				//GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 100, m_player, 100);
-				GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 40, m_player, 1.f);
+				GET_SINGLE(BulletManager)->HeartShotGoToTarget(pos, m_midBoss->GetCurrentScene(), 55, m_player, 1.f);
 			}
 		}
 	}
