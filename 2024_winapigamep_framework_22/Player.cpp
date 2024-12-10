@@ -163,7 +163,17 @@ void Player::EnterCollision(Collider* _other)
 
 bool Player::TryShoot()
 {
-	float delay = 60 / rpm;
+	float additionalDelay = -0.01;
+	switch (m_level)
+	{
+	case 2:
+		additionalDelay = 0.01;
+		break;
+	case 3:
+		additionalDelay = 0.022;
+		break;
+	}
+	float delay = 60 / rpm + additionalDelay;
 	float currentTime = GET_SINGLE(TimeManager)->GetTime();
 
 	bool canShot = lastShotTime + delay < currentTime;
