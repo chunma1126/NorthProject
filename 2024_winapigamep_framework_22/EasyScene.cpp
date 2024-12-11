@@ -72,6 +72,14 @@ void EasyScene::Update()
 }
 
 
+
+
+EasyScene::EasyScene(const wstring _sceneName)
+	: Scene(_sceneName) 
+{
+
+}
+
 EasyScene::~EasyScene()
 {
 	//delete m_backGround;

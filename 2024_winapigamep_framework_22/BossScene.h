@@ -6,6 +6,7 @@ class Background;
 class BossScene : public Scene
 {
 public:
+	BossScene(wstring _sceneName);
 	~BossScene();
 	void Init() override;
 	void Update() override;

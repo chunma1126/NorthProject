@@ -3,11 +3,13 @@
 #include "SceneManager.h"
 #include "UIManager.h"
 #include "EventManager.h"
+#include "Scene.h"
 void RestartButton::ClickEvent()
 {
 	GET_SINGLE(UIManager)->ResetScore();
 
-	GET_SINGLE(SceneManager)->LoadScene(L"BossScene");
+	wstring curScneName = GET_SINGLE(SceneManager)->GetCurrentScene()->GetSceneName();
+	GET_SINGLE(SceneManager)->LoadScene(curScneName);
 
 	GET_SINGLE(UIManager)->SetActiveChild(L"GameOver", false);
 	GET_SINGLE(UIManager)->SetActiveChild(L"Clear", false);

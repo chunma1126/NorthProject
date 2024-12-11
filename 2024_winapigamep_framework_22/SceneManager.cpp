@@ -14,8 +14,8 @@ void SceneManager::Init()
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 
-	RegisterScene(L"BossScene", std::make_shared<BossScene>());
-	RegisterScene(L"Easy", std::make_shared<EasyScene>());
+	RegisterScene(L"BossScene", std::make_shared<BossScene>(L"BossScene"));
+	RegisterScene(L"Easy", std::make_shared<EasyScene>(L"Easy"));
 	//RegisterScene(L"OJYScene", std::make_shared<OJYScene>());
 
 	// ¾À ·Îµå

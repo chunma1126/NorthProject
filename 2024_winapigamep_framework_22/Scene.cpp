@@ -2,8 +2,15 @@
 #include "Scene.h"
 #include "Object.h"
 #include "CollisionManager.h"
+
+Scene::Scene(wstring _sceneName)
+{
+	m_sceneName = _sceneName;
+}
+
 Scene::Scene()
 {
+
 }
 
 Scene::~Scene()

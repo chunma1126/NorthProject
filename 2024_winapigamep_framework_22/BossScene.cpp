@@ -72,6 +72,13 @@ void BossScene::Update()
 }
 
 
+BossScene::BossScene(const wstring _sceneName)
+	: Scene(_sceneName)
+{
+
+}
+
+
 BossScene::~BossScene()
 {
 	//delete m_backGround;

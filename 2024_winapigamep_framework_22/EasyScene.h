@@ -6,6 +6,7 @@ class Background;
 class EasyScene : public Scene
 {
 public:
+	EasyScene(wstring _sceneName);
 	~EasyScene();
 	void Init() override;
 	void Update() override;

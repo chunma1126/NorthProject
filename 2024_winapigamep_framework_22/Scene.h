@@ -4,6 +4,7 @@ class Object; // 클래스 전방선언
 class Scene
 {
 public:
+	Scene(wstring _sceneName);
 	Scene();
 	virtual ~Scene(); // 가상 소멸자
 public:
@@ -21,9 +22,12 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
+	const wstring GetSceneName() { return m_sceneName; }
 private:
 	//Object m_obj;
 	//Object* m_pObj;
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+	wstring m_sceneName;
+
 };
 
