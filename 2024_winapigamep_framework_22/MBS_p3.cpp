@@ -32,7 +32,7 @@ void MBS_p3::Update()
 			dir.x *= 5;
 			Vec2 result = pos + dir;
 			float dt = GET_SINGLE(TimeManager)->GetDT();
-			m_midBoss->SetPos(Vec2::MoveTowards(pos, m_targetPos, 300 * dt));
+			m_midBoss->SetPos(Vec2::MoveTowards(pos, m_targetPos, 230 * dt));
 			//m_midBoss->SetPos(result);
 			if (m_player == nullptr)
 			{
